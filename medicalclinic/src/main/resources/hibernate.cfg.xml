@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-configuration PUBLIC  
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"  
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">  
+  
+<hibernate-configuration>  
+  
+    <session-factory>  
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>  
+        <property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>  
+        <property name="connection.username">medicalclinic</property>  
+        <property name="connection.password">zaq12wsx</property>    
+        <property name="dialect">org.hibernate.dialect.OracleDialect</property>
+        <mapping class="clinic.db.Doctor" />
+        <mapping class="clinic.db.Address" />
+        <mapping class="clinic.db.Clinics" />
+        <mapping class="clinic.db.CommisionedHealthCheck" />
+        <mapping class="clinic.db.Counties" />
+        <mapping class="clinic.db.Diseases" />
+        <mapping class="clinic.db.DoctorOfficeHours" />
+        <mapping class="clinic.db.Drugs" />
+        <mapping class="clinic.db.HealthCheck" />
+        <mapping class="clinic.db.HistoryDiseases" />
+        <mapping class="clinic.db.LeaveDoctor" />
+        <mapping class="clinic.db.Locality" />
+        <mapping class="clinic.db.Nurse" />
+        <mapping class="clinic.db.OtherEmployee" />
+        <mapping class="clinic.db.Patient" />
+        <mapping class="clinic.db.Permissions" />
+        <mapping class="clinic.db.PostOffice" />
+        <mapping class="clinic.db.Province" />
+        <mapping class="clinic.db.SaveDrugs" />
+        <mapping class="clinic.db.ScheduleVisits" />
+        <mapping class="clinic.db.Specjality" />
+        <mapping class="clinic.db.SpecjalityDoctor" />
+        <mapping class="clinic.db.Streets" />
+        <mapping class="clinic.db.Users" />
+        <mapping class="clinic.db.Visits" />
+        
+    </session-factory>  
+  
+</hibernate-configuration>  
