@@ -12,17 +12,17 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "clinic.web.*" })
+@ComponentScan({ "medicalclinic.web.*" })
 @Import({ SecurityConfig.class })
 public class AppConfig {
 
 	@Bean(name = "dataSource")
 	public DriverManagerDataSource dataSource() {
 	    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-	    driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	    driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/test");
-	    driverManagerDataSource.setUsername("root");
-	    driverManagerDataSource.setPassword("password");
+	    driverManagerDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	    driverManagerDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+	    driverManagerDataSource.setUsername("medicalclinic");
+	    driverManagerDataSource.setPassword("zaq12wsx");
 	    return driverManagerDataSource;
 	}
 	
