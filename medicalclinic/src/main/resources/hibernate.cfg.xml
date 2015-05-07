@@ -36,6 +36,8 @@
         <mapping class="medicalclinic.db.Streets" />
         <mapping class="medicalclinic.db.Users" />
         <mapping class="medicalclinic.db.Visits" />
+        <mapping class="medicalclinic.db.Employee" />
+        <mapping class="medicalclinic.db.Department" />
         
     </session-factory>  
   

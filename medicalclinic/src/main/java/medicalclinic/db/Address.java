@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,9 +20,6 @@ import javax.persistence.Table;
 @Table(name = "ADDRESS") 
 public class Address implements ObjectDB
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8852616135488393442L;
 
 	@Id
@@ -29,20 +28,39 @@ public class Address implements ObjectDB
 	@SequenceGenerator(name="IDADDRESS", sequenceName = "IDADDRESS", allocationSize=1)
 	private int id;
 	
-	@Column(name = "ID_LOCALITY")
-	private int id_locality;
+	@ManyToOne
+    @JoinColumn(name = "ID_LOCALITY")
+	private Locality idLocality;
 	
-	@Column(name = "ID_POSTOFFICE")
-	private int id_postoffice;
+	@ManyToOne
+    @JoinColumn(name = "ID_POSTOFFICE")
+	private PostOffice idPostoffice;
 	
-	@Column(name = "ID_STREETS")
-	private int id_strets;
+	@ManyToOne
+    @JoinColumn(name = "ID_STREETS")
+	private Streets idStrets;
 	
-	@Column(name = "ID_COUNTRIES")
-	private int id_countries;
+	@ManyToOne
+    @JoinColumn(name = "ID_COUNTIES")
+	private Counties idCounties;
 	
 	@Column(name = "HOUSE_NUMBER")
 	private int house_number;
+	
+	/**
+	 * Default Constuctor
+	 */
+	public Address(){}
+	
+	
+	/**
+	 * Constuctor
+	 * @param houseNumber variable int 
+	 * */
+	public Address(int houseNumber)
+	{
+		this.house_number = houseNumber;
+	}
 	
 	/**
 	 * @param house_number the house_number to set
@@ -57,33 +75,33 @@ public class Address implements ObjectDB
 	public void setId(int id) {
 		this.id = id;
 	}
-	 
+	
 	/**
-	 * @param id_countries the id_countries to set
+	 * @param idCounties the idCounties to set
 	 */
-	public void setId_countries(int id_countries) {
-		this.id_countries = id_countries;
+	public void setIdCounties(Counties idCounties) {
+		this.idCounties = idCounties;
 	}
 	
 	/**
-	 * @param id_locality the id_locality to set
+	 * @param idLocality the idLocality to set
 	 */
-	public void setId_locality(int id_locality) {
-		this.id_locality = id_locality;
+	public void setIdLocality(Locality idLocality) {
+		this.idLocality = idLocality;
 	}
 	
 	/**
-	 * @param id_postoffice the id_postoffice to set
+	 * @param idPostoffice the idPostoffice to set
 	 */
-	public void setId_postoffice(int id_postoffice) {
-		this.id_postoffice = id_postoffice;
+	public void setIdPostoffice(PostOffice idPostoffice) {
+		this.idPostoffice = idPostoffice;
 	}
 	
 	/**
-	 * @param id_strets the id_strets to set
+	 * @param idStrets the idStrets to set
 	 */
-	public void setId_strets(int id_strets) {
-		this.id_strets = id_strets;
+	public void setIdStrets(Streets idStrets) {
+		this.idStrets = idStrets;
 	}
 	
 	/**
@@ -101,30 +119,30 @@ public class Address implements ObjectDB
 	}
 	
 	/**
-	 * @return the id_countries
+	 * @return the idCounties
 	 */
-	public int getId_countries() {
-		return id_countries;
+	public Counties getIdCounties() {
+		return idCounties;
 	}
 	
 	/**
-	 * @return the id_locality
+	 * @return the idLocality
 	 */
-	public int getId_locality() {
-		return id_locality;
+	public Locality getIdLocality() {
+		return idLocality;
 	}
 	
 	/**
-	 * @return the id_postoffice
+	 * @return the idPostoffice
 	 */
-	public int getId_postoffice() {
-		return id_postoffice;
+	public PostOffice getIdPostoffice() {
+		return idPostoffice;
 	}
 	
 	/**
-	 * @return the id_strets
+	 * @return the idStrets
 	 */
-	public int getId_strets() {
-		return id_strets;
+	public Streets getIdStrets() {
+		return idStrets;
 	}
 }

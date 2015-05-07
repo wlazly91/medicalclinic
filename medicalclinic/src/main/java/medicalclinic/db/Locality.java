@@ -38,6 +38,22 @@ public class Locality implements ObjectDB {
 	@Column(name = "VILLAGE")
 	private int village;
 	
+	
+	/**
+	 * 
+	 */
+	public Locality() {}
+	
+	/**
+	 * 
+	 * */
+	public Locality(String name, int country, int village)
+	{
+		this.country =country;
+		this.name = name;
+		this.village = village;
+	}
+	
 	/**
 	 * @param country the country to set
 	 */

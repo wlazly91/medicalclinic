@@ -51,7 +51,7 @@ public class Users implements ObjectDB {
 	private String phoneNum;
 	
 	/**
-	 * @param eMail the eMail to set
+	 * @param eMail the eMail to set	
 	 */
 	public void seteMail(String eMail) {
 		this.eMail = eMail;

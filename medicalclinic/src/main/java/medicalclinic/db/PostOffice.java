@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,12 +31,24 @@ public class PostOffice implements ObjectDB {
 	@SequenceGenerator(name="IDPOSTOFFICE", sequenceName = "IDPOSTOFFICE", allocationSize=1)
 	private int idPostOf;
 	
-	@Column(name = "ID_LOCALITY")
-	private int idLocality;
+	@ManyToOne
+    @JoinColumn(name = "ID_LOCALITY")
+	private Locality idLocality;
 	
 	@Column(name = "CODE")
 	private String code;
 	
+	
+	/**
+	 * 
+	 */
+	public PostOffice() {}
+	
+	
+	public PostOffice(String code)
+	{
+		this.code = code;
+	}
 	/**
 	 * @param code the code to set
 	 */
@@ -45,7 +59,7 @@ public class PostOffice implements ObjectDB {
 	/**
 	 * @param idLocality the idLocality to set
 	 */
-	public void setIdLocality(int idLocality) {
+	public void setIdLocality(Locality idLocality) {
 		this.idLocality = idLocality;
 	}
 	
@@ -66,7 +80,7 @@ public class PostOffice implements ObjectDB {
 	/**
 	 * @return the idLocality
 	 */
-	public int getIdLocality() {
+	public Locality getIdLocality() {
 		return idLocality;
 	}
 	

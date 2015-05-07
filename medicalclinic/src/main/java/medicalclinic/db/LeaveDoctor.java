@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,8 +34,9 @@ public class LeaveDoctor implements ObjectDB {
 	@SequenceGenerator(name="IDLEAVYDOCTOR", sequenceName = "IDLEAVYDOCTOR", allocationSize=1)
 	private int idLeave;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoctor;
+	@ManyToOne
+    @JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoctor;
 	
 	@Column(name = "DATE_FROM")
 	private Date dateFrom;
@@ -41,6 +44,17 @@ public class LeaveDoctor implements ObjectDB {
 	@Column(name = "DATE_TO")
 	private Date dateTo;
 	
+	
+	/**
+	 * 
+	 */
+	public LeaveDoctor() {}
+	
+	public LeaveDoctor(Date from, Date to)
+	{
+		this.dateFrom = from;
+		this.dateTo = to;
+	}
 	/**
 	 * @param dateFrom the dateFrom to set
 	 */
@@ -58,7 +72,7 @@ public class LeaveDoctor implements ObjectDB {
 	/**
 	 * @param idDoctor the idDoctor to set
 	 */
-	public void setIdDoctor(int idDoctor) {
+	public void setIdDoctor(Doctor idDoctor) {
 		this.idDoctor = idDoctor;
 	}
 	
@@ -86,7 +100,7 @@ public class LeaveDoctor implements ObjectDB {
 	/**
 	 * @return the idDoctor
 	 */
-	public int getIdDoctor() {
+	public Doctor getIdDoctor() {
 		return idDoctor;
 	}
 	
