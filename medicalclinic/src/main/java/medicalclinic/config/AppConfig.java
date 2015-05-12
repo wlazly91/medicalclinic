@@ -1,11 +1,16 @@
 package medicalclinic.config;
 
 
+import java.util.Properties;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -16,15 +21,39 @@ import org.springframework.web.servlet.view.JstlView;
 @Import({ SecurityConfig.class })
 public class AppConfig {
 
-	@Bean(name = "dataSource")
-	public DriverManagerDataSource dataSource() {
-	    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-	    driverManagerDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-	    driverManagerDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-	    driverManagerDataSource.setUsername("medicalclinic");
-	    driverManagerDataSource.setPassword("zaq12wsx");
-	    return driverManagerDataSource;
+    @Bean
+    public SessionFactory sessionFactory() {
+            LocalSessionFactoryBuilder builder = 
+		new LocalSessionFactoryBuilder(dataSource());
+            builder.scanPackages("medicalclinic.db")
+                  .addProperties(getHibernateProperities());
+
+            return builder.buildSessionFactory();
+    }
+    
+	private Properties getHibernateProperities(){
+		Properties prop = new Properties();
+		prop.put("hibernate.format_sql", "true");
+        prop.put("hibernate.show_sql", "true");
+        prop.put("hibernate.dialect","org.hibernate.dialect.OracleDialect");
+        		
+        return prop;
 	}
+	
+	@Bean(name = "dataSource")
+	public BasicDataSource dataSource() {
+		BasicDataSource  basicDataSource = new BasicDataSource ();
+		basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		basicDataSource.setUsername("medicalclinic");
+		basicDataSource.setPassword("zaq12wsx");
+	    return basicDataSource;
+	}
+	
+	@Bean
+    public HibernateTransactionManager txManager() {
+            return new HibernateTransactionManager(sessionFactory());
+    }
 	
 	@Bean
 	public InternalResourceViewResolver viewResolver() {

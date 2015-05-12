@@ -3,13 +3,18 @@
  */
 package medicalclinic.db;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -47,9 +52,7 @@ public class Users implements ObjectDB {
 	@JoinColumn(name = "ID_OTHER")
 	private OtherEmployee idOther;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_PERMISSIONS")
-	private Permissions idPermi;
+	private Set<Permissions> userRole = new HashSet<Permissions>(0);
 	
 	@Column(name = "E_MAIL")
 	private String eMail;
@@ -57,14 +60,39 @@ public class Users implements ObjectDB {
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNum;
 	
+	@Column(name = "LOGIN")
+	private String login;
+	
+	@Column(name = "PASSWORD")
+	private String password;
+	
 	
 	public Users() {}
 	
 
-	public Users(String eMailN, String numberP) {
+	public Users(String eMailN, String numberP, String passwordN, String loginN) {
 		this.eMail = eMailN;
 		this.phoneNum = numberP;
+		this.password = passwordN;
+		this.login = loginN;
 	}
+	
+	
+	public Users(String loginN, String passwordN, Set<Permissions> permissionsN)
+	{
+		this.password = passwordN;
+		this.login = loginN;
+		this.userRole = permissionsN;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	/**
 	 * @param eMail the eMail to set	
 	 */
@@ -93,11 +121,8 @@ public class Users implements ObjectDB {
 		this.idPatient = idPatient;
 	}
 	
-	/**
-	 * @param idPermi the idPermi to set
-	 */
-	public void setIdPermi(Permissions idPermi) {
-		this.idPermi = idPermi;
+	public void setUserRole(Set<Permissions> userRole) {
+		this.userRole = userRole;
 	}
 	
 	/**
@@ -119,6 +144,15 @@ public class Users implements ObjectDB {
 	 */
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
+	}
+	
+	
+	public String getLogin() {
+		return login;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 	
 	/**
@@ -149,13 +183,10 @@ public class Users implements ObjectDB {
 		return idPatient;
 	}
 	
-	/**
-	 * @return the idPermi
-	 */
-	public Permissions getIdPermi() {
-		return idPermi;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<Permissions> getUserRole() {
+		return userRole;
 	}
-	
 	
 	/**
 	 * @return the idUser
