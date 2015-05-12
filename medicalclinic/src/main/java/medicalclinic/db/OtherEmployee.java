@@ -38,6 +38,14 @@ public class OtherEmployee implements ObjectDB
 	@Column(name = "POSITION")
 	private String position;
 	
+	
+	public OtherEmployee() {}
+	
+	public OtherEmployee(String nameN, String surnameN, String positionN) {
+		this.name = nameN;
+		this.surname = surnameN;
+		this.position = positionN;
+	}
 	/**
 	 * @param id the id to set
 	 */

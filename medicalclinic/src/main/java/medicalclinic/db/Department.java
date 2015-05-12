@@ -20,14 +20,14 @@ public class Department {
  
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDdpt") 
-	@SequenceGenerator(name="IDdpt", sequenceName = "IDdpt", allocationSize=1)
+    @SequenceGenerator(name="IDdpt", sequenceName = "IDdpt", allocationSize=1)
     @Column(name="DEPARTMENT_ID")
     private Long departmentId;
      
     @Column(name="DPT_NAME")
     private String departmentName;
 
-	@OneToMany(cascade={CascadeType.ALL})
+    @OneToMany(cascade={CascadeType.ALL})
     @JoinColumn(name="department_id")
     @OrderColumn(name="idx")
     private List<Employee> employees;

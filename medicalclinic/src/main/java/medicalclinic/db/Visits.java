@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,17 +33,20 @@ public class Visits implements ObjectDB {
 	@SequenceGenerator(name="IDVISITS", sequenceName = "IDVISITS", allocationSize=1)
 	private int idVisits;
 	
-	@Column(name = "ID_DISEASES")
-	private int idDis;
+	@ManyToOne
+	@JoinColumn(name = "ID_DISEASES")
+	private Diseases idDis;
 	
-	@Column(name = "ID_PATIENT")
-	private int idPatient;
+	@ManyToOne
+	@JoinColumn(name = "ID_PATIENT")
+	private Patient idPatient;
 	
 	@Column(name = "DATE_VISITS")
 	private Date dateVisit;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoc;
+	@ManyToOne
+	@JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoc;
 	
 	
 	/**
@@ -54,21 +59,21 @@ public class Visits implements ObjectDB {
 	/**
 	 * @param idDis the idDis to set
 	 */
-	public void setIdDis(int idDis) {
+	public void setIdDis(Diseases idDis) {
 		this.idDis = idDis;
 	}
 	
 	/**
 	 * @param idDoc the idDoc to set
 	 */
-	public void setIdDoc(int idDoc) {
+	public void setIdDoc(Doctor idDoc) {
 		this.idDoc = idDoc;
 	}
 	
 	/**
 	 * @param idPatient the idPatient to set
 	 */
-	public void setIdPatient(int idPatient) {
+	public void setIdPatient(Patient idPatient) {
 		this.idPatient = idPatient;
 	}
 	
@@ -89,21 +94,21 @@ public class Visits implements ObjectDB {
 	/**
 	 * @return the idDis
 	 */
-	public int getIdDis() {
+	public Diseases getIdDis() {
 		return idDis;
 	}
 	
 	/**
 	 * @return the idDoc
 	 */
-	public int getIdDoc() {
+	public Doctor getIdDoc() {
 		return idDoc;
 	}
 	
 	/**
 	 * @return the idPatient
 	 */
-	public int getIdPatient() {
+	public Patient getIdPatient() {
 		return idPatient;
 	}
 	

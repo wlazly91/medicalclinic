@@ -32,6 +32,19 @@ public class Clinics implements ObjectDB
 	
 	
 	/**
+	 * Domyœlny
+	 */
+	public Clinics() {}
+	
+	/**
+	 * Konstruktor sparametryzowany
+	 */
+	public Clinics(String name) {
+		this.name = name;
+	}
+	
+	
+	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {

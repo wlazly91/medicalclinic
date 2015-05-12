@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,12 +34,20 @@ public class Counties implements ObjectDB{
 	@SequenceGenerator(name="IDCOUNTIES", sequenceName = "IDCOUNTIES", allocationSize=1)
 	private int id;
 	
-	@Column(name = "ID_PROVICE")
-	private int idProvice;
+	@ManyToOne
+	@JoinColumn(name = "ID_PROVINCE")
+	private Province idProvice;
 	
 	@Column(name = "NAME")
 	private String name;
 	
+	
+	
+	public Counties() {}
+	
+	public Counties(String nameN) {
+		this.name = nameN;
+	}
 	/**
 	 * @param id the id to set
 	 */
@@ -48,7 +58,7 @@ public class Counties implements ObjectDB{
 	/**
 	 * @param idProvice the idProvice to set
 	 */
-	public void setIdProvice(int idProvice) {
+	public void setIdProvice(Province idProvice) {
 		this.idProvice = idProvice;
 	}
 	
@@ -69,7 +79,7 @@ public class Counties implements ObjectDB{
 	/**
 	 * @return the idProvice
 	 */
-	public int getIdProvice() {
+	public Province getIdProvice() {
 		return idProvice;
 	}
 	

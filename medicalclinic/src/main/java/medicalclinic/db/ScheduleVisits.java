@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,14 +33,17 @@ public class ScheduleVisits implements ObjectDB {
 	@SequenceGenerator(name="IDSCHULEVISITS", sequenceName = "IDSCHULEVISITS", allocationSize=1)
 	private int idSV;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoctor;
+	@ManyToOne
+	@JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoctor;
 	
-	@Column(name = "ID_CLINICS")
-	private int idClinics;
+	@ManyToOne
+	@JoinColumn(name = "ID_CLINICS")
+	private Clinics idClinics;
 	
-	@Column(name = "ID_PATIENT")
-	private int idPatient;
+	@ManyToOne
+	@JoinColumn(name = "ID_PATIENT")
+	private Patient idPatient;
 	
 	@Column(name = "DATE_SV")
 	private Date dateSV;
@@ -46,6 +51,13 @@ public class ScheduleVisits implements ObjectDB {
 	@Column(name = "HOURS_SV")
 	private String hoursSV;
 	
+	
+	public ScheduleVisits() {}
+	
+	public ScheduleVisits(Date dateS, String hours) {
+		this.dateSV = dateS;
+		this.hoursSV = hours;
+	}
 	/**
 	 * @param dateSV the dateSV to set
 	 */
@@ -63,21 +75,21 @@ public class ScheduleVisits implements ObjectDB {
 	/**
 	 * @param idClinics the idClinics to set
 	 */
-	public void setIdClinics(int idClinics) {
+	public void setIdClinics(Clinics idClinics) {
 		this.idClinics = idClinics;
 	}
 	
 	/**
 	 * @param idDoctor the idDoctor to set
 	 */
-	public void setIdDoctor(int idDoctor) {
+	public void setIdDoctor(Doctor idDoctor) {
 		this.idDoctor = idDoctor;
 	}
 	
 	/**
 	 * @param idPatient the idPatient to set
 	 */
-	public void setIdPatient(int idPatient) {
+	public void setIdPatient(Patient idPatient) {
 		this.idPatient = idPatient;
 	}
 	
@@ -105,21 +117,21 @@ public class ScheduleVisits implements ObjectDB {
 	/**
 	 * @return the idClinics
 	 */
-	public int getIdClinics() {
+	public Clinics getIdClinics() {
 		return idClinics;
 	}
 	
 	/**
 	 * @return the idDoctor
 	 */
-	public int getIdDoctor() {
+	public Doctor getIdDoctor() {
 		return idDoctor;
 	}
 	
 	/**
 	 * @return the idPatient
 	 */
-	public int getIdPatient() {
+	public Patient getIdPatient() {
 		return idPatient;
 	}
 	

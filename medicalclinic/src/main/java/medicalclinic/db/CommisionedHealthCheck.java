@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,14 +33,17 @@ public class CommisionedHealthCheck implements ObjectDB
 	@SequenceGenerator(name="IDCOMMISIONED_HEALTH_CHECK", sequenceName = "IDCOMMISIONED_HEALTH_CHECK", allocationSize=1)
 	private int id;
 	
-	@Column(name = "ID_HEALTH")
-	private int idHealth;
+	@ManyToOne
+	@JoinColumn(name = "ID_HEALTH")
+	private HealthCheck idHealth;
 	
-	@Column(name = "ID_VISIT")
-	private int idVisit;
+	@ManyToOne
+	@JoinColumn(name = "ID_VISIT")
+	private Visits idVisit;
 	
-	@Column(name = "ID_PATIENT")
-	private int idPatient;
+	@ManyToOne
+	@JoinColumn(name = "ID_PATIENT")
+	private Patient idPatient;
 	
 	/**
 	 * @param id the id to set
@@ -50,21 +55,21 @@ public class CommisionedHealthCheck implements ObjectDB
 	/**
 	 * @param idHealth the idHealth to set
 	 */
-	public void setIdHealth(int idHealth) {
+	public void setIdHealth(HealthCheck idHealth) {
 		this.idHealth = idHealth;
 	}
 	
 	/**
 	 * @param idPatient the idPatient to set
 	 */
-	public void setIdPatient(int idPatient) {
+	public void setIdPatient(Patient idPatient) {
 		this.idPatient = idPatient;
 	}
 	
 	/**
 	 * @param idVisit the idVisit to set
 	 */
-	public void setIdVisit(int idVisit) {
+	public void setIdVisit(Visits idVisit) {
 		this.idVisit = idVisit;
 	}
 	
@@ -78,21 +83,21 @@ public class CommisionedHealthCheck implements ObjectDB
 	/**
 	 * @return the idHealth
 	 */
-	public int getIdHealth() {
+	public HealthCheck getIdHealth() {
 		return idHealth;
 	}
 	
 	/**
 	 * @return the idPatient
 	 */
-	public int getIdPatient() {
+	public Patient getIdPatient() {
 		return idPatient;
 	}
 	
 	/**
 	 * @return the idVisit
 	 */
-	public int getIdVisit() {
+	public Visits getIdVisit() {
 		return idVisit;
 	}
 }

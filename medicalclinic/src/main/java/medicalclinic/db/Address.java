@@ -29,19 +29,19 @@ public class Address implements ObjectDB
 	private int id;
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_LOCALITY")
+	@JoinColumn(name = "ID_LOCALITY")
 	private Locality idLocality;
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_POSTOFFICE")
+	@JoinColumn(name = "ID_POSTOFFICE")
 	private PostOffice idPostoffice;
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_STREETS")
+	@JoinColumn(name = "ID_STREETS")
 	private Streets idStrets;
 	
 	@ManyToOne
-    @JoinColumn(name = "ID_COUNTIES")
+	@JoinColumn(name = "ID_COUNTIES")
 	private Counties idCounties;
 	
 	@Column(name = "HOUSE_NUMBER")

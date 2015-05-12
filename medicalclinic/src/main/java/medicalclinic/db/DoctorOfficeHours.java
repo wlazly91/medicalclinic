@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,8 +31,9 @@ public class DoctorOfficeHours implements ObjectDB {
 	@SequenceGenerator(name="IDDOCTOROFFICE", sequenceName = "IDDOCTOROFFICE", allocationSize=1)
 	private int idDoc;
 	
-	@Column(name = "ID_CLINICS")
-	private int idClinics;
+	@ManyToOne
+	@JoinColumn(name = "ID_CLINICS")
+	private Clinics idClinics;
 	
 	@Column(name = "HOURS_FROM")
 	private String hoursFrom;
@@ -38,9 +41,18 @@ public class DoctorOfficeHours implements ObjectDB {
 	@Column(name = "HOURS_TO")
 	private String hoursTo;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoctor;
+	@ManyToOne
+	@JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoctor;
 	
+	
+	public DoctorOfficeHours() {}
+	
+	
+	public DoctorOfficeHours(String from, String to) {
+		this.hoursFrom = from;
+		this.hoursTo = to;
+	}
 	/**
 	 * @param hoursFrom the hoursFrom to set
 	 */
@@ -57,7 +69,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	/**
 	 * @param idClinics the idClinics to set
 	 */
-	public void setIdClinics(int idClinics) {
+	public void setIdClinics(Clinics idClinics) {
 		this.idClinics = idClinics;
 	}
 	
@@ -71,7 +83,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	/**
 	 * @param idDoctor the idDoctor to set
 	 */
-	public void setIdDoctor(int idDoctor) {
+	public void setIdDoctor(Doctor idDoctor) {
 		this.idDoctor = idDoctor;
 	}
 	
@@ -92,7 +104,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	/**
 	 * @return the idClinics
 	 */
-	public int getIdClinics() {
+	public Clinics getIdClinics() {
 		return idClinics;
 	}
 	
@@ -106,7 +118,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	/**
 	 * @return the idDoctor
 	 */
-	public int getIdDoctor() {
+	public Doctor getIdDoctor() {
 		return idDoctor;
 	}
 	

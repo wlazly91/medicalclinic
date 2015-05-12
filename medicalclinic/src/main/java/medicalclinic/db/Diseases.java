@@ -32,6 +32,13 @@ public class Diseases implements ObjectDB {
 	@Column(name = "NAME")
 	private String name;
 	
+	
+	public Diseases() {}
+	
+	
+	public Diseases(String nameN) { 
+		this.name = nameN;
+	}
 	/**
 	 * @param idDiseases the idDiseases to set
 	 */

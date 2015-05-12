@@ -32,6 +32,12 @@ public class HealthCheck implements ObjectDB {
 	@Column(name = "NAME")
 	private String name;
 	
+	
+	public HealthCheck() {}
+	
+	public HealthCheck(String nameN) {
+		this.name = nameN;
+	}
 	/**
 	 * @param idHealth the idHealth to set
 	 */

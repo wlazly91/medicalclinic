@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -40,13 +42,24 @@ public class Patient implements ObjectDB {
 	@Column(name = "INSURANCE")
 	private String insurance;
 	
-	@Column(name = "ID_ADDRESS")
-	private int adres;
+	@ManyToOne
+	@JoinColumn(name = "ID_ADDRESS")
+	private Address adres;
+	
+	
+	public Patient() {}
+	
+	public Patient(String nameN, String surnameN, String peselN, String insuranceN) {
+		this.name = nameN;
+		this.surname = surnameN;
+		this.pesel = peselN;
+		this.insurance = insuranceN;
+	}
 	
 	/**
 	 * @param adres the adres to set
 	 */
-	public void setAdres(int adres) {
+	public void setAdres(Address adres) {
 		this.adres = adres;
 	}
 	
@@ -88,7 +101,7 @@ public class Patient implements ObjectDB {
 	/**
 	 * @return the adres
 	 */
-	public int getAdres() {
+	public Address getAdres() {
 		return adres;
 	}
 	

@@ -33,6 +33,13 @@ public class Specjality implements ObjectDB {
 	@Column(name = "NAME")
 	private String name;
 	
+	
+	public Specjality() {}
+	
+	
+	public Specjality(String nameN) {
+		this.name = nameN;
+	}
 	/**
 	 * @param idSpecjal the idSpecjal to set
 	 */

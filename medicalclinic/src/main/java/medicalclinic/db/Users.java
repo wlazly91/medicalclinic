@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,20 +31,25 @@ public class Users implements ObjectDB {
 	@SequenceGenerator(name="IDUSER", sequenceName = "IDUSER", allocationSize=1)
 	private int idUser;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoc;
+	@ManyToOne
+	@JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoc;
 	
-	@Column(name = "ID_PATIENT")
-	private int idPatient;
+	@ManyToOne
+	@JoinColumn(name = "ID_PATIENT")
+	private Patient idPatient;
 	
-	@Column(name = "ID_NURSE")
-	private int nurse;
+	@ManyToOne
+	@JoinColumn(name = "ID_NURSE")
+	private Nurse nurse;
 	
-	@Column(name = "ID_OTHER")
-	private int idOther;
+	@ManyToOne
+	@JoinColumn(name = "ID_OTHER")
+	private OtherEmployee idOther;
 	
-	@Column(name = "ID_PERMISSIONS")
-	private int idPermi;
+	@ManyToOne
+	@JoinColumn(name = "ID_PERMISSIONS")
+	private Permissions idPermi;
 	
 	@Column(name = "E_MAIL")
 	private String eMail;
@@ -50,6 +57,14 @@ public class Users implements ObjectDB {
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNum;
 	
+	
+	public Users() {}
+	
+
+	public Users(String eMailN, String numberP) {
+		this.eMail = eMailN;
+		this.phoneNum = numberP;
+	}
 	/**
 	 * @param eMail the eMail to set	
 	 */
@@ -60,28 +75,28 @@ public class Users implements ObjectDB {
 	/**
 	 * @param idDoc the idDoc to set
 	 */
-	public void setIdDoc(int idDoc) {
+	public void setIdDoc(Doctor idDoc) {
 		this.idDoc = idDoc;
 	}
 	
 	/**
 	 * @param idOther the idOther to set
 	 */
-	public void setIdOther(int idOther) {
+	public void setIdOther(OtherEmployee idOther) {
 		this.idOther = idOther;
 	}
 	
 	/**
 	 * @param idPatient the idPatient to set
 	 */
-	public void setIdPatient(int idPatient) {
+	public void setIdPatient(Patient idPatient) {
 		this.idPatient = idPatient;
 	}
 	
 	/**
 	 * @param idPermi the idPermi to set
 	 */
-	public void setIdPermi(int idPermi) {
+	public void setIdPermi(Permissions idPermi) {
 		this.idPermi = idPermi;
 	}
 	
@@ -95,7 +110,7 @@ public class Users implements ObjectDB {
 	/**
 	 * @param nurse the nurse to set
 	 */
-	public void setNurse(int nurse) {
+	public void setNurse(Nurse nurse) {
 		this.nurse = nurse;
 	}
 	
@@ -116,28 +131,28 @@ public class Users implements ObjectDB {
 	/**
 	 * @return the idDoc
 	 */
-	public int getIdDoc() {
+	public Doctor getIdDoc() {
 		return idDoc;
 	}
 	
 	/**
 	 * @return the idOther
 	 */
-	public int getIdOther() {
+	public OtherEmployee getIdOther() {
 		return idOther;
 	}
 	
 	/**
 	 * @return the idPatient
 	 */
-	public int getIdPatient() {
+	public Patient getIdPatient() {
 		return idPatient;
 	}
 	
 	/**
 	 * @return the idPermi
 	 */
-	public int getIdPermi() {
+	public Permissions getIdPermi() {
 		return idPermi;
 	}
 	
@@ -153,7 +168,7 @@ public class Users implements ObjectDB {
 	/**
 	 * @return the nurse
 	 */
-	public int getNurse() {
+	public Nurse getNurse() {
 		return nurse;
 	}
 	

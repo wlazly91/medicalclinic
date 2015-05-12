@@ -32,6 +32,11 @@ public class Drugs implements ObjectDB {
 	@Column(name = "NAME")
 	private String name;
 	
+	public Drugs() {}
+	
+	public Drugs(String nameN) {
+		this.name = nameN;
+	}
 	/**
 	 * @param idDrugs the idDrugs to set
 	 */

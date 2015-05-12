@@ -32,6 +32,11 @@ public class Province implements ObjectDB {
 	@Column(name = "NAME")
 	private String name;
 	
+	public Province() {}
+	
+	public Province(String nameN) {
+		this.name = nameN;
+	}
 	/**
 	 * @param idProvince the idProvince to set
 	 */

@@ -38,6 +38,14 @@ public class Nurse implements ObjectDB {
 	@Column(name = "POSITION")
 	private String position;
 	
+	
+	public Nurse() {}
+	
+	public Nurse(String nameN, String surnameN, String positionN) {
+		this.name = nameN;
+		this.surname = surnameN;
+		this.position = positionN;
+	}
 	/**
 	 * @param idNurse the idNurse to set
 	 */

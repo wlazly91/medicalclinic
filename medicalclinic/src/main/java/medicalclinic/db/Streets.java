@@ -33,6 +33,11 @@ public class Streets implements ObjectDB {
 	private String name;
 	
 	
+	public Streets() {}
+	
+	public Streets(String nameN) {
+		this.name = nameN;	
+	}
 	/**
 	 * @param idStreets the idStreets to set
 	 */

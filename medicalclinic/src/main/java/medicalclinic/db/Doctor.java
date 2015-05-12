@@ -31,6 +31,13 @@ public class Doctor implements ObjectDB
 	@Column(name = "SURNAME")
 	private String surname;
 	
+	
+	public Doctor() {}
+	
+	public Doctor(String nameN, String nameS){
+		this.name = nameN;
+		this.surname = nameS;
+	}
 	/**
 	 * @param id the id to set
 	 */

@@ -4,10 +4,12 @@
 package medicalclinic.db;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Klasa reprezentuj¹ca tabelê permissions
@@ -15,6 +17,8 @@ import javax.persistence.SequenceGenerator;
  * @author £ukasz Kochanek
  * @version 1.0
  */
+@Entity
+@Table(name= "PERMISSIONS")
 public class Permissions implements ObjectDB {
 
 	private static final long serialVersionUID = -7675439514054378439L;
@@ -54,6 +58,24 @@ public class Permissions implements ObjectDB {
 	
 	@Column(name = "SHOW_RESULTS_HEALTH")
 	private int showResulsHealth;
+	
+	
+	
+	public Permissions() {}
+	
+	
+	public Permissions(String nameN, int modify, int add, int delete, int save_doctor, int show, int commissioned, int save_drugs, int add_result, int show_result) {
+		this.name = nameN;
+		this.modifyUser = modify;
+		this.addUser = add;
+		this.deleteUser = delete;
+		this.saveDoctor = save_doctor;
+		this.showHistory = show;
+		this.comHealth = commissioned;
+		this.saveDrugs = save_drugs;
+		this.addResults = add_result;
+		this.showResulsHealth = show_result;
+	}
 	
 	/**
 	 * @param addResults the addResults to set

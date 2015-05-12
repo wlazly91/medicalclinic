@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,16 +31,21 @@ public class SpecjalityDoctor implements ObjectDB {
 	@SequenceGenerator(name="IDSPECJALITYDOCTOR", sequenceName = "IDSPECJALITYDOCTOR", allocationSize=1)
 	private int idSpecDoc;
 	
-	@Column(name = "ID_DOCTOR")
-	private int idDoc;
+	@ManyToOne
+	@JoinColumn(name = "ID_DOCTOR")
+	private Doctor idDoc;
 	
-	@Column(name = "ID_SPECJALITY")
-	private int idSpecjaliy;
+	@ManyToOne
+	@JoinColumn(name = "ID_SPECJALITY")
+	private Specjality idSpecjaliy;
+	
+	
+	public SpecjalityDoctor() {}
 	
 	/**
 	 * @param idDoc the idDoc to set
 	 */
-	public void setIdDoc(int idDoc) {
+	public void setIdDoc(Doctor idDoc) {
 		this.idDoc = idDoc;
 	}
 	
@@ -52,14 +59,14 @@ public class SpecjalityDoctor implements ObjectDB {
 	/**
 	 * @param idSpecjaliy the idSpecjaliy to set
 	 */
-	public void setIdSpecjaliy(int idSpecjaliy) {
+	public void setIdSpecjaliy(Specjality idSpecjaliy) {
 		this.idSpecjaliy = idSpecjaliy;
 	}
 	
 	/**
 	 * @return the idDoc
 	 */
-	public int getIdDoc() {
+	public Doctor getIdDoc() {
 		return idDoc;
 	}
 	
@@ -73,7 +80,7 @@ public class SpecjalityDoctor implements ObjectDB {
 	/**
 	 * @return the idSpecjaliy
 	 */
-	public int getIdSpecjaliy() {
+	public Specjality getIdSpecjaliy() {
 		return idSpecjaliy;
 	}
 	
