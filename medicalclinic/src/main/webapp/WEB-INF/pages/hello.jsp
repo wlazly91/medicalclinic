@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
-pageEncoding="ISO-8859-1"%>
+<%@page session="false"%>
 <html>
 <body>
 	<h1>Title : ${title}</h1>	

@@ -1,7 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="javax.servlet.jsp.PageContext" %>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Login Page</title>
@@ -71,7 +70,7 @@
 			</tr>
 		   </table>
  
-		   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> s
+		   <input type="hidden" name="<c:out value='${_csrf.parameterName}'/>" value="<c:out value='${_csrf.token}'/>" />
 		</form>
 	</div>
  
