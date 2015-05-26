@@ -60,7 +60,6 @@ public class Permissions implements ObjectDB {
 	private int showResulsHealth;
 	
 	
-	
 	public Permissions() {}
 	
 	

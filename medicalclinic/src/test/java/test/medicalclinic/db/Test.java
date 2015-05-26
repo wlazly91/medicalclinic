@@ -2,8 +2,6 @@ package test.medicalclinic.db;
 
 import medicalclinic.db.Address;
 import medicalclinic.db.Counties;
-import medicalclinic.db.Department;
-import medicalclinic.db.Employee;
 import medicalclinic.db.HibernateUtil;
 import medicalclinic.db.Locality;
 import medicalclinic.db.PostOffice;

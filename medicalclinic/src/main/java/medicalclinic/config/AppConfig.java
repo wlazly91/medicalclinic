@@ -24,7 +24,7 @@ public class AppConfig {
 	@Bean
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("com.lkochan.users.model").addProperties(getHibernateProperties());
+        builder.scanPackages("medicalclinic.*").addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
     }
@@ -37,6 +37,12 @@ public class AppConfig {
         return prop;
     }
 	
+	
+	@Bean
+    public HibernateTransactionManager txManager() {
+        return new HibernateTransactionManager(sessionFactory());
+    }
+	
 	@Bean(name = "dataSource")
 	public BasicDataSource dataSource() {
 		
@@ -47,11 +53,7 @@ public class AppConfig {
 		ds.setPassword("zaq12wsx");
 		return ds;
 	}
-	
-	@Bean
-    public HibernateTransactionManager txManager() {
-        return new HibernateTransactionManager(sessionFactory());
-    }
+
 		
 	@Bean
 	public InternalResourceViewResolver viewResolver() {

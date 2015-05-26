@@ -6,15 +6,15 @@ package medicalclinic.db;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -36,23 +36,21 @@ public class Users implements ObjectDB {
 	@SequenceGenerator(name="IDUSER", sequenceName = "IDUSER", allocationSize=1)
 	private int idUser;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_DOCTOR")
-	private Doctor idDoc;
+	@JoinColumn(name = "ID_DOCTOR", nullable = true)
+	@Column(name = "ID_DOCTOR")
+	private Integer idDoc;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_PATIENT")
-	private Patient idPatient;
+	@JoinColumn(name = "ID_PATIENT", nullable = true)
+	@Column(name = "ID_PATIENT")
+	private Integer idPat;
+
+	@JoinColumn(name = "ID_NURSE", nullable = true)
+	@Column(name = "ID_NURSE")
+	private Integer idNurse;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_NURSE")
-	private Nurse nurse;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_OTHER")
-	private OtherEmployee idOther;
-	
-	private Set<Permissions> userRole = new HashSet<Permissions>(0);
+	@JoinColumn(name = "ID_OTHER", nullable = true)
+	@Column(name = "ID_OTHER")
+	private Integer idOther;
 	
 	@Column(name = "E_MAIL")
 	private String eMail;
@@ -66,6 +64,14 @@ public class Users implements ObjectDB {
 	@Column(name = "PASSWORD")
 	private String password;
 	
+	@Column(name = "ACTIVE")
+	private int activ;
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="PERMISSIONS_USER", 
+                joinColumns={@JoinColumn(name="ID_USER")}, 
+                inverseJoinColumns={@JoinColumn(name="ID_PER")})
+    private Set<Permissions> permission = new HashSet<Permissions>();
 	
 	public Users() {}
 	
@@ -78,11 +84,46 @@ public class Users implements ObjectDB {
 	}
 	
 	
-	public Users(String loginN, String passwordN, Set<Permissions> permissionsN)
+	public Users(String loginN, String passwordN)
 	{
 		this.password = passwordN;
 		this.login = loginN;
-		this.userRole = permissionsN;
+	}
+	
+//	public void setPermission(Set<Permissions> permission) {
+//		this.permission = permission;
+//	}
+//	
+//	public Set<Permissions> getPermission() {
+//		return permission;
+//	}
+	
+	public void setActiv(int activ) {
+		this.activ = activ;
+	}
+	
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+	
+	public void setIdDoc(Integer idDoc) {
+		this.idDoc = idDoc;
+	}
+	
+	public void setIdNurse(Integer idNurse) {
+		this.idNurse = idNurse;
+	}
+	
+	public void setIdOther(Integer idOther) {
+		this.idOther = idOther;
+	}
+	
+	public void setIdPat(Integer idPat) {
+		this.idPat = idPat;
+	}
+	
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 	
 	public void setLogin(String login) {
@@ -93,59 +134,37 @@ public class Users implements ObjectDB {
 		this.password = password;
 	}
 	
-	/**
-	 * @param eMail the eMail to set	
-	 */
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-	
-	/**
-	 * @param idDoc the idDoc to set
-	 */
-	public void setIdDoc(Doctor idDoc) {
-		this.idDoc = idDoc;
-	}
-	
-	/**
-	 * @param idOther the idOther to set
-	 */
-	public void setIdOther(OtherEmployee idOther) {
-		this.idOther = idOther;
-	}
-	
-	/**
-	 * @param idPatient the idPatient to set
-	 */
-	public void setIdPatient(Patient idPatient) {
-		this.idPatient = idPatient;
-	}
-	
-	public void setUserRole(Set<Permissions> userRole) {
-		this.userRole = userRole;
-	}
-	
-	/**
-	 * @param idUser the idUser to set
-	 */
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-	
-	/**
-	 * @param nurse the nurse to set
-	 */
-	public void setNurse(Nurse nurse) {
-		this.nurse = nurse;
-	}
-	
-	/**
-	 * @param phoneNum the phoneNum to set
-	 */
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 	
+	public int getActiv() {
+		return activ;
+	}
+	
+	public String geteMail() {
+		return eMail;
+	}
+	
+	public Integer getIdDoc() {
+		return idDoc;
+	}
+	
+	public Integer getIdNurse() {
+		return idNurse;
+	}
+	
+	public Integer getIdOther() {
+		return idOther;
+	}
+	
+	public Integer getIdPat() {
+		return idPat;
+	}
+	
+	public int getIdUser() {
+		return idUser;
+	}
 	
 	public String getLogin() {
 		return login;
@@ -155,59 +174,9 @@ public class Users implements ObjectDB {
 		return password;
 	}
 	
-	/**
-	 * @return the eMail
-	 */
-	public String geteMail() {
-		return eMail;
-	}
-	
-	/**
-	 * @return the idDoc
-	 */
-	public Doctor getIdDoc() {
-		return idDoc;
-	}
-	
-	/**
-	 * @return the idOther
-	 */
-	public OtherEmployee getIdOther() {
-		return idOther;
-	}
-	
-	/**
-	 * @return the idPatient
-	 */
-	public Patient getIdPatient() {
-		return idPatient;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
-	public Set<Permissions> getUserRole() {
-		return userRole;
-	}
-	
-	/**
-	 * @return the idUser
-	 */
-	public int getIdUser() {
-		return idUser;
-	}
-	
-	
-	/**
-	 * @return the nurse
-	 */
-	public Nurse getNurse() {
-		return nurse;
-	}
-	
-	/**
-	 * @return the phoneNum
-	 */
 	public String getPhoneNum() {
 		return phoneNum;
 	}
+	
 	
 }

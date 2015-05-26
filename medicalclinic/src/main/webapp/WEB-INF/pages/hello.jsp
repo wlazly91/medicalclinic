@@ -1,5 +1,5 @@
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -11,27 +11,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-</head>
-<body>
-
-<sec:authorize access="hasRole('ROLE_USER')">
-		<!-- For login user -->
-		<c:url value="/logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<script>
+  		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
-		<c:if test="${pageContext.request.userPrincipal.name}">
-			<li>
-				<a	href="login"> Logout </a>
-			</li>	
-		</c:if>
+</head>
+<body>
 
+<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
+		<c:url value="/logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+		</form>
 </sec:authorize>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,25 +34,41 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#">Family Clinic</a>
+      <a class="navbar-brand"> Family Clinic</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li> 
-        <li><a href="#">Page 3</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
+        <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
+        <sec:authorize access="hasRole('ROLE_USER')">
+        <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-th"></span> Patient Panel</a>
+			<ul class="dropdown-menu" role="menu">
+				  <li class="dropdown-header">My Panel</li>
+                  <li><a href="#">My Visits</a></li>
+                  <li><a href="#">My Health Check</a></li>
+                  <li><a href="#">Medical History </a></li>
+                  <li><a href="#">Change Password</a></li>
+           </ul>
+        </li>
+        </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Page 4<span class="caret"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-cog"> </span>  Admin Options </a>
 			<ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>		
+				  <li class="dropdown-header">Visits</li>
+                  <li><a href="#">Add Visits</a></li>
+                  <li><a href="#">Delete Visits</a></li>
+                  <li><a href="#">Modify Visits</a></li>		
                   <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li class="dropdown-header">Users</li>
+                  <li><a href="#">Add User</a></li>
+                  <li><a href="#">Delete User</a></li>
+                  <li><a href="#">Modify User</a></li>
+                  <li><a href="#">Change Password</a></li>
+                  <li><a href="#">Permissions User</a></li>
                 </ul>
         </li>
         </sec:authorize>
@@ -94,23 +102,8 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Theme example</h1>
-        <p>
-        	<sec:authorize access="hasRole('ROLE_ADMIN')">
-        		<p> Jesteś Adminem </p>
-        	</sec:authorize>
-        	<sec:authorize access="hasRole('ROLE_USER')">
-        		<p> Jesteś Userem </p>
-        	</sec:authorize>
-        </p>
-      </div>
-
-
-
-    </div>
+<div class="container theme-showcase">    
+	
+</div>
 </body>
 </html>

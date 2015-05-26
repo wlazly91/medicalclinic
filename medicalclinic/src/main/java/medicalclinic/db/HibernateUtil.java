@@ -13,6 +13,7 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
      
+    
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             // loads configuration and mappings
