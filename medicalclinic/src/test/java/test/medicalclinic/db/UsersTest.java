@@ -1,8 +1,10 @@
 package test.medicalclinic.db;
 
+import static org.junit.Assert.*;
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Doctor;
 import medicalclinic.model.AppUser;
+import medicalclinic.model.Permission;
 import medicalclinic.model.UserManagement;
 
 import org.hibernate.Session;
@@ -43,32 +45,21 @@ public class UsersTest {
 		AppUser appUser = new AppUser();
 		
 		
-		appUser.setName("£ukasz1");
-		appUser.setSurname("Kochanek");
-		appUser.setSpecjality("Kardiolog");
-		appUser.setLogin("lkochan1");
-		appUser.setPassword("lkochan");
+		appUser.setName("Asia");
+		appUser.setSurname("Ko");
+		appUser.setSpecjality("Kardi");
+		appUser.setLogin("lkoc");
+		appUser.setPassword("lkanA");
 		appUser.setActive(1);
+		appUser.setWho("Doctor");
 		
 		um.addDoctor(appUser);
 	}
 	
-//	@Test
+	@Test
 	public void testUsers2() {
 
-		UserManagement um = new UserManagement();
-		AppUser appUser = new AppUser();
 		
-		
-		appUser.setName("£ukasz");
-		appUser.setSurname("Kochanek");
-		appUser.setSpecjality("Kardiolog");
-		appUser.setLogin("lkochan");
-		appUser.setPassword("lkochan");
-		appUser.setActive(1);
-		appUser.setIdPerson(47);
-		
-		um.addUsers(appUser);
 	}
 	
 }

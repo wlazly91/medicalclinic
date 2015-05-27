@@ -14,6 +14,7 @@ public class AppUser {
 	private String eMail;
 	
 	private String who;
+	private String permisions;
 	
 	private String login;
 	private String password;

@@ -149,6 +149,13 @@
 		<tr>
         	<td><form:checkbox path="who" value="Nurse"/> Nurse </td>
     	</tr>
+    	
+    	<sec:authorize access = "hasRole('ROLE_ADMIN')">
+    	<tr>
+        	<td><form:checkbox path="who" value="Admin"/> Admin </td>
+    	</tr>
+    	</sec:authorize>
+    	
     	<tr>
         	<td colspan="2">
             	<input type="submit" value="Submit"/>

@@ -39,11 +39,14 @@ public class UserManagement {
 		session.getTransaction().commit();
 		session.close();
 		
-		appUser.setIdPerson((int)um.getIdDoctor(doc).get(0).getId());
-				
-		um.addUsers(appUser);
+		appUser.setIdPerson(um.getIdDoctor(doc).get(0).getId());
+
+		boolean flag = um.addUsers(appUser);
+
+		if(um.getIdDoctor(doc).get(0).getName().equals(doc.getName()) && um.getIdDoctor(doc).get(0).getSurname().equals(doc.getSurname()) && um.getIdDoctor(doc).get(0).getSpecjalityName().equals(doc.getSpecjalityName()) && flag == true)
+			return true;
 		
-		return true;
+		return false;
 	}
 	/**
 	 * Metoda Dodaje Usera do bazy na podstawie Obiektu AppUsers
@@ -53,20 +56,38 @@ public class UserManagement {
 	public boolean addUsers(AppUser appUser)
 	{
 		Users usr = new Users();
-		
+		UserManagement um = new UserManagement();
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		usr.setLogin(appUser.getLogin());
 		usr.setPassword(appUser.getPassword());
 		usr.setActiv(appUser.getActive());
-		usr.setIdDoc(appUser.getIdPerson());
+		usr.seteMail(appUser.geteMail());
+		usr.setPhoneNum(appUser.getPhoneNumber());
+				
+		switch(appUser.getWho()) {
+			case "Dosctor":
+				usr.setIdDoc(appUser.getIdPerson());
+				break;
+			case "Patient":
+				usr.setIdPat(appUser.getIdPerson());
+				break;
+			case "Nurse":
+				usr.setIdNurse(appUser.getIdPerson());
+				break;
+			default:
+				break;
+		}
 		
 		session.save(usr);
 		session.getTransaction().commit();
 		session.close();
 		
-		return true;
+		if(um.getIdUser(usr).get(0).getLogin().equals(appUser.getLogin()))
+			return true;
+		
+		return false;
 	}
 	
 	/**
@@ -90,5 +111,51 @@ public class UserManagement {
 		}
 		
 		return null;
+	}
+	
+	
+	/**
+	 * Metoda zwraca Users o podanych parametrach 
+	 * @param doc obiekt klasy Users
+	 * @return result Object reprezentuj¹cy users
+	 * */
+	public List<Users> getIdUser(Users doc)
+	{
+		if(doc.getLogin() != null)
+		{
+			session = sessionFactory.openSession();
+		
+			String hql = "from Users where login = '"+ doc.getLogin() +"'";
+			Query query = session.createQuery(hql);
+		
+			@SuppressWarnings("unchecked")
+			List<Users> results = query.list();
+			
+			return results;
+		}
+		
+		return null;
+	}
+	
+	
+	/**
+	 * Metoda zwraca id uprawnieñ jakie nale¿y nadaæ u¿ytkownikowi 
+	 * @param nazwa uprawieñ
+	 * @return int ID uprawnieñ w bazie 
+	 * */
+	public int setPerrmissions(String perm)
+	{
+		switch(perm) {
+			case "Doctor":
+				return Permission.DOCTOR.getIdPermision();
+			case "Patient":
+				return Permission.USER.getIdPermision();
+			case "Nurse" :
+				return Permission.NURSE.getIdPermision();
+			case "Admin":
+				return Permission.ADMIN.getIdPermision();
+		}
+		
+		return 0;
 	}
 }
