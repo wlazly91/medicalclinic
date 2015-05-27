@@ -1,38 +1,74 @@
 package test.medicalclinic.db;
 
 import medicalclinic.config.AppConfig;
-import medicalclinic.db.Users;
+import medicalclinic.db.Doctor;
+import medicalclinic.model.AppUser;
+import medicalclinic.model.UserManagement;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class UsersTest {
 	
 	
-	@Test
+//	@Test
 	public void testUsers() {
-		Users usr = new Users();
 		AppConfig config = new AppConfig();
 		SessionFactory sessionFactory = config.sessionFactory();
 		Session session;
 
+		UserManagement um = new UserManagement();
+		Doctor doc = new Doctor();
 		
-		usr.setIdDoc(1);
-		usr.setIdPat(null);
-		usr.setIdNurse(null);
-		usr.setIdOther(null);
-		usr.setPhoneNum("654 654 654");
-		usr.seteMail("tsetowy@testowy.com");
-		usr.setLogin("testowy");
-		usr.setPassword("testowy");
-		usr.setActiv(1);
+		doc.setName("£ukasz");
+		doc.setSurname("Kochanek");
+		doc.setSpecjalityName("Kardiolog");
 			
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(usr);
+		session.save(doc);
 		session.getTransaction().commit();
 		session.close();
+//		Assert.assertNotNull(um.getIdDoctor(doc));
+		System.out.println(um.getIdDoctor(doc).get(0).getName());
 	}
 
+	
+	@Test
+	public void testUsers1() {
+
+		UserManagement um = new UserManagement();
+		AppUser appUser = new AppUser();
+		
+		
+		appUser.setName("£ukasz1");
+		appUser.setSurname("Kochanek");
+		appUser.setSpecjality("Kardiolog");
+		appUser.setLogin("lkochan1");
+		appUser.setPassword("lkochan");
+		appUser.setActive(1);
+		
+		um.addDoctor(appUser);
+	}
+	
+//	@Test
+	public void testUsers2() {
+
+		UserManagement um = new UserManagement();
+		AppUser appUser = new AppUser();
+		
+		
+		appUser.setName("£ukasz");
+		appUser.setSurname("Kochanek");
+		appUser.setSpecjality("Kardiolog");
+		appUser.setLogin("lkochan");
+		appUser.setPassword("lkochan");
+		appUser.setActive(1);
+		appUser.setIdPerson(47);
+		
+		um.addUsers(appUser);
+	}
+	
 }

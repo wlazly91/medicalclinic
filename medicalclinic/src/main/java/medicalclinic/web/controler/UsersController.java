@@ -1,6 +1,6 @@
 package medicalclinic.web.controler;
 
-import medicalclinic.db.Users;
+import medicalclinic.model.AppUser;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,17 +14,21 @@ public class UsersController {
 
 	  @RequestMapping(value = "/user", method = RequestMethod.GET)
 	   public ModelAndView student() {
-	      return new ModelAndView("user", "command", new Users());
+	      return new ModelAndView("user", "command", new AppUser());
 	   }
 	   
 	
 	@RequestMapping(value = "/addUsers", method = RequestMethod.POST)
-	   public String addStudent(@ModelAttribute("SpringSecurity") Users user, 
+	   public String addStudent(@ModelAttribute("SpringSecurity") AppUser user, 
 	   ModelMap model) {
-	      
+		
 		if(user != null)
-			model.addAttribute("msg", "Uda³o Siê");
-	      
+		{
+			model.addAttribute("name", user.getName());
+			model.addAttribute("surname", user.getSurname());
+			model.addAttribute("who", user.getWho());
+		}
+		
 		return "result";
 	   }
 }

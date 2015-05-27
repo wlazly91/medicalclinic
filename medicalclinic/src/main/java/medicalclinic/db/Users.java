@@ -3,18 +3,12 @@
  */
 package medicalclinic.db;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -48,14 +42,14 @@ public class Users implements ObjectDB {
 	@Column(name = "ID_NURSE")
 	private Integer idNurse;
 	
-	@JoinColumn(name = "ID_OTHER", nullable = true)
-	@Column(name = "ID_OTHER")
-	private Integer idOther;
+//	@JoinColumn(name = "ID_OTHER", nullable = true)
+//	@Column(name = "ID_OTHER")
+//	private Integer idOther;
 	
-	@Column(name = "E_MAIL")
+	@Column(name = "E_MAIL", nullable = true)
 	private String eMail;
 	
-	@Column(name = "PHONE_NUMBER")
+	@Column(name = "PHONE_NUMBER", nullable = true)
 	private String phoneNum;
 	
 	@Column(name = "LOGIN")
@@ -67,11 +61,14 @@ public class Users implements ObjectDB {
 	@Column(name = "ACTIVE")
 	private int activ;
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="PERMISSIONS_USER", 
-                joinColumns={@JoinColumn(name="ID_USER")}, 
-                inverseJoinColumns={@JoinColumn(name="ID_PER")})
-    private Set<Permissions> permission = new HashSet<Permissions>();
+//	@Column(name = "STREETS", nullable = true)
+//	private String streets;
+	
+//	@ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(name="PERMISSIONS_USER", 
+//                joinColumns={@JoinColumn(name="ID_USER")}, 
+//                inverseJoinColumns={@JoinColumn(name="ID_PER")})
+//    private Set<Permissions> permission = new HashSet<Permissions>();
 	
 	public Users() {}
 	
@@ -98,6 +95,10 @@ public class Users implements ObjectDB {
 //		return permission;
 //	}
 	
+//	public void setStreets(String streets) {
+//		this.streets = streets;
+//	}
+	
 	public void setActiv(int activ) {
 		this.activ = activ;
 	}
@@ -114,9 +115,9 @@ public class Users implements ObjectDB {
 		this.idNurse = idNurse;
 	}
 	
-	public void setIdOther(Integer idOther) {
-		this.idOther = idOther;
-	}
+//	public void setIdOther(Integer idOther) {
+//		this.idOther = idOther;
+//	}
 	
 	public void setIdPat(Integer idPat) {
 		this.idPat = idPat;
@@ -138,6 +139,10 @@ public class Users implements ObjectDB {
 		this.phoneNum = phoneNum;
 	}
 	
+//	public String getStreets() {
+//		return streets;
+//	}
+	
 	public int getActiv() {
 		return activ;
 	}
@@ -154,9 +159,9 @@ public class Users implements ObjectDB {
 		return idNurse;
 	}
 	
-	public Integer getIdOther() {
-		return idOther;
-	}
+//	public Integer getIdOther() {
+//		return idOther;
+//	}
 	
 	public Integer getIdPat() {
 		return idPat;

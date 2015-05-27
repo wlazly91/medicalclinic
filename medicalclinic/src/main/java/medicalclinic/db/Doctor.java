@@ -31,6 +31,8 @@ public class Doctor implements ObjectDB
 	@Column(name = "SURNAME")
 	private String surname;
 	
+	@Column(name = "SPECJALITY_NAME")
+	private String specjalityName;
 	
 	public Doctor() {}
 	
@@ -59,6 +61,10 @@ public class Doctor implements ObjectDB
 		this.surname = surname;
 	}
 	
+	public void setSpecjalityName(String specjalityName) {
+		this.specjalityName = specjalityName;
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -79,5 +85,8 @@ public class Doctor implements ObjectDB
 	public String getSurname() {
 		return surname;
 	}
-	  
+	 
+	public String getSpecjalityName() {
+		return specjalityName;
+	}
 }

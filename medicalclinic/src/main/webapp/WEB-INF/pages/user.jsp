@@ -110,42 +110,45 @@
 	<form:form method="POST" action="/SpringSecurity/addUsers">
    	<table>
     	<tr>
-        	<td><form:label path="login">Login</form:label></td>
-        	<td><form:input path="login" /></td>
+        	<td><form:label path="name">Name </form:label></td>
+        	<td><form:input path="name" /></td>
     	</tr>
     	<tr>
-        	<td><form:label path="password">Password</form:label></td>
-        	<td><form:input path="password" /></td>
+        	<td><form:label path="surname">Surname </form:label></td>
+        	<td><form:input path="surname" /></td>
     	</tr>
    		<tr>
-        	<td><form:label path="phoneNum">Phone Number </form:label></td>
-        	<td><form:input path="phoneNum" /></td>
+        	<td><form:label path="specjality">Specjality </form:label></td>
+        	<td><form:input path="specjality" /></td>
     	</tr>
         <tr>	
-        	<td><form:label path="eMail">E-mail</form:label></td>
+        	<td><form:label path="eMail">Login </form:label></td>
 	        <td><form:input path="eMail" /></td>
     	</tr>
-        	<tr>
-        	<td><form:label path="idDoc">Doctor </form:label></td>
-	        <td><form:input path="idDoc" /></td>
-    	</tr>
-        	<tr>
-        	<td><form:label path="idPat">Patient </form:label></td>
-        	<td><form:input path="idPat" /></td>
-   		</tr>
-       	<tr>
-        	<td><form:label path="idNurse">Nurse </form:label></td>
-       		<td><form:input path="idNurse" /></td>
-    	</tr>
-    	<tr>
-        	<td><form:label path="idOther">Other </form:label></td>
-        	<td><form:input path="idOther" /></td>
+        <tr>
+        	<td><form:label path="password">Password </form:label></td>
+	        <td><form:input path="password" /></td>
     	</tr>
 		<tr>
-        	<td><form:label path="activ">Activ </form:label></td>
-        	<td><form:input path="activ" /></td>
+        	<td><form:label path="phoneNumber">Phone Number </form:label></td>
+	        <td><form:input path="phoneNumber" /></td>
     	</tr>
-
+		<tr>
+        	<td><form:label path="eMail">E-Mail </form:label></td>
+	        <td><form:input path="eMail" /></td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="active" value="1"/> Active </td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Doctor"/> Doctor </td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Patient"/> Patient </td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Nurse"/> Nurse </td>
+    	</tr>
     	<tr>
         	<td colspan="2">
             	<input type="submit" value="Submit"/>
