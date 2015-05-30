@@ -11,7 +11,6 @@ import medicalclinic.db.Streets;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-@SuppressWarnings("unused")
 public class Test {
 
 	public static void main(String[] args) {

@@ -3,9 +3,11 @@ package medicalclinic.model;
 
 public class AppUser {
 
+	//-- DOCTOR NURSE PATIENT --//
 	private String name;
 	private String surname;
 	private String specjality;
+	
 	//-- Patient --//
 	private String pesel;
 	private String countie;
@@ -13,16 +15,25 @@ public class AppUser {
 	private String phoneNumber;
 	private String eMail;
 	
+	//-- Okreœlenie jaki u¿ytkownik jest dodawany --//
 	private String who;
+	
+	//-- Okreœlenie jakie uprawnienia --//
 	private String permisions;
 	
+	//-- Users --//
 	private String login;
 	private String password;
 	private int active;
+	
+	//-- ID(PATIENT, DOCTOR, NURSE) --//
 	private int idPerson;
 	
 	public AppUser() {}
 	
+	public String getPermisions() {
+		return permisions;
+	}
 	
 	public int getIdPerson() {
 		return idPerson;
@@ -74,6 +85,10 @@ public class AppUser {
 	
 	public String getWho() {
 		return who;
+	}
+	
+	public void setPermisions(String permisions) {
+		this.permisions = permisions;
 	}
 	
 	public void setIdPerson(int idPerson) {

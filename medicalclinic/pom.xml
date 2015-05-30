@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>medicalclinic Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  
+
   	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -138,32 +138,24 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>4.1.6.RELEASE</version>
-		</dependency>
-
-
 </dependencies>
   <build>
-		<finalName>SpringSecurity</finalName>
+		<finalName>FamilyClinic</finalName>
 		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>${jdk.version}</source>
+        	<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-compiler-plugin</artifactId>
+        		<version>3.1</version>
+        		<configuration>
+            		<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
+        		</configuration>
+    	</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
+				<version>2.3</version>
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>false</downloadJavadocs>

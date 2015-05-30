@@ -16,37 +16,37 @@ public class PermissionsUser implements ObjectDB {
 
 	@Id
 	@Column(name = "ID_PER_USR")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDUserPer") 
-	@SequenceGenerator(name="IDUserPer", sequenceName = "IDUserPer", allocationSize=1)
-	private int idPerUser;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDUSERPER") 
+	@SequenceGenerator(name="IDUSERPER", sequenceName = "IDUSERPER", allocationSize=1)
+	private Integer idPerUser;
 	
 	@Column(name = "ID_USER")
-	private int idUser;
+	private Integer idUser;
 	
 	@Column(name = "ID_PER")
-	private int idPer;
+	private Integer idPer;
 	
-	public void setIdPer(int idPer) {
+	public void setIdPer(Integer idPer) {
 		this.idPer = idPer;
 	}
 	
-	public void setIdPerUser(int idPerUser) {
+	public void setIdPerUser(Integer idPerUser) {
 		this.idPerUser = idPerUser;
 	}
 	
-	public void setIdUser(int idUser) {
+	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
 	
-	public int getIdPer() {
+	public Integer getIdPer() {
 		return idPer;
 	}
 	
-	public int getIdPerUser() {
+	public Integer getIdPerUser() {
 		return idPerUser;
 	}
 	
-	public int getIdUser() {
+	public Integer getIdUser() {
 		return idUser;
 	}
 	

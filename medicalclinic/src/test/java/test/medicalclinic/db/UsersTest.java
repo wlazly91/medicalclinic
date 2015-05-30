@@ -1,15 +1,15 @@
 package test.medicalclinic.db;
 
-import static org.junit.Assert.*;
+import java.sql.SQLException;
+
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Doctor;
 import medicalclinic.model.AppUser;
-import medicalclinic.model.Permission;
 import medicalclinic.model.UserManagement;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class UsersTest {
@@ -39,19 +39,20 @@ public class UsersTest {
 
 	
 	@Test
-	public void testUsers1() {
+	public void testUsers1() throws HibernateException, SQLException {
 
 		UserManagement um = new UserManagement();
 		AppUser appUser = new AppUser();
 		
-		
-		appUser.setName("Asia");
-		appUser.setSurname("Ko");
-		appUser.setSpecjality("Kardi");
-		appUser.setLogin("lkoc");
-		appUser.setPassword("lkanA");
+		appUser.setName("Testowy");
+		appUser.setSurname("Testowy");
+		appUser.setSpecjality("Testowy");
+		appUser.setLogin("Testowy");
+		appUser.setPassword("Testowe");
 		appUser.setActive(1);
 		appUser.setWho("Doctor");
+		
+//		um.addPermission(appUser);
 		
 		um.addDoctor(appUser);
 	}
