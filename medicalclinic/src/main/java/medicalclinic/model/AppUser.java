@@ -21,7 +21,7 @@ public class AppUser {
 	//-- Okreœlenie jakie uprawnienia --//
 	private String permisions;
 	
-	//-- Users --//
+	//-- Users loginy i has³a--//
 	private String login;
 	private String password;
 	private int active;
