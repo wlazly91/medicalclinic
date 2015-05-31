@@ -55,8 +55,45 @@ public class UsersTest {
 		
 		session.getTransaction().commit();
 		session.close();
+
+	}
+	
+	
+	@Test
+	public void testUsers3() {
+
+		UserManagement um = new UserManagement();
+		AppUser appUser = new AppUser();
+		AppUser appUser1 = new AppUser();
 		
-		System.out.println(usr.getIdUser());
+		appUser.setName("Luki");
+		appUser.setSurname("Kocha");
+		appUser.setSpecjality("Kardiolog");
+		appUser.setLogin("lkochan");
+		appUser.setPassword("lkochan");
+		appUser.setActive(1);
+		appUser.setWho("Doctor");
+		
+		try {
+			assertTrue(um.addDoctor(appUser));
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		appUser1.setName("Luki");
+		appUser1.setSurname("Kocha");
+		appUser1.setSpecjality("Kardiolog");
+		appUser1.setNewPassword("Nowehas³o");
+		appUser1.setWho("Doctor");
+		
+		try {
+			assertTrue("Oczekiwana wrtoœæ TRUE" , um.changePassowrd(appUser1));
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

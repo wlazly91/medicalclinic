@@ -1,9 +1,11 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+
+<!DOCTYPE html>
 <html>
-
-
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -19,14 +21,12 @@
 		</script>
 </head>
 <body>
-
 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
 		<c:url value="/logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 		</form>
 </sec:authorize>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -103,14 +103,46 @@
     </div>
   </div>
 </nav>
+
 <div class="container theme-showcase">    
-<table>
-    <tr>
-        <td>Result :</td>
-        <td>${msg}</td>
-    </tr>
-</table>
+	<sec:authorize access = "hasAnyRole('ROLE_ADMIN')">
+	<h2>Add New User </h2>
+
+	<form:form method="POST" action="/FamilyClinic/addUser">
+   	<table>
+    	<tr>
+        	<td><form:label path="name"> NameUser</form:label></td>
+        	<td><form:input path="name" /></td>
+    	</tr>
+    	<tr>
+        	<td><form:label path="surname"> SurnameUser </form:label></td>
+        	<td><form:input path="surname" /></td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Doctor"/> Doctor </td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Patient"/> Patient </td>
+    	</tr>
+		<tr>
+        	<td><form:checkbox path="who" value="Nurse"/> Nurse </td>
+    	</tr>
+    	
+    	<sec:authorize access = "hasRole('ROLE_ADMIN')">
+    	<tr>
+        	<td><form:checkbox path="who" value="Admin"/> Admin </td>
+    	</tr>
+    	</sec:authorize>
+    	
+    	<tr>
+        	<td colspan="2">
+            	<input type="submit" value="Submit"/>
+        	</td>
+    	</tr>
+	</table>  
+	</form:form>
+	</sec:authorize>
 </div>
+
 </body>
 </html>
-  

@@ -2,6 +2,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,7 +129,7 @@
     	</tr>
         <tr>
         	<td><form:label path="password">Password </form:label></td>
-	        <td><form:input path="password" /></td>
+	        <td><form:input type='password' path="password" /></td>
     	</tr>
 		<tr>
         	<td><form:label path="phoneNumber">Phone Number </form:label></td>
@@ -164,7 +166,13 @@
 	</table>  
 	</form:form>
 	</sec:authorize>
+<table>
+    <tr>
+        <td>Result :</td>
+        <td>${msg}</td>
 
+    </tr>
+</table> 
 </div>
 
 </body>

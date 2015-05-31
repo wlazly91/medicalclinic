@@ -24,12 +24,18 @@ public class AppUser {
 	//-- Users loginy i has³a--//
 	private String login;
 	private String password;
+	private String newPassword;
 	private int active;
 	
 	//-- ID(PATIENT, DOCTOR, NURSE) --//
 	private int idPerson;
 	
 	public AppUser() {}
+	
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
 	
 	public String getPermisions() {
 		return permisions;
@@ -85,6 +91,10 @@ public class AppUser {
 	
 	public String getWho() {
 		return who;
+	}
+	
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 	
 	public void setPermisions(String permisions) {

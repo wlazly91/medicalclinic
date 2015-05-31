@@ -23,23 +23,26 @@ public class UsersController {
 	   
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	   public String addUsers(@ModelAttribute("FamilyClinic") AppUser user, 
+	   public ModelAndView addUsers(@ModelAttribute("FamilyClinic") AppUser user, 
 	   ModelMap model) {
 		
+		ModelAndView modelresult = new ModelAndView("result");
 		UserManagement um = new UserManagement();
+		
 		if(user != null)
 		{
 			try {
 				if(!um.addDoctor(user))
 					model.addAttribute("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+				
+				modelresult.addObject("msg", "poprawnie dodano u¿ytkownika");
+				
 			} catch (HibernateException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-					
-			model.addAttribute("msg", "Poprawnie dodano u¿ytkownika");
+			
 		}
 		
-		return "result";
+		return modelresult;
 	   }
 }

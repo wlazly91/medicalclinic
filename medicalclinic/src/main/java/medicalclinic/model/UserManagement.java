@@ -5,6 +5,8 @@ import java.util.List;
 
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Doctor;
+import medicalclinic.db.Nurse;
+import medicalclinic.db.Patient;
 import medicalclinic.db.PermissionsUser;
 import medicalclinic.db.Users;
 
@@ -140,12 +142,74 @@ public class UserManagement {
 	
 	
 	/**
+	 * Metoda zmienie has³o podanego u¿ytkownika 
+	 * @param AppUser - u¿ytkownik aplikacji 
+	 * @return true - powodzenie / false - niepowodzenie 
+	 * */
+	public boolean changePassowrd(AppUser appUser)
+	{
+		Users usr = new Users();
+		Doctor doc = new Doctor();
+		Patient pat = new Patient();
+		Nurse nur = new Nurse();
+		List<Users> listUsers = null;
+		
+		UserManagement um = new UserManagement();
+		
+		try {
+			switch(appUser.getWho()) {								
+			case "Doctor":											
+				doc.setName(appUser.getName());
+				doc.setSurname(appUser.getSurname());
+				doc.setSpecjalityName(appUser.getSpecjality());
+				usr.setIdDoc(um.getIdDoctor(doc).get(0).getId());
+				break;
+			case "Patient":
+				pat.setName(appUser.getName());
+				pat.setSurname(appUser.getSurname());
+				pat.setPesel(appUser.getPesel());
+				usr.setIdPat(um.getIdPatient(pat).get(0).getIdPatient());
+				break;
+			case "Nurse":
+				nur.setIdNurse(appUser.getIdPerson());
+				nur.setName(appUser.getName());
+				nur.setSurname(appUser.getSurname());
+				usr.setIdNurse(um.getIdNurse(nur).get(0).getIdNurse());
+				break;
+			case "Admin":
+				usr.setIdUser(1);				
+			default:
+				return false;
+			}
+			
+			listUsers = um.getIdUser(appUser, usr);
+			usr.setIdUser(listUsers.get(0).getIdUser());
+			usr.setLogin(listUsers.get(0).getLogin());
+			usr.setActiv(listUsers.get(0).getActiv());			
+			usr.setPassword(appUser.getNewPassword());	
+			
+			session = sessionFactory.openSession();
+			session.beginTransaction();	
+			session.update(usr);
+			session.getTransaction().commit();
+			session.close();
+			
+			if(usr.getPassword() == appUser.getNewPassword())
+				return true;
+		} 
+		catch (Exception e) {
+			
+		}
+		return false;
+	}
+	
+	/**
 	 * Metoda zwraca Doctora o podanych parametrach 
 	 * @param doc obiekt klasy Doctor
 	 * @return result Object reprezentuj¹cy Doctora
 	 * */
 	@SuppressWarnings("unchecked")
-	public List<Doctor> getIdDoctor(Doctor doc)
+	private List<Doctor> getIdDoctor(Doctor doc)
 	{
 		if(doc.getName() != null && doc.getSurname() != null && doc.getSpecjalityName() != null)
 		{
@@ -161,14 +225,53 @@ public class UserManagement {
 		
 		return null;
 	}
+
+
+	/**
+	 * Metoda zwraca pacjenta o podanych parametrach 
+	 * @param Patient
+	 * @return result Object reprezentuj¹cy Pacjenta
+	 * */
+	private List<Patient> getIdPatient(Patient pat)
+	{
+			session = sessionFactory.openSession();
+		
+			String hql = "from patient where name = '" + pat.getName() + "' And surname = '" + pat.getSurname() + "' And pesel = '" + pat.getPesel() + "'";
+			Query query = session.createQuery(hql);
+		
+			@SuppressWarnings("unchecked")
+			List<Patient> results = query.list();
+			
+			return results;	
+	}
+
 	
+	/**
+	 * Metoda zwraca Pielêgniarke o podanych parametrach 
+	 * @param Patient
+	 * @return result Object reprezentuj¹cy pielêgniarkê
+	 * */
+	private List<Nurse> getIdNurse(Nurse nur)
+	{
+			session = sessionFactory.openSession();
+		
+			String hql = "from nurse where name = '" + nur.getName() + "' and surname = '" + nur.getSurname() + "'";
+			Query query = session.createQuery(hql);
+		
+			@SuppressWarnings("unchecked")
+			List<Nurse> results = query.list();
+			
+			return results;	
+	}
+
 	
 	/**
 	 * Metoda zwraca Users o podanych parametrach 
 	 * @param doc obiekt klasy Users
 	 * @return result Object reprezentuj¹cy users
 	 * */
-	public List<Users> getIdUser(Users usr)
+	@SuppressWarnings("unused")
+	private List<Users> getIdUser(Users usr)
 	{
 		if(usr.getLogin() != null)
 		{
@@ -188,12 +291,51 @@ public class UserManagement {
 	
 
 	/**
+	 * Metoda zwraca Users o podanych parametrach 
+	 * @param doc obiekt klasy Users
+	 * @return result Object reprezentuj¹cy users
+	 * */
+	private List<Users> getIdUser(AppUser appUser,  Users usr)
+	{
+		String hql = "";
+		if(usr != null)
+		{
+			session = sessionFactory.openSession();
+			switch(appUser.getWho()){
+		case "Doctor":											
+			hql = "from Users where id_doctor = "+ usr.getIdDoc() +"";
+			break;
+		case "Patient":
+			hql = "from Users where id_nurse = "+ usr.getIdPat() +"";
+			break;
+		case "Nurse":
+			hql = "from Users where id_patient = "+ usr.getIdNurse() +"";
+			break;
+		case "Admin":
+			usr.setIdUser(1);				
+		default:
+			return null;
+		}			
+			Query query = session.createQuery(hql);
+		
+			@SuppressWarnings("unchecked")
+			List<Users> results = query.list();
+			
+			return results;
+		}
+		
+		return null;
+	}
+	
+	
+	/**
 	 * Metoda zwraca Permissions o podanych parametrach 
 	 * @param idPerm ID uprawnieñ
 	 * @param idUsr ID usera 
 	 * @return result Object reprezentuj¹cy PermissionsUser
 	 * */
-	public List<PermissionsUser> getIdPermissions(int idPerm, int idUsr)
+	@SuppressWarnings("unused")
+	private List<PermissionsUser> getIdPermissions(int idPerm, int idUsr)
 	{
 			session = sessionFactory.openSession();
 		
@@ -205,7 +347,8 @@ public class UserManagement {
 			
 			return results;	
 	}
-
+	
+	
 	/**
 	 * Metoda zwraca id uprawnieñ jakie nale¿y nadaæ u¿ytkownikowi 
 	 * @param nazwa uprawieñ
@@ -248,5 +391,5 @@ public class UserManagement {
 		default:
 			break;
 		}
-	}
+	}	
 }
