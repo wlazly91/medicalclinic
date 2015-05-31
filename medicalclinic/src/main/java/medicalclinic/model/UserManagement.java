@@ -13,6 +13,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+
+/**
+ * Klasa s³u¿¹ca do zarz¹dzania u¿ytkownikami
+ * @author £.Kochanek
+ * @version 1.0
+ * */
 public class UserManagement {
 
 	AppConfig config = new AppConfig();
@@ -41,16 +47,16 @@ public class UserManagement {
 			doc.setName(appUser.getName());
 			doc.setSurname(appUser.getSurname());
 			doc.setSpecjalityName(appUser.getSpecjality());
-		
+
 			session.save(doc);
 			session.getTransaction().commit();
 			session.close();
-		
-			appUser.setIdPerson(umManagement.getIdDoctor(doc).get(0).getId());
-
+			
+			appUser.setIdPerson(doc.getId());
+			
 			boolean flag = umManagement.addUsers(appUser);
 
-			if(umManagement.getIdDoctor(doc).get(0).getName().equals(doc.getName()) && umManagement.getIdDoctor(doc).get(0).getSurname().equals(doc.getSurname()) && umManagement.getIdDoctor(doc).get(0).getSpecjalityName().equals(doc.getSpecjalityName()) && flag == true)
+			if(doc.getId() > 0 && flag == true)
 				return true;
 		
 		}
@@ -102,20 +108,18 @@ public class UserManagement {
 			session.save(usr);
 			session.getTransaction().commit();
 			session.close();
-		
-			appUser.setIdPerson(umManagement.getIdUser(usr).get(0).getIdUser());
+
+			appUser.setIdPerson(usr.getIdUser());
 			
 			boolean flag = umManagement.addPermission(appUser);
 			
-			if(umManagement.getIdUser(usr).get(0).getLogin().equals(appUser.getLogin()) && flag)
+			if(usr.getIdUser() > 0 && flag == true)
 				return true;
 		}
 		catch (HibernateException e) {
 			System.out.println(e);
 			return false;
 		}
-
-		
 		return false;
 	}
 	
@@ -140,16 +144,13 @@ public class UserManagement {
 			session.getTransaction().commit();
 			session.close();
 			
-			List<PermissionsUser> permList = umManagement.getIdPermissions(perm.getIdPer(), perm.getIdUser());
-			
-			if(permList.get(0).getIdUser().equals(perm.getIdUser()) && permList.get(0).getIdPer().equals(umManagement.setPerrmissions(appUser.getWho())))
+			if(perm.getIdPer() > 0)
 				return true;
 		} 
 		catch (HibernateException e) {
 			System.out.println(e);
 			return false;
 		}
-
 		return false;
 	}
 	
@@ -203,9 +204,10 @@ public class UserManagement {
 	
 
 	/**
-	 * Metoda zwraca Users o podanych parametrach 
-	 * @param doc obiekt klasy Users
-	 * @return result Object reprezentuj¹cy users
+	 * Metoda zwraca Permissions o podanych parametrach 
+	 * @param idPerm ID uprawnieñ
+	 * @param idUsr ID usera 
+	 * @return result Object reprezentuj¹cy PermissionsUser
 	 * */
 	public List<PermissionsUser> getIdPermissions(int idPerm, int idUsr)
 	{
@@ -217,7 +219,7 @@ public class UserManagement {
 			@SuppressWarnings("unchecked")
 			List<PermissionsUser> results = query.list();
 			
-			return results;
+			return results;	
 	}
 
 	/**
@@ -225,7 +227,7 @@ public class UserManagement {
 	 * @param nazwa uprawieñ
 	 * @return int ID uprawnieñ w bazie 
 	 * */
-	public int setPerrmissions(String perm)
+	private int setPerrmissions(String perm)
 	{
 		switch(perm) {
 			case "Doctor":
