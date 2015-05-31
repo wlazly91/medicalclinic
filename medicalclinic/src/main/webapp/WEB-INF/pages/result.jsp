@@ -8,12 +8,9 @@
 <h2>Submitted Student Information</h2>
    <table>
     <tr>
-        <td>Name :</td>
-        <td>${name}</td>
-         <td>Surname: </td>
-        <td>${surname}</td>
-         <td>Who: </td>
-        <td>${who}</td>
+        <td>Result :</td>
+        <td>${msg}</td>
+
     </tr>
 </table>  
 </body>

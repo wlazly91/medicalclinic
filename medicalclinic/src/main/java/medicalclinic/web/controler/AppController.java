@@ -1,14 +1,10 @@
 package medicalclinic.web.controler;
-import medicalclinic.model.Student;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,22 +53,6 @@ public class AppController {
 	  return model;
  
 	}
-	
-	  @RequestMapping(value = "/student", method = RequestMethod.GET)
-	   public ModelAndView student() {
-	      return new ModelAndView("student", "command", new Student());
-	   }
-	   
-	
-	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
-	   public String addStudent(@ModelAttribute("SpringSecurity") Student student, 
-	   ModelMap model) {
-	      model.addAttribute("name", student.getName());
-	      model.addAttribute("age", student.getAge());
-	      model.addAttribute("id", student.getId());
-	      
-	      return "result";
-	   }
  
 	//for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)

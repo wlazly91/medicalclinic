@@ -1,7 +1,11 @@
 package medicalclinic.web.controler;
 
-import medicalclinic.model.AppUser;
+import java.sql.SQLException;
 
+import medicalclinic.model.AppUser;
+import medicalclinic.model.UserManagement;
+
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,22 +17,24 @@ import org.springframework.web.servlet.ModelAndView;
 public class UsersController {
 
 	  @RequestMapping(value = "/user", method = RequestMethod.GET)
-	   public ModelAndView student() {
+	   public ModelAndView user() {
 	      return new ModelAndView("user", "command", new AppUser());
 	   }
 	   
 	
-	@RequestMapping(value = "/addUsers", method = RequestMethod.POST)
-	   public String addStudent(@ModelAttribute("SpringSecurity") AppUser user, 
-	   ModelMap model) {
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	   public String addUsers(@ModelAttribute("FamilyClinic") AppUser user, 
+	   ModelMap model) throws HibernateException, SQLException {
 		
+		UserManagement um = new UserManagement();
 		if(user != null)
 		{
-			model.addAttribute("name", user.getName());
-			model.addAttribute("surname", user.getSurname());
-			model.addAttribute("who", user.getWho());
+			if(!um.addDoctor(user))
+				model.addAttribute("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+					
+			model.addAttribute("msg", "Poprawnie dodano u¿ytkownika");
 		}
 		
-		return "result";
+		return "user";
 	   }
 }

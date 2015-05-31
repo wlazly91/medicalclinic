@@ -107,7 +107,7 @@
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN, ROLE_NURSE')">
 	<h2>Add New User </h2>
 
-	<form:form method="POST" action="/SpringSecurity/addUsers">
+	<form:form method="POST" action="/FamilyClinic/user">
    	<table>
     	<tr>
         	<td><form:label path="name">Name </form:label></td>
@@ -122,8 +122,8 @@
         	<td><form:input path="specjality" /></td>
     	</tr>
         <tr>	
-        	<td><form:label path="eMail">Login </form:label></td>
-	        <td><form:input path="eMail" /></td>
+        	<td><form:label path="login">Login </form:label></td>
+	        <td><form:input path="login" /></td>
     	</tr>
         <tr>
         	<td><form:label path="password">Password </form:label></td>
@@ -164,6 +164,9 @@
 	</table>  
 	</form:form>
 	</sec:authorize>
+	<c:if test="${msg != null}">
+		Udało się dodać użytkownika		
+	</c:if>
 </div>
 
 </body>
