@@ -27,7 +27,6 @@ public class UserManagement {
 	
 	public UserManagement() {}
 	
-	
 	/**
 	 * Metoda Dodaje Doctora do bazy na podstawie Obiektu AppUsers
 	 * @param appUser - obiekt klasy AppUsers
@@ -40,7 +39,7 @@ public class UserManagement {
 		Doctor doc = new Doctor();
 		UserManagement umManagement = new UserManagement();
 		
-		try{
+		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 		
@@ -64,9 +63,7 @@ public class UserManagement {
 			System.out.println(e);
 			return false;
 		}
-
-		
-		return false;		
+		return false;
 	}
 	
 	
@@ -90,20 +87,7 @@ public class UserManagement {
 			usr.setActiv(appUser.getActive());
 			usr.seteMail(appUser.geteMail());
 			usr.setPhoneNum(appUser.getPhoneNumber());
-
-			switch(appUser.getWho()) {
-				case "Doctor":
-					usr.setIdDoc(appUser.getIdPerson());
-					break;
-				case "Patient":
-					usr.setIdPat(appUser.getIdPerson());
-					break;
-				case "Nurse":
-					usr.setIdNurse(appUser.getIdPerson());
-					break;
-				default:
-					break;
-			}
+			umManagement.setPersonId(appUser, usr);
 		
 			session.save(usr);
 			session.getTransaction().commit();
@@ -241,5 +225,28 @@ public class UserManagement {
 		}
 		
 		return 0;
+	}
+	
+	/**
+	 * Metoda w zale¿noœci od podanego parametru ustawia 
+	 * w obiekcie Klasy Users (idDictor, idNurse, idPatient)
+	 * @param appUsers obiekt klasy AppUser
+	 * @param usr obiekt klasy Users w którym bêdziemy ustawiaæ pole
+	 * */
+	private void setPersonId(AppUser appUser, Users usr)
+	{
+		switch(appUser.getWho()) {								//			 Na podstawie zaznaczonej flagi
+		case "Doctor":											//			 do lekarza, pacjenta lub pielêgniarki
+			usr.setIdDoc(appUser.getIdPerson());				//			 do lekarza, pacjenta lub pielêgniarki
+			break;
+		case "Patient":
+			usr.setIdPat(appUser.getIdPerson());
+			break;
+		case "Nurse":
+			usr.setIdNurse(appUser.getIdPerson());
+			break;
+		default:
+			break;
+		}
 	}
 }

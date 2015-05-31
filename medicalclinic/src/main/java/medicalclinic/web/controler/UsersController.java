@@ -16,25 +16,30 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UsersController {
 
-	  @RequestMapping(value = "/user", method = RequestMethod.GET)
-	   public ModelAndView user() {
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	   public ModelAndView student() {
 	      return new ModelAndView("user", "command", new AppUser());
 	   }
 	   
 	
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	   public String addUsers(@ModelAttribute("FamilyClinic") AppUser user, 
-	   ModelMap model) throws HibernateException, SQLException {
+	   ModelMap model) {
 		
 		UserManagement um = new UserManagement();
 		if(user != null)
 		{
-			if(!um.addDoctor(user))
-				model.addAttribute("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+			try {
+				if(!um.addDoctor(user))
+					model.addAttribute("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+			} catch (HibernateException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 					
 			model.addAttribute("msg", "Poprawnie dodano u¿ytkownika");
 		}
 		
-		return "user";
+		return "result";
 	   }
 }

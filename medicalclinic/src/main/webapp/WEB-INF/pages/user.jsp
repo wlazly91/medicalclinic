@@ -107,14 +107,14 @@
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN, ROLE_NURSE')">
 	<h2>Add New User </h2>
 
-	<form:form method="POST" action="/FamilyClinic/user">
+	<form:form method="POST" action="/FamilyClinic/addUser">
    	<table>
     	<tr>
-        	<td><form:label path="name">Name </form:label></td>
+        	<td><form:label path="name">NameUser</form:label></td>
         	<td><form:input path="name" /></td>
     	</tr>
     	<tr>
-        	<td><form:label path="surname">Surname </form:label></td>
+        	<td><form:label path="surname">SurnameUser </form:label></td>
         	<td><form:input path="surname" /></td>
     	</tr>
    		<tr>
@@ -164,9 +164,7 @@
 	</table>  
 	</form:form>
 	</sec:authorize>
-	<c:if test="${msg != null}">
-		Udało się dodać użytkownika		
-	</c:if>
+
 </div>
 
 </body>
