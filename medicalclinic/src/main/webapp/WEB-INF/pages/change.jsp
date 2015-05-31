@@ -18,6 +18,10 @@
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
 			}
+			
+			function formSubmit() {
+				document.getElementById("whoChange").submit();
+			}
 		</script>
 </head>
 <body>
@@ -103,44 +107,27 @@
     </div>
   </div>
 </nav>
-
-<div class="container theme-showcase">    
+	
+<div class="container theme-showcase" role = "main">     
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN')">
 	<h2>Add New User </h2>
-
-	<form:form method="POST" action="/FamilyClinic/addUser">
-   	<table>
-    	<tr>
-        	<td><form:label path="name"> NameUser</form:label></td>
-        	<td><form:input path="name" /></td>
-    	</tr>
-    	<tr>
-        	<td><form:label path="surname"> SurnameUser </form:label></td>
-        	<td><form:input path="surname" /></td>
+	<form:form method="POST" action="/FamilyClinic/changePaswword" id = "whoChange">
+		<tr>
+        	<td><form:checkbox path="who" value="Doctor" onchange="javascript:formSubmit()"/> Doctor </td>
     	</tr>
 		<tr>
-        	<td><form:checkbox path="who" value="Doctor"/> Doctor </td>
+        	<td><form:checkbox path="who" value="Patient" onchange="javascript:formSubmit()"/> Patient </td>
     	</tr>
 		<tr>
-        	<td><form:checkbox path="who" value="Patient"/> Patient </td>
-    	</tr>
-		<tr>
-        	<td><form:checkbox path="who" value="Nurse"/> Nurse </td>
+        	<td><form:checkbox path="who" value="Nurse" onchange="javascript:formSubmit()"/> Nurse </td>
     	</tr>
     	
     	<sec:authorize access = "hasRole('ROLE_ADMIN')">
     	<tr>
-        	<td><form:checkbox path="who" value="Admin"/> Admin </td>
+        	<td><form:checkbox path="who" value="Admin" onchange="javascript:formSubmit()"/> Admin </td>
     	</tr>
     	</sec:authorize>
-    	
-    	<tr>
-        	<td colspan="2">
-            	<input type="submit" value="Submit"/>
-        	</td>
-    	</tr>
-	</table>  
-	</form:form>
+   	</form:form>
 	</sec:authorize>
 </div>
 

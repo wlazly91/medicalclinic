@@ -104,7 +104,7 @@
   </div>
 </nav>
 
-<div class="container theme-showcase">    
+<div class="container theme-showcase" role = "main">      
 
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN, ROLE_NURSE')">
 	<h2>Add New User </h2>

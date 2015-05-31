@@ -1,9 +1,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
-
-
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -19,14 +18,12 @@
 		</script>
 </head>
 <body>
-
 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
 		<c:url value="/logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 		</form>
 </sec:authorize>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -103,14 +100,13 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase">    
-<table>
-    <tr>
-        <td>Result :</td>
-        <td>${msg}</td>
-    </tr>
-</table>
+
+<div class="container theme-showcase" role = "main">    
+<div class="jumbotron">
+        <h1>Result :  ${msg}</h1>
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
 </div>
+</div>
+
 </body>
 </html>
-  

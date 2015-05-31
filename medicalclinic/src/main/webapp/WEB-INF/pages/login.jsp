@@ -116,7 +116,7 @@
   </div>
 </nav>
 
-<div class="container theme-showcase">    
+<div class="container theme-showcase" role = "main">      
 	<div id="login-box">
 
 		<h3>Login with Username and Password</h3>

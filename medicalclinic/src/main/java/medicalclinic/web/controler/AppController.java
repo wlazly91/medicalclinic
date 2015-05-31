@@ -24,6 +24,15 @@ public class AppController {
 	  
 	}
 	
+//	@RequestMapping(value = { "/change" }, method = RequestMethod.GET)
+//	public ModelAndView changePage() {
+// 
+//	  ModelAndView model = new ModelAndView();
+//	  model.setViewName("change");
+//	  return model;
+//	  
+//	}
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {

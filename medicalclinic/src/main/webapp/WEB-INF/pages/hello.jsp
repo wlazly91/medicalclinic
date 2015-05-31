@@ -102,7 +102,7 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase">    
+<div class="container theme-showcase" role = "main">      
 	
 </div>
 </body>
