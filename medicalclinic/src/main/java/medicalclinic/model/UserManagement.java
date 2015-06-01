@@ -203,6 +203,22 @@ public class UserManagement {
 		return false;
 	}
 	
+	
+	/**
+	 * Metoda pobiera wszytskich u¿ytkowników z tabeli
+	 * */
+	@SuppressWarnings("unchecked")
+	public List<Users> getUsers()
+	{
+		List<Users> result = null;
+		session = sessionFactory.openSession();
+		
+		String hql = "from Users";
+		Query query = session.createQuery(hql);
+		
+		result = query.list();
+		return result;
+	}
 	/**
 	 * Metoda zwraca Doctora o podanych parametrach 
 	 * @param doc obiekt klasy Doctor

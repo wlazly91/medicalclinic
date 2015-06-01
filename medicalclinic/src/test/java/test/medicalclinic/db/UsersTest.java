@@ -93,7 +93,13 @@ public class UsersTest {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@Test
+	public void testUsers4() {
+
+		UserManagement um = new UserManagement();
+		System.out.println(um.getUsers());
 	}
 	
 }

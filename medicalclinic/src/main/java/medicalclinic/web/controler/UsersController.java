@@ -1,7 +1,9 @@
 package medicalclinic.web.controler;
 
 import java.sql.SQLException;
+import java.util.List;
 
+import medicalclinic.db.Users;
 import medicalclinic.model.AppUser;
 import medicalclinic.model.UserManagement;
 import medicalclinic.model.Who;
@@ -64,4 +66,17 @@ public class UsersController {
 		
 		return modelresult;
 	}
+	
+	
+	@RequestMapping(value = "/userList", method = RequestMethod.GET)
+	public ModelAndView show() {
+		
+		UserManagement um = new UserManagement();
+		List<Users> users = um.getUsers();
+		ModelAndView model = new ModelAndView();
+		model.addObject("users", users);
+		
+		return model;
+	}
+
 }
