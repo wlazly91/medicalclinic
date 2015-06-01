@@ -77,6 +77,7 @@
                   <li><a href="#">Modify Visits</a></li>		
                   <li class="divider"></li>
                   <li class="dropdown-header">Users</li>
+                  <li><a href="userList">Users</a></li>
                   <li><a href="#">Add User</a></li>
                   <li><a href="#">Delete User</a></li>
                   <li><a href="#">Modify User</a></li>

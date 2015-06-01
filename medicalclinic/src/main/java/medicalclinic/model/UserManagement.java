@@ -214,9 +214,13 @@ public class UserManagement {
 		session = sessionFactory.openSession();
 		
 		String hql = "from Users";
+
 		Query query = session.createQuery(hql);
+
 		
 		result = query.list();
+
+		
 		return result;
 	}
 	/**

@@ -64,6 +64,7 @@
                   <li><a href="#">Modify Visits</a></li>		
                   <li class="divider"></li>
                   <li class="dropdown-header">Users</li>
+                  <li><a href="userList">Users</a></li>
                   <li><a href="#">Add User</a></li>
                   <li><a href="#">Delete User</a></li>
                   <li><a href="#">Modify User</a></li>
@@ -104,14 +105,15 @@
 </nav>
 <div class="container theme-showcase" role = "main">  
 <div class="jumbotron">    
-            <table>
-                <thead>
+
+<table class="table table-striped">
+            <thead>
                     <tr>
                         <th>Login</th>
                         <th>Password</th>
                     </tr>
                 </thead>
-                <tbody>
+            <tbody>
                     <c:forEach var="user" items="${users}">
                         <tr>
                             <td>${user.login}</td>
@@ -119,7 +121,8 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>      
+          </table>
+     
 </div>
 </div>
 </body>

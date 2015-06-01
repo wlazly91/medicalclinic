@@ -42,10 +42,6 @@ public class Users implements ObjectDB {
 	@Column(name = "ID_NURSE")
 	private Integer idNurse;
 	
-//	@JoinColumn(name = "ID_OTHER", nullable = true)
-//	@Column(name = "ID_OTHER")
-//	private Integer idOther;
-	
 	@Column(name = "E_MAIL", nullable = true)
 	private String eMail;
 	
@@ -61,16 +57,7 @@ public class Users implements ObjectDB {
 	@Column(name = "ACTIVE")
 	private int activ;
 	
-//	@Column(name = "STREETS", nullable = true)
-//	private String streets;
-	
-//	@ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(name="PERMISSIONS_USER", 
-//                joinColumns={@JoinColumn(name="ID_USER")}, 
-//                inverseJoinColumns={@JoinColumn(name="ID_PER")})
-//    private Set<Permissions> permission = new HashSet<Permissions>();
-	
-	public Users() {}
+	public Users() {}	
 	
 
 	public Users(String eMailN, String numberP, String passwordN, String loginN) {
