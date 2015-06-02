@@ -3,13 +3,17 @@ package test.medicalclinic.db;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import medicalclinic.config.AppConfig;
+import medicalclinic.db.A;
+import medicalclinic.db.B;
 import medicalclinic.db.Users;
 import medicalclinic.model.AppUser;
 import medicalclinic.model.UserManagement;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -20,7 +24,7 @@ public class UsersTest {
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-	@Test
+//	@Test
 	public void testUsers1() throws HibernateException, SQLException {
 
 		UserManagement um = new UserManagement();
@@ -37,7 +41,7 @@ public class UsersTest {
 		assertTrue(um.addDoctor(appUser));
 	}
 	
-	@Test
+//	@Test
 	public void testUsers2() {
 
 		Users usr = new Users();
@@ -59,7 +63,7 @@ public class UsersTest {
 	}
 	
 	
-	@Test
+//	@Test
 	public void testUsers3() {
 
 		UserManagement um = new UserManagement();
@@ -97,8 +101,46 @@ public class UsersTest {
 	
 	@Test
 	public void testUsers4() {
-		UserManagement um = new UserManagement();
-		System.out.println(um.getUsers());
+		
+		session = sessionFactory.openSession();
+		
+		String hql = "from B";
+
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<B> result = query.list();		
+		
+		System.out.println(result.get(0).getName());
+	}
+	
+	
+//	@Test
+	public void testUsers5() {
+		
+		AppConfig config = new AppConfig();
+		SessionFactory sessionFactory = config.sessionFactory();
+		Session session = sessionFactory.openSession();
+		A a = new A();
+		B b = new B();
+	
+		session.beginTransaction();
+		
+		a.setId(1);
+		b.setName("Testowe b");
+		b.setAaa(a);
+		
+		session.save(b);
+		session.getTransaction().commit();
+		
+
+		String hql = "from B where name = 'Testowe b'";
+
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<B> result = query.list();		
+		session.close();
+		System.out.println(result.get(0).getAaa().getId());
+		
 	}
 	
 }

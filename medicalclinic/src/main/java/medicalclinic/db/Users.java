@@ -3,12 +3,17 @@
  */
 package medicalclinic.db;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,9 +35,9 @@ public class Users implements ObjectDB {
 	@SequenceGenerator(name="IDUSER", sequenceName = "IDUSER", allocationSize=1)
 	private int idUser;
 	
-	@JoinColumn(name = "ID_DOCTOR", nullable = true)
-	@Column(name = "ID_DOCTOR")
-	private Integer idDoc;
+//	@JoinColumn(name = "ID_DOCTOR", nullable = true)
+//	@Column(name = "ID_DOCTOR")
+//	private Integer idDoc;
 	
 	@JoinColumn(name = "ID_PATIENT", nullable = true)
 	@Column(name = "ID_PATIENT")
@@ -57,14 +62,22 @@ public class Users implements ObjectDB {
 	@Column(name = "ACTIVE")
 	private int activ;
 	
+	@ManyToOne
+    @JoinColumn(name="ID_DOCTOR", nullable = true)
+    private Doctor doc;
+	
 	public Users() {}	
 	
 
-	public Users(String eMailN, String numberP, String passwordN, String loginN) {
+	public Users(String eMailN, String numberP, String passwordN, String loginN, Doctor doc, int active, int id) {
+		this.idUser = id;
 		this.eMail = eMailN;
 		this.phoneNum = numberP;
 		this.password = passwordN;
 		this.login = loginN;
+		this.doc = doc;
+		this.activ = active;
+		
 	}
 	
 	
@@ -72,6 +85,14 @@ public class Users implements ObjectDB {
 	{
 		this.password = passwordN;
 		this.login = loginN;
+	}
+	
+	public Doctor getDoc() {
+		return doc;
+	}
+	
+	public void setDoc(Doctor doc) {
+		this.doc = doc;
 	}
 	
 //	public void setPermission(Set<Permissions> permission) {
@@ -95,7 +116,7 @@ public class Users implements ObjectDB {
 	}
 	
 	public void setIdDoc(Integer idDoc) {
-		this.idDoc = idDoc;
+//		this.idDoc = idDoc;
 	}
 	
 	public void setIdNurse(Integer idNurse) {
@@ -139,7 +160,8 @@ public class Users implements ObjectDB {
 	}
 	
 	public Integer getIdDoc() {
-		return idDoc;
+//		return idDoc;
+		return 10;
 	}
 	
 	public Integer getIdNurse() {

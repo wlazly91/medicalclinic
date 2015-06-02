@@ -219,8 +219,8 @@ public class UserManagement {
 
 		
 		result = query.list();
-
-		
+		session.close();
+			
 		return result;
 	}
 	/**
@@ -240,6 +240,7 @@ public class UserManagement {
 		
 			List<Doctor> results = query.list();
 			
+			session.close();
 			return results;
 		}
 		
@@ -261,7 +262,7 @@ public class UserManagement {
 		
 			@SuppressWarnings("unchecked")
 			List<Patient> results = query.list();
-			
+			session.close();
 			return results;	
 	}
 
@@ -280,7 +281,7 @@ public class UserManagement {
 		
 			@SuppressWarnings("unchecked")
 			List<Nurse> results = query.list();
-			
+			session.close();
 			return results;	
 	}
 
@@ -302,7 +303,7 @@ public class UserManagement {
 		
 			@SuppressWarnings("unchecked")
 			List<Users> results = query.list();
-			
+			session.close();
 			return results;
 		}
 		
@@ -340,7 +341,7 @@ public class UserManagement {
 		
 			@SuppressWarnings("unchecked")
 			List<Users> results = query.list();
-			
+			session.close();
 			return results;
 		}
 		
@@ -364,7 +365,7 @@ public class UserManagement {
 		
 			@SuppressWarnings("unchecked")
 			List<PermissionsUser> results = query.list();
-			
+			session.close();
 			return results;	
 	}
 	

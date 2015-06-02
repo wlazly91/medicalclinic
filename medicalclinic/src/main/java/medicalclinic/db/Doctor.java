@@ -1,10 +1,15 @@
 package medicalclinic.db;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 /**
@@ -34,12 +39,35 @@ public class Doctor implements ObjectDB
 	@Column(name = "SPECJALITY_NAME")
 	private String specjalityName;
 	
+	@OneToMany(mappedBy="doc")
+	private Set<Users> users;
+//	private Users users;
+	
 	public Doctor() {}
 	
-	public Doctor(String nameN, String nameS){
+	public Doctor(String nameN, String nameS, String specjalityName, Set a) {
 		this.name = nameN;
 		this.surname = nameS;
+		this.specjalityName = specjalityName;
+		this.users = a;
 	}
+	
+//	public void setUsers(Users users) {
+//		this.users = users;
+//	}
+//	
+//	public Users getUsers() {
+//		return users;
+//	}
+	
+	public void setUsers(Set<Users> users) {
+		this.users = users;
+	}
+	
+	public Set<Users> getUsers() {
+		return users;
+	}
+		
 	/**
 	 * @param id the id to set
 	 */
