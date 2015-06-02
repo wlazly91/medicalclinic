@@ -7,6 +7,7 @@ import medicalclinic.config.AppConfig;
 import medicalclinic.db.Doctor;
 import medicalclinic.db.Nurse;
 import medicalclinic.db.Patient;
+import medicalclinic.db.Permissions;
 import medicalclinic.db.PermissionsUser;
 import medicalclinic.db.Users;
 
@@ -123,14 +124,19 @@ public class UserManagement {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			
-			perm.setIdUser(appUser.getIdPerson());
-			perm.setIdPer(umManagement.setPerrmissions(appUser.getWho()));
+			Users usr = new Users();
+			usr.setIdUser(appUser.getIdPerson());
+			Permissions permTmp = new Permissions();
+			permTmp.setIdPermissions(umManagement.setPerrmissions(appUser.getWho()));
+			
+			perm.setUsr(usr);
+			perm.setPerm(permTmp);
 			
 			session.save(perm);
 			session.getTransaction().commit();
 			session.close();
 			
-			if(perm.getIdPer() > 0)
+			if(perm.getIdPerUser() > 0)
 				return true;
 		} 
 		catch (HibernateException e) {
@@ -168,13 +174,13 @@ public class UserManagement {
 				pat.setName(appUser.getName());
 				pat.setSurname(appUser.getSurname());
 				pat.setPesel(appUser.getPesel());
-				usr.setIdPat(um.getIdPatient(pat).get(0).getIdPatient());
+				pat.setIdPatient(um.getIdPatient(pat).get(0).getIdPatient());
 				break;
 			case "Nurse":
 				nur.setIdNurse(appUser.getIdPerson());
 				nur.setName(appUser.getName());
 				nur.setSurname(appUser.getSurname());
-				usr.setIdNurse(um.getIdNurse(nur).get(0).getIdNurse());
+				nur.setIdNurse(um.getIdNurse(nur).get(0).getIdNurse());
 				break;
 			case "Admin":
 				usr.setIdUser(1);				
@@ -324,13 +330,13 @@ public class UserManagement {
 			session = sessionFactory.openSession();
 			switch(appUser.getWho()){
 		case "Doctor":											
-			hql = "from Users where id_doctor = "+ usr.getIdDoc() +"";
+			hql = "from Users where id_doctor = "+ usr.getDoc().getId() +"";
 			break;
 		case "Patient":
-			hql = "from Users where id_nurse = "+ usr.getIdPat() +"";
+			hql = "from Users where id_nurse = "+ usr.getPat().getIdPatient() +"";
 			break;
 		case "Nurse":
-			hql = "from Users where id_patient = "+ usr.getIdNurse() +"";
+			hql = "from Users where id_patient = "+ usr.getNur().getIdNurse() +"";
 			break;
 		case "Admin":
 			usr.setIdUser(1);				
@@ -406,10 +412,14 @@ public class UserManagement {
 			usr.setDoc(doctor);										//			 do lekarza, pacjenta lub pielêgniarki
 			break;
 		case "Patient":
-			usr.setIdPat(appUser.getIdPerson());
+			Patient pat = new Patient();
+			pat.setIdPatient(appUser.getIdPerson());
+			usr.setPat(pat);
 			break;
 		case "Nurse":	
-			usr.setIdNurse(appUser.getIdPerson());
+			Nurse nur = new Nurse();
+			nur.setIdNurse(appUser.getIdPerson());
+			usr.setNur(nur);
 			break;
 		default:
 			break;
