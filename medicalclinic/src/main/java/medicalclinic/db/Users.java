@@ -3,17 +3,13 @@
  */
 package medicalclinic.db;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -34,10 +30,6 @@ public class Users implements ObjectDB {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDUSER") 
 	@SequenceGenerator(name="IDUSER", sequenceName = "IDUSER", allocationSize=1)
 	private int idUser;
-	
-//	@JoinColumn(name = "ID_DOCTOR", nullable = true)
-//	@Column(name = "ID_DOCTOR")
-//	private Integer idDoc;
 	
 	@JoinColumn(name = "ID_PATIENT", nullable = true)
 	@Column(name = "ID_PATIENT")
@@ -63,7 +55,7 @@ public class Users implements ObjectDB {
 	private int activ;
 	
 	@ManyToOne
-    @JoinColumn(name="ID_DOCTOR", nullable = true)
+    @JoinColumn(name="ID_DOCTOR")
     private Doctor doc;
 	
 	public Users() {}	

@@ -143,4 +143,18 @@ public class UsersTest {
 		
 	}
 	
+	@Test
+	public void testUsers6() {
+		
+		session = sessionFactory.openSession();
+		
+		String hql = "from Users where id_users = 4";
+
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Users> result = query.list();		
+		
+		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
+	}
+	
 }

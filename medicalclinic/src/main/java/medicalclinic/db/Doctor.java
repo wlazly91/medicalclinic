@@ -2,14 +2,12 @@ package medicalclinic.db;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 /**
@@ -41,11 +39,10 @@ public class Doctor implements ObjectDB
 	
 	@OneToMany(mappedBy="doc")
 	private Set<Users> users;
-//	private Users users;
 	
 	public Doctor() {}
 	
-	public Doctor(String nameN, String nameS, String specjalityName, Set a) {
+	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a) {
 		this.name = nameN;
 		this.surname = nameS;
 		this.specjalityName = specjalityName;
