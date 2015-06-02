@@ -24,17 +24,17 @@ public class UsersTest {
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-//	@Test
+	@Test
 	public void testUsers1() throws HibernateException, SQLException {
 
 		UserManagement um = new UserManagement();
 		AppUser appUser = new AppUser();
 		
-		appUser.setName("as");
-		appUser.setSurname("as");
-		appUser.setSpecjality("as");
-		appUser.setLogin("as");
-		appUser.setPassword("as");
+		appUser.setName("Tesotwy po zmian");
+		appUser.setSurname("Tesotwy po zmian");
+		appUser.setSpecjality("Tesotwy po zmian");
+		appUser.setLogin("Tesotwy po zmian");
+		appUser.setPassword("Tesotwy po zmian");
 		appUser.setActive(1);
 		appUser.setWho("Doctor");
 		
@@ -99,7 +99,7 @@ public class UsersTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testUsers4() {
 		
 		session = sessionFactory.openSession();
@@ -143,7 +143,7 @@ public class UsersTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void testUsers6() {
 		
 		session = sessionFactory.openSession();

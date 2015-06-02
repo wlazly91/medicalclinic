@@ -162,7 +162,7 @@ public class UserManagement {
 				doc.setName(appUser.getName());
 				doc.setSurname(appUser.getSurname());
 				doc.setSpecjalityName(appUser.getSpecjality());
-				usr.setIdDoc(um.getIdDoctor(doc).get(0).getId());
+				doc.setId(um.getIdDoctor(doc).get(0).getId());
 				break;
 			case "Patient":
 				pat.setName(appUser.getName());
@@ -399,14 +399,16 @@ public class UserManagement {
 	 * */
 	private void setPersonId(AppUser appUser, Users usr)
 	{
-		switch(appUser.getWho()) {								//			 Na podstawie zaznaczonej flagi
-		case "Doctor":											//			 do lekarza, pacjenta lub pielêgniarki
-			usr.setIdDoc(appUser.getIdPerson());				//			 do lekarza, pacjenta lub pielêgniarki
+		switch(appUser.getWho()) {									//			 Na podstawie zaznaczonej flagi
+		case "Doctor":	
+			Doctor doctor  = new Doctor();
+			doctor.setId(appUser.getIdPerson());					//			 do lekarza, pacjenta lub pielêgniarki
+			usr.setDoc(doctor);										//			 do lekarza, pacjenta lub pielêgniarki
 			break;
 		case "Patient":
 			usr.setIdPat(appUser.getIdPerson());
 			break;
-		case "Nurse":
+		case "Nurse":	
 			usr.setIdNurse(appUser.getIdPerson());
 			break;
 		default:

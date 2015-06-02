@@ -86,19 +86,7 @@ public class Users implements ObjectDB {
 	public void setDoc(Doctor doc) {
 		this.doc = doc;
 	}
-	
-//	public void setPermission(Set<Permissions> permission) {
-//		this.permission = permission;
-//	}
-//	
-//	public Set<Permissions> getPermission() {
-//		return permission;
-//	}
-	
-//	public void setStreets(String streets) {
-//		this.streets = streets;
-//	}
-	
+
 	public void setActiv(int activ) {
 		this.activ = activ;
 	}
@@ -107,17 +95,10 @@ public class Users implements ObjectDB {
 		this.eMail = eMail;
 	}
 	
-	public void setIdDoc(Integer idDoc) {
-//		this.idDoc = idDoc;
-	}
-	
 	public void setIdNurse(Integer idNurse) {
 		this.idNurse = idNurse;
 	}
-	
-//	public void setIdOther(Integer idOther) {
-//		this.idOther = idOther;
-//	}
+
 	
 	public void setIdPat(Integer idPat) {
 		this.idPat = idPat;
