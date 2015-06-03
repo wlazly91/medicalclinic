@@ -24,7 +24,7 @@ public class UsersTest {
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-	@Test
+//	@Test
 	public void testUsers1() throws HibernateException, SQLException {
 
 		UserManagement um = new UserManagement();
@@ -157,4 +157,20 @@ public class UsersTest {
 		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
 	}
 	
+	@Test
+	public void testUsers7() {
+		session = sessionFactory.openSession();
+		
+		String hql = "from Users";
+
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Users> result = query.list();		
+		
+		for (Users users : result) {
+			System.out.println(users.getLogin());
+		}
+//		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
+		
+	}
 }

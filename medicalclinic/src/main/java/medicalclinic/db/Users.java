@@ -50,15 +50,15 @@ public class Users implements ObjectDB {
 	private int activ;
 	
 	@ManyToOne
-    @JoinColumn(name="ID_DOCTOR")
+    @JoinColumn(name="ID_DOCTOR", nullable = true)
     private Doctor doc;
 	
 	@ManyToOne
-    @JoinColumn(name="ID_NURSE")
+    @JoinColumn(name="ID_NURSE", nullable = true)
     private Nurse nur;
 	
 	@ManyToOne
-    @JoinColumn(name="ID_PATIENT")
+    @JoinColumn(name="ID_PATIENT", nullable = true)
     private Patient pat;
 	
 	@OneToMany(mappedBy="usr")

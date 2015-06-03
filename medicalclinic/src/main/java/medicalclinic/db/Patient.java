@@ -52,21 +52,27 @@ public class Patient implements ObjectDB {
 	@OneToMany(mappedBy="pat")
 	private Set<Users> users;
 	
+	@OneToMany(mappedBy="patient")
+	private Set<Visits> visit;
+	
 	public Patient() {}
 	
-	public Patient(String nameN, String surnameN, String peselN, String insuranceN) {
+	public Patient(String nameN, String surnameN, String peselN, String insuranceN, Set<Visits> vis) {
 		this.name = nameN;
 		this.surname = surnameN;
 		this.pesel = peselN;
 		this.insurance = insuranceN;
+		this.visit = vis;
 	}
 	
+	public void setVisit(Set<Visits> visit) {
+		this.visit = visit;
+	}
 	
 	public void setUsers(Set<Users> users) {
 		this.users = users;
 	}
 	
-
 	public void setAdres(Address adres) {
 		this.adres = adres;
 	}
@@ -89,6 +95,10 @@ public class Patient implements ObjectDB {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	
+	public Set<Visits> getVisit() {
+		return visit;
 	}
 	
 	public Set<Users> getUsers() {

@@ -111,6 +111,8 @@
                     <tr>
                         <th>Login</th>
                         <th>Password</th>
+                        <th>Name</th>
+                        <th>Surname</th>
                     </tr>
                 </thead>
             <tbody>
@@ -118,11 +120,12 @@
                         <tr>
                             <td>${user.login}</td>
                             <td>${user.password}</td>
+                            <td>${user.getDoc().getName()} ${user.getNur().getName()} ${user.getPat().getName()}</td>                  
+                            <td>${user.getDoc().getSurname()} ${user.getNur().getName()} ${user.getNur().getName()}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
-          </table>
-     
+          </table>     
 </div>
 </div>
 </body>

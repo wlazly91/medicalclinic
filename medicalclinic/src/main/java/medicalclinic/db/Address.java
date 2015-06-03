@@ -37,10 +37,6 @@ public class Address implements ObjectDB
 	private PostOffice idPostoffice;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_STREETS")
-	private Streets idStrets;
-	
-	@ManyToOne
 	@JoinColumn(name = "ID_COUNTIES")
 	private Counties idCounties;
 	
@@ -98,13 +94,6 @@ public class Address implements ObjectDB
 	}
 	
 	/**
-	 * @param idStrets the idStrets to set
-	 */
-	public void setIdStrets(Streets idStrets) {
-		this.idStrets = idStrets;
-	}
-	
-	/**
 	 * @return the house_number
 	 */
 	public int getHouse_number() {
@@ -138,11 +127,5 @@ public class Address implements ObjectDB
 	public PostOffice getIdPostoffice() {
 		return idPostoffice;
 	}
-	
-	/**
-	 * @return the idStrets
-	 */
-	public Streets getIdStrets() {
-		return idStrets;
-	}
+
 }

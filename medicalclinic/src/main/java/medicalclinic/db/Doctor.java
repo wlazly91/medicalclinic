@@ -40,15 +40,23 @@ public class Doctor implements ObjectDB
 	@OneToMany(mappedBy="doc")
 	private Set<Users> users;
 	
+	@OneToMany(mappedBy="doctor")
+	private Set<Visits> visits;
+	
 	public Doctor() {}
 	
-	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a) {
+	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a, Set<Visits> vis) {
 		this.name = nameN;
 		this.surname = nameS;
 		this.specjalityName = specjalityName;
 		this.users = a;
+		this.visits = vis;
 	}
 	
+	
+	public void setVisits(Set<Visits> visits) {
+		this.visits = visits;
+	}
 	
 	public void setUsers(Set<Users> users) {
 		this.users = users;
@@ -57,24 +65,15 @@ public class Doctor implements ObjectDB
 	public Set<Users> getUsers() {
 		return users;
 	}
-		
-	/**
-	 * @param id the id to set
-	 */
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	/**
-	 * @param name the name to set
-	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	/**
-	 * @param surname the surname to set
-	 */
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
@@ -83,23 +82,19 @@ public class Doctor implements ObjectDB
 		this.specjalityName = specjalityName;
 	}
 	
-	/**
-	 * @return the id
-	 */
+	
+	public Set<Visits> getVisits() {
+		return visits;
+	}
+
 	public int getId() {
 		return id;
 	}
-	
-	/**
-	 * @return the name
-	 */
+
 	public String getName() {
 		return name;
 	}
-	
-	/**
-	 * @return the surname
-	 */
+
 	public String getSurname() {
 		return surname;
 	}
