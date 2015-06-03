@@ -3,6 +3,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,11 @@ public class AppController {
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
- 
-	  ModelAndView model = new ModelAndView();
-	  model.addObject("title", "Spring Security Login Form - Database Authentication");
-	  model.addObject("message", "This is default page!");
-	  model.setViewName("hello");
-	  return model;
+
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Login Form - Database Authentication");
+		model.setViewName("hello");
+		return model;
 	  
 	}
 	
@@ -38,6 +38,12 @@ public class AppController {
 	public ModelAndView adminPage() {
  
 	  ModelAndView model = new ModelAndView();
+	  
+	  
+		User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String a = usr.getUsername();
+		
+		model.addObject("msg", a);
 	  model.setViewName("admin");
 	  
 	  

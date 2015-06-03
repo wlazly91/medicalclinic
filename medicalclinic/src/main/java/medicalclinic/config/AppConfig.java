@@ -3,6 +3,8 @@ package medicalclinic.config;
 
 import java.util.Properties;
 
+import medicalclinic.db.Users;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +22,7 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan({ "medicalclinic.*" })
 @Import({ SecurityConfig.class })
 public class AppConfig {
- 
+	
 	@Bean
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());

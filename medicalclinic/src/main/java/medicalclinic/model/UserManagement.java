@@ -15,6 +15,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 
 /**
@@ -216,6 +218,7 @@ public class UserManagement {
 	@SuppressWarnings("unchecked")
 	public List<Users> getUsers()
 	{
+
 		List<Users> result = null;
 		session = sessionFactory.openSession();
 		
