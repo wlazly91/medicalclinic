@@ -53,17 +53,11 @@ public class Visits implements ObjectDB {
 		this.idVisits = id;
 		this.patient = pat;
 	}
-	
-	/**
-	 * @param dateVisit the dateVisit to set
-	 */
+
 	public void setDateVisit(Date dateVisit) {
 		this.dateVisit = dateVisit;
 	}
-	
-	/**
-	 * @param idDoc the idDoc to set
-	 */
+
 	public void setIdDoc(Doctor idDoc) {
 		this.doctor = idDoc;
 	}
@@ -71,10 +65,7 @@ public class Visits implements ObjectDB {
 	public void setPat(Patient pat) {
 		this.patient = pat;
 	}
-	
-	/**
-	 * @param idVisits the idVisits to set
-	 */
+
 	public void setIdVisits(int idVisits) {
 		this.idVisits = idVisits;
 	}
@@ -82,25 +73,15 @@ public class Visits implements ObjectDB {
 	public Patient getPat() {
 		return patient;
 	}
-	
-	/**
-	 * @return the dateVisit
-	 */
+
 	public Date getDateVisit() {
 		return dateVisit;
 	}
-	
-	/**
-	 * @return the idDoc
-	 */
+
 	public Doctor getIdDoc() {
 		return doctor;
 	}
-	
-	
-	/**
-	 * @return the idVisits
-	 */
+
 	public int getIdVisits() {
 		return idVisits;
 	}
