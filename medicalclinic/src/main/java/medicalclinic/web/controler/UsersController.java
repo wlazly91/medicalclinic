@@ -36,7 +36,7 @@ public class UsersController {
 		{
 			try {
 				if(!um.addDoctor(user))
-					model.addAttribute("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+					modelresult.addObject("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
 				
 				modelresult.addObject("msg", "poprawnie dodano u¿ytkownika");
 				

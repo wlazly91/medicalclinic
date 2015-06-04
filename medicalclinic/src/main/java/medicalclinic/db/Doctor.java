@@ -43,14 +43,18 @@ public class Doctor implements ObjectDB
 	@OneToMany(mappedBy="doctor")
 	private Set<Visits> visits;
 	
+	@OneToMany(mappedBy="doc")
+	private Set<DoctorOfficeHours> doctorHours;
+	
 	public Doctor() {}
 	
-	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a, Set<Visits> vis) {
+	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a, Set<Visits> vis, Set<DoctorOfficeHours> docHours) {
 		this.name = nameN;
 		this.surname = nameS;
 		this.specjalityName = specjalityName;
 		this.users = a;
 		this.visits = vis;
+		this.doctorHours = docHours;
 	}
 	
 	

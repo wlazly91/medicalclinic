@@ -1,13 +1,16 @@
 package medicalclinic.model;
 
+import java.util.List;
+
 import medicalclinic.config.AppConfig;
+import medicalclinic.db.Users;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 public class VisitsManagement extends WebSecurityConfigurerAdapter{
 	
@@ -19,14 +22,16 @@ public class VisitsManagement extends WebSecurityConfigurerAdapter{
 	 * Metoda s³u¿y do rejestrowania siê do lekarza
 	 * 
 	 * */
+	@SuppressWarnings("unused")
 	public boolean saveMeVisits() {
 		
 		try {
-//			userDetailsServiceBean().loadUserByUsername(null);
-//			UserDetails a = userDetailsService().loadUserByUsername(null);
-//			a.getUsername();
 			User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			usr.getUsername();
+			UserManagement um = new UserManagement();
+			List<Users> userList = um.getUsers(usr.getUsername());
+			
+			
+			
  
 		} catch (Exception e) {
 			return false;

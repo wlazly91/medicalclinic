@@ -15,8 +15,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 
 
 /**
@@ -232,6 +230,29 @@ public class UserManagement {
 			
 		return result;
 	}
+	
+	
+	/**
+	 * Metoda pobiera u¿ytkownika o podanych loginie
+	 * */
+	@SuppressWarnings("unchecked")
+	public List<Users> getUsers(String login)
+	{
+
+		List<Users> result = null;
+		session = sessionFactory.openSession();
+		
+		String hql = "from Users where login = " + login;
+
+		Query query = session.createQuery(hql);
+
+		
+		result = query.list();
+		session.close();
+			
+		return result;
+	}
+	
 	/**
 	 * Metoda zwraca Doctora o podanych parametrach 
 	 * @param doc obiekt klasy Doctor
