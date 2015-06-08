@@ -3,8 +3,6 @@ package medicalclinic.config;
 
 import java.util.Properties;
 
-import medicalclinic.db.Users;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;

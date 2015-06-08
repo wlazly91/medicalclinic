@@ -124,6 +124,5 @@
         <h1>Result :  ${msg}</h1>
         </div>
    	</div>
-</div>
 </body>
 </html>
