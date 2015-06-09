@@ -17,6 +17,9 @@
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
 			}
+			function formSubmit() {
+				document.getElementById("whoShow").submit();
+			}
 		</script>
 </head>
 <body>
@@ -105,23 +108,37 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase" role = "main">    
+<div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-		<form:form method="POST" action="/FamilyClinic/clinic">
-   	<table>
-        <tr>	
-        	<td><form:label path="login">Login </form:label></td>
-	        <td><form:input path="login" /></td>
-    	</tr>
-    	<tr>
-        	<td colspan="2">
-            	<input type="submit" value="Submit"/>
-        	</td>
-    	</tr>
-	</table>  
-	</form:form>
-
-        <h1>Result :  ${msg}</h1>
+        <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
+        	<c:forEach var="clinic" items="${clinic}">
+        	<table>
+        	<tr>
+				<td><form:checkbox path="who" value="${clinic.name}" onchange="javascript:formSubmit()"/>  ${clinic.name}</td>
+	    	</tr>
+			</table> 
+			</c:forEach> 
+		</form:form>
+		<c:if test="${doctorList != null}">
+		<table class="table table-striped">
+            <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Specjality</th>
+                    </tr>
+                </thead>
+            <tbody>
+                    <c:forEach var="doctorList" items="${doctorList}">
+                        <tr>
+                            <td>${doctorList.name}</td>
+                            <td>${doctorList.surname}</td>
+                            <td>${doctorList.specjalityName}</td>                  
+                        </tr>
+                    </c:forEach>
+                </tbody>
+          </table> 
+          </c:if>
         </div>
    	</div>
 </body>

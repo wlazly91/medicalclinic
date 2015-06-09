@@ -14,9 +14,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Klasa reprezentuj¹ca tabelê bazy danych Docotr Office Hours
- * (terminy przyjêæ lekarzy)
- * @author £ukasz Kochanek
+ * Klasa reprezentujÄ…ca tabelÄ™ bazy danych Docotr Office Hours
+ * (terminy przyjÄ™Ä‡  lekarzy)
+ * @author Åukasz Kochanek
  * @version 1.0
  */
 @Entity

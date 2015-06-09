@@ -15,13 +15,13 @@ public class AppUser {
 	private String phoneNumber;
 	private String eMail;
 	
-	//-- Okreúlenie jaki uøytkownik jest dodawany --//
+	//-- Okre≈õlenie jaki u≈ºytkownik jest dodawany --//
 	private String who;
 	
-	//-- Okreúlenie jakie uprawnienia --//
+	//-- Okre≈õlenie jakie uprawnienia --//
 	private String permisions;
 	
-	//-- Users loginy i has≥a--//
+	//-- Users loginy i has≈Ça--//
 	private String login;
 	private String password;
 	private String newPassword;

@@ -1,6 +1,10 @@
 package medicalclinic.web.controler;
 
-import medicalclinic.model.AppUser;
+import java.util.List;
+
+import medicalclinic.db.Clinics;
+import medicalclinic.db.Doctor;
+import medicalclinic.model.ClinicManagment;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,21 +17,28 @@ import org.springframework.web.servlet.ModelAndView;
 public class ClinicController {
 
 	@RequestMapping(value = "/clinic", method = RequestMethod.GET)
-	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") String user, 
+	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") ClinicManagment who, 
 			   ModelMap model) {
-		
-		ModelAndView modelresult = new ModelAndView("clinic", "command", new AppUser());
 
+		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
+		ClinicManagment cM = new ClinicManagment();
+		List<Clinics> clinic = cM.getClinics();
+		modelresult.addObject("clinic" , clinic);
+		if(who.getWho() != null) {
+			List<Doctor> doctorList = cM.getDoctorInClinics(who.getWho());
+			modelresult.addObject("doctorList", doctorList);
+		}
+		
 		return modelresult;
 	}
 	
 	@RequestMapping(value = "/clinic", method = RequestMethod.POST)
-	public ModelAndView student(@ModelAttribute("FamilyClinic") AppUser user, 
+	public ModelAndView student(@ModelAttribute("FamilyClinic") ClinicManagment who, 
 			   ModelMap model) {
+
+		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
 		
-		ModelAndView modelresult = new ModelAndView("clinic", "command", new AppUser());
-		
-		modelresult.addObject("msg", user.getLogin());
+		modelresult.addObject("msg", who.getWho());
 
 		
 		return modelresult;

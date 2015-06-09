@@ -4,6 +4,7 @@ import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
 import medicalclinic.db.DoctorOfficeHours;
+import medicalclinic.model.ClinicManagment;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +12,7 @@ import org.junit.Test;
 
 public class DoctorOfficeHoursTest {
 
-	@Test
+	//@Test
 	public void test() {
 		
 		AppConfig config = new AppConfig();
@@ -28,7 +29,7 @@ public class DoctorOfficeHoursTest {
 		doc.setSpecjalityName("Pediatra");
 		session.save(doc);
 		
-		clin.setName("Dzieci�ca");
+		clin.setName("Dziecięca");
 		session.save(clin);
 		
 		doctorHours.setIdClinics(clin);
@@ -41,5 +42,22 @@ public class DoctorOfficeHoursTest {
 		session.getTransaction().commit();	
 		session.close();
 	}
+	
+	//@Test
+	public void test1() {
+		ClinicManagment cm = new ClinicManagment();
+		
+		cm.getDoctorOfficeHours("Dziecięca");
+		
+		System.out.println(cm.getDoctorOfficeHours("Dziecięca"));
+	}
 
+	@Test
+	public void test2() {
+ 		ClinicManagment cm = new ClinicManagment();
+		
+		cm.getDoctorInClinics("Dziecięca");
+		
+		System.out.println(cm.getDoctorInClinics("Dziecięca"));
+	}
 }
