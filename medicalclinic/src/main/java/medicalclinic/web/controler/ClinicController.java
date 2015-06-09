@@ -21,9 +21,11 @@ public class ClinicController {
 			   ModelMap model) {
 
 		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
+		
 		ClinicManagment cM = new ClinicManagment();
 		List<Clinics> clinic = cM.getClinics();
 		modelresult.addObject("clinic" , clinic);
+		
 		if(who.getWho() != null) {
 			List<Doctor> doctorList = cM.getDoctorInClinics(who.getWho());
 			modelresult.addObject("doctorList", doctorList);
@@ -37,10 +39,7 @@ public class ClinicController {
 			   ModelMap model) {
 
 		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
-		
-		modelresult.addObject("msg", who.getWho());
 
-		
 		return modelresult;
 	}
 	

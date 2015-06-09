@@ -44,7 +44,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="/clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
+        <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
@@ -110,6 +110,7 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
+       
         <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
         	<c:forEach var="clinic" items="${clinic}">
         	<table>
@@ -119,6 +120,7 @@
 			</table> 
 			</c:forEach> 
 		</form:form>
+		
 		<c:if test="${doctorList != null}">
 		<table class="table table-striped">
             <thead>
