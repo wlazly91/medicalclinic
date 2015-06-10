@@ -22,13 +22,13 @@ import org.hibernate.SessionFactory;
  * @author �.Kochanek
  * @version 1.0
  * */
-public class UserManagement {
+public class UserManager {
 
 	AppConfig config = new AppConfig();
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-	public UserManagement() {}
+	public UserManager() {}
 	
 	/**
 	 * Metoda Dodaje Doctora do bazy na podstawie Obiektu AppUsers
@@ -40,7 +40,7 @@ public class UserManagement {
 	public boolean addDoctor(AppUser appUser) throws HibernateException, SQLException
 	{
 		Doctor doc = new Doctor();
-		UserManagement umManagement = new UserManagement();
+		UserManager umManagement = new UserManager();
 		
 		try {
 			session = sessionFactory.openSession();
@@ -79,7 +79,7 @@ public class UserManagement {
 	public boolean addUsers(AppUser appUser) throws HibernateException, SQLException
 	{
 		Users usr = new Users();
-		UserManagement umManagement = new UserManagement();
+		UserManager umManagement = new UserManager();
 		
 		try {
 			session = sessionFactory.openSession();
@@ -118,7 +118,7 @@ public class UserManagement {
 	public boolean addPermission(AppUser appUser) throws HibernateException, SQLException
 	{
 		PermissionsUser perm = new PermissionsUser();
-		UserManagement umManagement = new UserManagement();
+		UserManager umManagement = new UserManager();
 		
 		try {
 			session = sessionFactory.openSession();
@@ -160,7 +160,7 @@ public class UserManagement {
 		Nurse nur = new Nurse();
 		List<Users> listUsers = null;
 		
-		UserManagement um = new UserManagement();
+		UserManager um = new UserManager();
 		
 		try {
 			switch(appUser.getWho()) {								

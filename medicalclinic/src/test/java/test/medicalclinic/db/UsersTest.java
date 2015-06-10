@@ -11,7 +11,7 @@ import medicalclinic.db.B;
 import medicalclinic.db.Users;
 import medicalclinic.model.AppUser;
 import medicalclinic.model.EncryptionPassword;
-import medicalclinic.model.UserManagement;
+import medicalclinic.model.UserManager;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -28,7 +28,7 @@ public class UsersTest {
 	@Test
 	public void testUsers1() throws HibernateException, SQLException {
 
-		UserManagement um = new UserManagement();
+		UserManager um = new UserManager();
 		AppUser appUser = new AppUser();
 		
 		appUser.setName("Łukasz");
@@ -67,7 +67,7 @@ public class UsersTest {
 //	@Test
 	public void testUsers3() {
 
-		UserManagement um = new UserManagement();
+		UserManager um = new UserManager();
 		AppUser appUser = new AppUser();
 		AppUser appUser1 = new AppUser();
 		

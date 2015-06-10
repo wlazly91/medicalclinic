@@ -4,7 +4,7 @@ import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
 import medicalclinic.db.DoctorOfficeHours;
-import medicalclinic.model.ClinicManagment;
+import medicalclinic.model.ClinicManager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +45,7 @@ public class DoctorOfficeHoursTest {
 	
 	//@Test
 	public void test1() {
-		ClinicManagment cm = new ClinicManagment();
+		ClinicManager cm = new ClinicManager();
 		
 		cm.getDoctorOfficeHours("Dziecięca");
 		
@@ -54,7 +54,7 @@ public class DoctorOfficeHoursTest {
 
 	@Test
 	public void test2() {
- 		ClinicManagment cm = new ClinicManagment();
+ 		ClinicManager cm = new ClinicManager();
 		
 		cm.getDoctorInClinics("Dziecięca");
 		

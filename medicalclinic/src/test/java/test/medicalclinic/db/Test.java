@@ -1,13 +1,13 @@
 package test.medicalclinic.db;
 
-import medicalclinic.model.VisitsManagement;
+import medicalclinic.model.VisitsManager;
 
 
 public class Test {
 
 	public static void main(String[] args) {
 		
-		VisitsManagement vm = new VisitsManagement();
+		VisitsManager vm = new VisitsManager();
 		vm.saveMeVisits();
 	  }
 

@@ -12,14 +12,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 
-public class VisitsManagement extends WebSecurityConfigurerAdapter{
+public class VisitsManager extends WebSecurityConfigurerAdapter{
 	
 	AppConfig config = new AppConfig();
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
 	/**
-	 * Metoda s³u¿y do rejestrowania siê do lekarza
+	 * Metoda sï¿½uï¿½y do rejestrowania siï¿½ do lekarza
 	 * 
 	 * */
 	@SuppressWarnings("unused")
@@ -27,7 +27,7 @@ public class VisitsManagement extends WebSecurityConfigurerAdapter{
 		
 		try {
 			User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			UserManagement um = new UserManagement();
+			UserManager um = new UserManager();
 			List<Users> userList = um.getUsers(usr.getUsername());
 			
 			

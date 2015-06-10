@@ -4,7 +4,7 @@ import java.util.List;
 
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
-import medicalclinic.model.ClinicManagment;
+import medicalclinic.model.ClinicManager;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,12 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class ClinicController {
 
 	@RequestMapping(value = "/clinic", method = RequestMethod.GET)
-	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") ClinicManagment who, 
+	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") ClinicManager who, 
 			   ModelMap model) {
 
-		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
+		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManager());
 		
-		ClinicManagment cM = new ClinicManagment();
+		ClinicManager cM = new ClinicManager();
 		List<Clinics> clinic = cM.getClinics();
 		modelresult.addObject("clinic" , clinic);
 		
@@ -35,10 +35,10 @@ public class ClinicController {
 	}
 	
 	@RequestMapping(value = "/clinic", method = RequestMethod.POST)
-	public ModelAndView student(@ModelAttribute("FamilyClinic") ClinicManagment who, 
+	public ModelAndView student(@ModelAttribute("FamilyClinic") ClinicManager who, 
 			   ModelMap model) {
 
-		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManagment());
+		ModelAndView modelresult = new ModelAndView("clinic", "command", new ClinicManager());
 
 		return modelresult;
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 
 import medicalclinic.db.Users;
 import medicalclinic.model.AppUser;
-import medicalclinic.model.UserManagement;
+import medicalclinic.model.UserManager;
 import medicalclinic.model.Who;
 
 import org.hibernate.HibernateException;
@@ -30,15 +30,15 @@ public class UsersController {
 	   ModelMap model) {
 		
 		ModelAndView modelresult = new ModelAndView("result");
-		UserManagement um = new UserManagement();
+		UserManager um = new UserManager();
 		
 		if(user != null)
 		{
 			try {
 				if(!um.addDoctor(user))
-					modelresult.addObject("msg", "Wyst¹pi³ b³¹d podczas dodawania u¿ytkownika");
+					modelresult.addObject("msg", "Wystï¿½piï¿½ bï¿½ï¿½d podczas dodawania uï¿½ytkownika");
 				
-				modelresult.addObject("msg", "poprawnie dodano u¿ytkownika");
+				modelresult.addObject("msg", "poprawnie dodano uï¿½ytkownika");
 				
 			} catch (HibernateException | SQLException e) {
 				e.printStackTrace();
@@ -71,7 +71,7 @@ public class UsersController {
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
 	public ModelAndView show() {
 		
-		UserManagement um = new UserManagement();
+		UserManager um = new UserManager();
 		List<Users> users = um.getUsers();
 		ModelAndView model = new ModelAndView();
 		model.addObject("users", users);
