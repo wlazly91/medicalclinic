@@ -18,8 +18,8 @@ import org.hibernate.SessionFactory;
 
 
 /**
- * Klasa s³u¿¹ca do zarz¹dzania u¿ytkownikami
- * @author £.Kochanek
+ * Klasa sï¿½uï¿½ï¿½ca do zarzï¿½dzania uï¿½ytkownikami
+ * @author ï¿½.Kochanek
  * @version 1.0
  * */
 public class UserManagement {
@@ -86,7 +86,7 @@ public class UserManagement {
 			session.beginTransaction();
 
 			usr.setLogin(appUser.getLogin());
-			usr.setPassword(appUser.getPassword());
+			usr.setPassword(EncryptionPassword.encodePassword(appUser.getPassword()));
 			usr.setActiv(appUser.getActive());
 			usr.seteMail(appUser.geteMail());
 			usr.setPhoneNum(appUser.getPhoneNumber());
@@ -111,9 +111,9 @@ public class UserManagement {
 	}
 	
 	/**
-	 * Dodawanie uprawnieñ dodawanego u¿ytkownika 
+	 * Dodawanie uprawnieï¿½ dodawanego uï¿½ytkownika 
 	 * @param appUser Obiekt klasy AppUser
-	 * @return true - dodawanie zakónczy³o siê powodzeniem / false - wyst¹pi³ b³¹d
+	 * @return true - dodawanie zakï¿½nczyï¿½o siï¿½ powodzeniem / false - wystï¿½piï¿½ bï¿½ï¿½d
 	 */
 	public boolean addPermission(AppUser appUser) throws HibernateException, SQLException
 	{
@@ -148,8 +148,8 @@ public class UserManagement {
 	
 	
 	/**
-	 * Metoda zmienie has³o podanego u¿ytkownika 
-	 * @param AppUser - u¿ytkownik aplikacji 
+	 * Metoda zmienie hasï¿½o podanego uï¿½ytkownika 
+	 * @param AppUser - uï¿½ytkownik aplikacji 
 	 * @return true - powodzenie / false - niepowodzenie 
 	 * */
 	public boolean changePassowrd(AppUser appUser)
@@ -192,7 +192,7 @@ public class UserManagement {
 			usr.setIdUser(listUsers.get(0).getIdUser());
 			usr.setLogin(listUsers.get(0).getLogin());
 			usr.setActiv(listUsers.get(0).getActiv());			
-			usr.setPassword(appUser.getNewPassword());	
+			usr.setPassword(EncryptionPassword.encodePassword(appUser.getNewPassword()));	
 			
 			session = sessionFactory.openSession();
 			session.beginTransaction();	
@@ -200,7 +200,7 @@ public class UserManagement {
 			session.getTransaction().commit();
 			session.close();
 			
-			if(usr.getPassword() == appUser.getNewPassword())
+			if(EncryptionPassword.encodePassword(usr.getPassword()).equals(EncryptionPassword.encodePassword(appUser.getNewPassword())))
 				return true;
 		} 
 		catch (Exception e) {
@@ -211,7 +211,7 @@ public class UserManagement {
 	
 	
 	/**
-	 * Metoda pobiera wszytskich u¿ytkowników z tabeli
+	 * Metoda pobiera wszytskich uï¿½ytkownikï¿½w z tabeli
 	 * */
 	@SuppressWarnings("unchecked")
 	public List<Users> getUsers()
@@ -233,7 +233,7 @@ public class UserManagement {
 	
 	
 	/**
-	 * Metoda pobiera u¿ytkownika o podanych loginie
+	 * Metoda pobiera uï¿½ytkownika o podanych loginie
 	 * */
 	@SuppressWarnings("unchecked")
 	public List<Users> getUsers(String login)
@@ -256,7 +256,7 @@ public class UserManagement {
 	/**
 	 * Metoda zwraca Doctora o podanych parametrach 
 	 * @param doc obiekt klasy Doctor
-	 * @return result Object reprezentuj¹cy Doctora
+	 * @return result Object reprezentujï¿½cy Doctora
 	 * */
 	@SuppressWarnings("unchecked")
 	private List<Doctor> getIdDoctor(Doctor doc)
@@ -281,7 +281,7 @@ public class UserManagement {
 	/**
 	 * Metoda zwraca pacjenta o podanych parametrach 
 	 * @param Patient
-	 * @return result Object reprezentuj¹cy Pacjenta
+	 * @return result Object reprezentujï¿½cy Pacjenta
 	 * */
 	private List<Patient> getIdPatient(Patient pat)
 	{
@@ -298,9 +298,9 @@ public class UserManagement {
 
 	
 	/**
-	 * Metoda zwraca Pielêgniarke o podanych parametrach 
+	 * Metoda zwraca Pielï¿½gniarke o podanych parametrach 
 	 * @param Patient
-	 * @return result Object reprezentuj¹cy pielêgniarkê
+	 * @return result Object reprezentujï¿½cy pielï¿½gniarkï¿½
 	 * */
 	private List<Nurse> getIdNurse(Nurse nur)
 	{
@@ -319,7 +319,7 @@ public class UserManagement {
 	/**
 	 * Metoda zwraca Users o podanych parametrach 
 	 * @param doc obiekt klasy Users
-	 * @return result Object reprezentuj¹cy users
+	 * @return result Object reprezentujï¿½cy users
 	 * */
 	@SuppressWarnings("unused")
 	private List<Users> getIdUser(Users usr)
@@ -344,7 +344,7 @@ public class UserManagement {
 	/**
 	 * Metoda zwraca Users o podanych parametrach 
 	 * @param doc obiekt klasy Users
-	 * @return result Object reprezentuj¹cy users
+	 * @return result Object reprezentujï¿½cy users
 	 * */
 	private List<Users> getIdUser(AppUser appUser,  Users usr)
 	{
@@ -381,9 +381,9 @@ public class UserManagement {
 	
 	/**
 	 * Metoda zwraca Permissions o podanych parametrach 
-	 * @param idPerm ID uprawnieñ
+	 * @param idPerm ID uprawnieï¿½
 	 * @param idUsr ID usera 
-	 * @return result Object reprezentuj¹cy PermissionsUser
+	 * @return result Object reprezentujï¿½cy PermissionsUser
 	 * */
 	@SuppressWarnings("unused")
 	private List<PermissionsUser> getIdPermissions(int idPerm, int idUsr)
@@ -401,9 +401,9 @@ public class UserManagement {
 	
 	
 	/**
-	 * Metoda zwraca id uprawnieñ jakie nale¿y nadaæ u¿ytkownikowi 
-	 * @param nazwa uprawieñ
-	 * @return int ID uprawnieñ w bazie 
+	 * Metoda zwraca id uprawnieï¿½ jakie naleï¿½y nadaï¿½ uï¿½ytkownikowi 
+	 * @param nazwa uprawieï¿½
+	 * @return int ID uprawnieï¿½ w bazie 
 	 * */
 	private int setPerrmissions(String perm)
 	{
@@ -422,18 +422,18 @@ public class UserManagement {
 	}
 	
 	/**
-	 * Metoda w zale¿noœci od podanego parametru ustawia 
+	 * Metoda w zaleï¿½noï¿½ci od podanego parametru ustawia 
 	 * w obiekcie Klasy Users (idDictor, idNurse, idPatient)
 	 * @param appUsers obiekt klasy AppUser
-	 * @param usr obiekt klasy Users w którym bêdziemy ustawiaæ pole
+	 * @param usr obiekt klasy Users w ktï¿½rym bï¿½dziemy ustawiaï¿½ pole
 	 * */
 	private void setPersonId(AppUser appUser, Users usr)
 	{
 		switch(appUser.getWho()) {									//			 Na podstawie zaznaczonej flagi
 		case "Doctor":	
 			Doctor doctor  = new Doctor();
-			doctor.setId(appUser.getIdPerson());					//			 do lekarza, pacjenta lub pielêgniarki
-			usr.setDoc(doctor);										//			 do lekarza, pacjenta lub pielêgniarki
+			doctor.setId(appUser.getIdPerson());					//			 do lekarza, pacjenta lub pielï¿½gniarki
+			usr.setDoc(doctor);										//			 do lekarza, pacjenta lub pielï¿½gniarki
 			break;
 		case "Patient":
 			Patient pat = new Patient();

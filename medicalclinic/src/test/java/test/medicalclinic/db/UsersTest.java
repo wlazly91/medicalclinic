@@ -10,6 +10,7 @@ import medicalclinic.db.A;
 import medicalclinic.db.B;
 import medicalclinic.db.Users;
 import medicalclinic.model.AppUser;
+import medicalclinic.model.EncryptionPassword;
 import medicalclinic.model.UserManagement;
 
 import org.hibernate.HibernateException;
@@ -24,17 +25,17 @@ public class UsersTest {
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-//	@Test
+	@Test
 	public void testUsers1() throws HibernateException, SQLException {
 
 		UserManagement um = new UserManagement();
 		AppUser appUser = new AppUser();
 		
-		appUser.setName("Tesotwy po zmian");
-		appUser.setSurname("Tesotwy po zmian");
-		appUser.setSpecjality("Tesotwy po zmian");
-		appUser.setLogin("Tesotwy po zmian");
-		appUser.setPassword("Tesotwy po zmian");
+		appUser.setName("≈Åukasz");
+		appUser.setSurname("Kochanek");
+		appUser.setSpecjality("Kardiolog");
+		appUser.setLogin("lkochan");
+		appUser.setPassword(EncryptionPassword.encodePassword("Koch@nek132"));
 		appUser.setActive(1);
 		appUser.setWho("Doctor");
 		
@@ -46,14 +47,14 @@ public class UsersTest {
 
 		Users usr = new Users();
 		
-		usr.setLogin("Kubuúasd");
+		usr.setLogin("KubuÔøΩasd");
 		usr.setPassword("OKAJSasd");
 		usr.setActiv(1);
 		
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		System.out.println("Jest juø ID" + usr.getIdUser());
+		System.out.println("Jest juÔøΩ ID" + usr.getIdUser());
 		
 		session.save(usr);
 		
@@ -89,11 +90,11 @@ public class UsersTest {
 		appUser1.setName("Luki");
 		appUser1.setSurname("Kocha");
 		appUser1.setSpecjality("Kardiolog");
-		appUser1.setNewPassword("Nowehas≥o");
+		appUser1.setNewPassword("Nowehas≈Ço");
 		appUser1.setWho("Doctor");
 		
 		try {
-			assertTrue("Oczekiwana wrtoúÊ TRUE" , um.changePassowrd(appUser1));
+			assertTrue("Oczekiwana wrto≈õƒá TRUE" , um.changePassowrd(appUser1));
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -157,7 +158,7 @@ public class UsersTest {
 		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
 	}
 	
-	@Test
+//	@Test
 	public void testUsers7() {
 		session = sessionFactory.openSession();
 		
