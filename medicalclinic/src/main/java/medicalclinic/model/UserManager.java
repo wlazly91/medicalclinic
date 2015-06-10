@@ -233,7 +233,7 @@ public class UserManager {
 	
 	
 	/**
-	 * Metoda pobiera u�ytkownika o podanych loginie
+	 * Metoda pobiera użytkownika o podanych loginie
 	 * */
 	@SuppressWarnings("unchecked")
 	public List<Users> getUsers(String login)

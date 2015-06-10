@@ -23,7 +23,6 @@
 		</script>
 </head>
 <body>
-
 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
 		<c:url value="/logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -110,38 +109,7 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-       
-        <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
-        	<c:forEach var="clinic" items="${clinic}">
-        	<table>
-        	<tr>
-				<td><form:checkbox path="who" value="${clinic.name}" onchange="javascript:formSubmit()"/>  ${clinic.name}</td>
-	    	</tr>
-			</table> 
-			</c:forEach> 
-		</form:form>
-		
-		<c:if test="${doctorList != null}">
-		<table class="table table-striped">
-            <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Specjality</th>
-                    </tr>
-                </thead>
-            <tbody>
-                    <c:forEach var="doctorList" items="${doctorList}">
-                        <tr>
-                            <td>${doctorList.name}</td>
-                            <td>${doctorList.surname}</td>
-                            <td>${doctorList.specjalityName}</td>                  
-                        </tr>
-                    </c:forEach>
-                </tbody>
-          </table> 
-          </c:if>
-        </div>
-   	</div>
+	</div>
+</div>
 </body>
 </html>

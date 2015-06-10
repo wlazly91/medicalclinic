@@ -16,9 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/** KLasa reprezentuj¹ca tabelê patient
+/** KLasa reprezentujï¿½ca tabelï¿½ patient
  * (pacjent)
- * @author £ukasz Kochanek
+ * @author ï¿½ukasz Kochanek
  * @version 1.0
  */
 @Entity
@@ -55,6 +55,9 @@ public class Patient implements ObjectDB {
 	@OneToMany(mappedBy="patient")
 	private Set<Visits> visit;
 	
+	@OneToMany(mappedBy="idPatient")
+	private Set<ScheduleVisits> sVisits;
+	
 	public Patient() {}
 	
 	public Patient(String nameN, String surnameN, String peselN, String insuranceN, Set<Visits> vis) {
@@ -63,6 +66,10 @@ public class Patient implements ObjectDB {
 		this.pesel = peselN;
 		this.insurance = insuranceN;
 		this.visit = vis;
+	}
+	
+	public void setsVisits(Set<ScheduleVisits> sVisits) {
+		this.sVisits = sVisits;
 	}
 	
 	public void setVisit(Set<Visits> visit) {
@@ -95,6 +102,10 @@ public class Patient implements ObjectDB {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	
+	public Set<ScheduleVisits> getsVisits() {
+		return sVisits;
 	}
 	
 	public Set<Visits> getVisit() {

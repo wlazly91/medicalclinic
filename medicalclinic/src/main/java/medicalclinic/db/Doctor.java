@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 /**
  * Klasa reprezentuje lekarzy 
- * @author £ukasz Kochanek
+ * @author ï¿½ukasz Kochanek
  * @version 1.0
  */
 
@@ -46,6 +46,9 @@ public class Doctor implements ObjectDB
 	@OneToMany(mappedBy="doc")
 	private Set<DoctorOfficeHours> doctorHours;
 	
+	@OneToMany(mappedBy="idDoctor")
+	private Set<ScheduleVisits> sVisit;
+	
 	public Doctor() {}
 	
 	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a, Set<Visits> vis, Set<DoctorOfficeHours> docHours) {
@@ -57,6 +60,13 @@ public class Doctor implements ObjectDB
 		this.doctorHours = docHours;
 	}
 	
+	public void setDoc(Set<ScheduleVisits> doc) {
+		this.sVisit = doc;
+	}
+	
+	public void setDoctorHours(Set<DoctorOfficeHours> doctorHours) {
+		this.doctorHours = doctorHours;
+	}
 	
 	public void setVisits(Set<Visits> visits) {
 		this.visits = visits;

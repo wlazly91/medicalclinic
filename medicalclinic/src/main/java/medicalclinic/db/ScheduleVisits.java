@@ -16,9 +16,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * klasa reprezentuj¹ca tabelê SCHEDULE_VISITS
+ * klasa reprezentujï¿½ca tabelï¿½ SCHEDULE_VISITS
  * (harmonogram wizyt)
- * @author £ukasz Kochanek
+ * @author ï¿½ukasz Kochanek
  * @version 1.0
  */
 @Entity
@@ -54,9 +54,12 @@ public class ScheduleVisits implements ObjectDB {
 	
 	public ScheduleVisits() {}
 	
-	public ScheduleVisits(Date dateS, String hours) {
+	public ScheduleVisits(Date dateS, String hours, Doctor doc, Clinics clin, Patient pat) {
 		this.dateSV = dateS;
 		this.hoursSV = hours;
+		this.idClinics = clin;
+		this.idDoctor = doc;
+		this.idPatient = pat;
 	}
 	/**
 	 * @param dateSV the dateSV to set

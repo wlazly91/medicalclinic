@@ -19,7 +19,7 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	Session session;
 	
 	/**
-	 * Metoda s�u�y do rejestrowania si� do lekarza
+	 * Metoda służy ro zarejestrowania pacjnta na wizytę	
 	 * 
 	 * */
 	@SuppressWarnings("unused")
@@ -29,8 +29,15 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 			User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			UserManager um = new UserManager();
 			List<Users> userList = um.getUsers(usr.getUsername());
+
+			session = sessionFactory.openSession();
+			session.beginTransaction();
 			
-			
+				
+
+			session.save(new String());
+			session.getTransaction().commit();
+			session.close();
 			
  
 		} catch (Exception e) {

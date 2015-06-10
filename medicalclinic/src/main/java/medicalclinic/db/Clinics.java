@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * Klasa reprezentuj¹ca poradnie w przychodni
+ * Klasa reprezentujï¿½ca poradnie w przychodni
  * */
 @Entity
 @Table(name = "CLINICS")
@@ -36,6 +36,8 @@ public class Clinics implements ObjectDB
 	@OneToMany(mappedBy="clinic")
 	private Set<DoctorOfficeHours> doctorHours;
 
+	@OneToMany(mappedBy="idClinics")
+	private Set<ScheduleVisits> sVisits;
 	
 	public Clinics() {}
 
@@ -43,6 +45,13 @@ public class Clinics implements ObjectDB
 		this.name = name;
 	}
 	
+	public void setsVisits(Set<ScheduleVisits> clinic) {
+		this.sVisits = clinic;
+	}
+	
+	public void setDoctorHours(Set<DoctorOfficeHours> doctorHours) {
+		this.doctorHours = doctorHours;
+	}
 	
 	public void setDictorHours(Set<DoctorOfficeHours> dictorHours) {
 		this.doctorHours = dictorHours;
@@ -66,5 +75,9 @@ public class Clinics implements ObjectDB
 	
 	public Set<DoctorOfficeHours> getDoctorHours() {
 		return doctorHours;
+	}
+	
+	public Set<ScheduleVisits> getClinic() {
+		return sVisits;
 	}
 }

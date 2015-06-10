@@ -39,7 +39,7 @@
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
-        <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
+        <li><a href="register"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
         <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-th"></span> Patient Panel</a>

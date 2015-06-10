@@ -36,9 +36,9 @@ public class UsersController {
 		{
 			try {
 				if(!um.addDoctor(user))
-					modelresult.addObject("msg", "Wyst�pi� b��d podczas dodawania u�ytkownika");
+					modelresult.addObject("msg", "Wystąpił błąd podczas dodawania użytkownika");
 				
-				modelresult.addObject("msg", "poprawnie dodano u�ytkownika");
+				modelresult.addObject("msg", "poprawnie dodano użytkownika");
 				
 			} catch (HibernateException | SQLException e) {
 				e.printStackTrace();

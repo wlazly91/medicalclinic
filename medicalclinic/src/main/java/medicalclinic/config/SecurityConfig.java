@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	      filter.setForceEncoding(true);
 	      http.addFilterBefore(filter,CsrfFilter.class);
 
-	}
+	}	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
