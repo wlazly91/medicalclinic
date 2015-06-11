@@ -1,6 +1,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,9 @@
   		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
+			}
+			function formSubmit() {
+				document.getElementById("whoDoctor").submit();
 			}
 		</script>
 </head>
@@ -106,7 +110,8 @@
 <div class="container theme-showcase" role = "main">  
 <div class="jumbotron">    
 
-<table class="table table-striped">
+<form:form id = "whoDoctor" method="POST" action="/FamilyClinic/userList">
+<table class="table table-hover">
             <thead>
                     <tr>
                         <th>Login</th>
@@ -117,15 +122,17 @@
                 </thead>
             <tbody>
                     <c:forEach var="user" items="${users}">
-                        <tr>
-                            <td>${user.login}</td>
+                        <tr onclick="javascript:formSubmit()" style="cursor: pointer;">   
+                            <td>${user.login}<input type="hidden" name="${user.login}"  value="${user.login}" /></td>
                             <td>${user.password}</td>
-                            <td>${user.getDoc().getName()} ${user.getNur().getName()} ${user.getPat().getName()}</td>                  
+                            <td>${user.getDoc().getName()} ${user.getNur().getName()} ${user.getPat().getName()}</td>                
                             <td>${user.getDoc().getSurname()} ${user.getNur().getName()} ${user.getNur().getName()}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
-          </table>     
+          </table>    
+</form:form> 
+
 </div>
 </div>
 </body>

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
+  <title>Visiting Hours</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -23,7 +23,6 @@
 		</script>
 </head>
 <body>
-
 <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
 		<c:url value="/logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -61,7 +60,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-cog"> </span> Admin Options </a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-cog"> </span>  Admin Options </a>
 			<ul class="dropdown-menu" role="menu">
 				  <li class="dropdown-header">Visits</li>
                   <li><a href="#">Add Visits</a></li>
@@ -110,38 +109,9 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-       
-        <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
-        	<c:forEach var="clinic" items="${clinic}">
-        	<table>
-        	<tr>
-				<td><form:checkbox path="who" value="${clinic.name}" onchange="javascript:formSubmit()"/>  ${clinic.name}</td>
-	    	</tr>
-			</table> 
-			</c:forEach> 
-		</form:form>
 		
-		<c:if test="${doctorList != null}">
-		<table class="table table-striped">
-            <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Specjality</th>
-                    </tr>
-                </thead>
-            <tbody>
-                    <c:forEach var="doctorList" items="${doctorList}">
-                        <tr>
-                            <td>${doctorList.name}</td>
-                            <td>${doctorList.surname}</td>
-                            <td>${doctorList.specjalityName}</td>                  
-                        </tr>
-                    </c:forEach>
-                </tbody>
-          </table> 
-          </c:if>
-        </div>
-   	</div>
+	
+	</div>
+</div>
 </body>
 </html>

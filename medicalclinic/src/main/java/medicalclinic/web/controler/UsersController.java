@@ -78,5 +78,15 @@ public class UsersController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value = "/userList", method = RequestMethod.POST)
+	public ModelAndView show1() {
+
+		ModelAndView model = new ModelAndView();
+		model.setViewName("result");
+		model.addObject("msg", "Yeah");
+		
+		return model;
+	}
 
 }
