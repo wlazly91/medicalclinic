@@ -15,13 +15,10 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   		<script>
-			function formSubmit() {
+			function formSubmitLogout() {
 				document.getElementById("logoutForm").submit();
 			}
-			
-			function formSubmit() {
-				document.getElementById("whoChange").submit();
-			}
+
 		</script>
 </head>
 <body>
@@ -95,7 +92,7 @@
 
         <li>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-			<a href="javascript:formSubmit()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+			<a href="javascript:formSubmitLogout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
 		</c:if>
 		</li>	
 		
@@ -111,6 +108,11 @@
 	
 <div class="container theme-showcase" role = "main">     
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN')">
+	<script type="text/javascript">
+	function formSubmit() {
+		document.getElementById("whoChange").submit();
+	}
+	</script>
 	<h2>Add New User </h2>
 	<form:form method="POST" action="/FamilyClinic/changePaswword" id = "whoChange">
 		<tr>

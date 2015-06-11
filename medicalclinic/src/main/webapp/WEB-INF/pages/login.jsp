@@ -26,7 +26,7 @@
 				value="${_csrf.token}" />
 		</form>
 		<script>
-			function formSubmit() {
+			function formSubmitLogout() {
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
@@ -91,7 +91,7 @@
       
         <li>
         <c:if test="${pageContext.request.userPrincipal.name == name}">
-			<a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign Up </a>
+			<a id="myBtn" href="#"><span class="glyphicon glyphicon-log-in"></span> Sign Up </a>
 		</c:if>
 		</li>	
 		
@@ -103,13 +103,13 @@
 
         <li>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-			<a href="javascript:formSubmit()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+			<a href="javascript:formSubmitLogout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
 		</c:if>
 		</li>	
 		
 		<li>
 		<c:if test="${pageContext.request.userPrincipal.name == name}">
-			<a href="login"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
+			<a href="javascript:showModalWindow()"><span class="glyphicon glyphicon-log-in"></span> Sign In</a>
 		</c:if>
 		</li>	
 	 </ul>
@@ -117,12 +117,20 @@
   </div>
 </nav>
 
-<div class="container theme-showcase" role = "main">      
-	<div id="login-box">
 
-		<h3>Login with Username and Password</h3>
-
-		<c:if test="${not empty error}">
+<div class="container">
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sing In</h4>
+        </div>
+        <div class="modal-body">
+          		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
@@ -131,30 +139,36 @@
 
 		<form name='loginForm'
 			action="<c:url value='/login' />" method='POST'>
-
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='login'></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					
-						<td colspan='2'>
-						<button type="submit" class="btn btn-danger" value="submit" name="submit">Sign In </button>
-						</td>
-						
-				</tr>
-			</table>
-
-			<input type="hidden" name="${_csrf.parameterName}"
+					<div class="form-group">	
+					<label><span class="glyphicon glyphicon-user"></span> Username</label>
+					<input type='text' name='login' class="form-control" placeholder="Enter username"/>
+					</div>
+					<div class="form-group">
+					<label><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+					<input type='password' name='password' class="form-control" placeholder="Enter password"/>
+					</div>
+				
+				<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
+			   
+			   
+        	<div class="modal-footer">
+        		<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</div>
 
-		</form>
-	</div>
+<script>
+function showModalWindow() {
+$(document).ready(function(){
+        $("#myModal").modal();
+    });
+}
+</script>
 </div>
 </body>
 </html>

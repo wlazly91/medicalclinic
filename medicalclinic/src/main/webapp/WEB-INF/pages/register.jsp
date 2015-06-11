@@ -14,11 +14,8 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   		<script>
-			function formSubmit() {
+			function formSubmitLogout() {
 				document.getElementById("logoutForm").submit();
-			}
-			function formSubmit() {
-				document.getElementById("whoShow").submit();
 			}
 		</script>
 </head>
@@ -94,7 +91,7 @@
 
         <li>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-			<a href="javascript:formSubmit()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+			<a href="javascript:formSubmitLogout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
 		</c:if>
 		</li>	
 		
