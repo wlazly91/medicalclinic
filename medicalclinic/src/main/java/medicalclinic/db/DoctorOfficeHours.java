@@ -26,7 +26,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	private static final long serialVersionUID = -7583092187360249349L;
 	
 	@Id
-	@Column(name = "ID_DOC")
+	@Column(name = "ID_DOCOFFICE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDDOCTOROFFICE") 
 	@SequenceGenerator(name="IDDOCTOROFFICE", sequenceName = "IDDOCTOROFFICE", allocationSize=1)
 	private int id;
@@ -45,6 +45,9 @@ public class DoctorOfficeHours implements ObjectDB {
 	@JoinColumn(name = "ID_DOCTOR")
 	private Doctor doc;
 	
+	@Column(name="VISITLENGHT")
+	private int visitLenght;
+	
 	
 	public DoctorOfficeHours() {}
 	
@@ -57,6 +60,18 @@ public class DoctorOfficeHours implements ObjectDB {
 		this.id = id;
 	}
 
+	public void setClinic(Clinics clinic) {
+		this.clinic = clinic;
+	}
+	
+	public void setDoc(Doctor doc) {
+		this.doc = doc;
+	}
+	
+	public void setVisitLenght(int visitLenght) {
+		this.visitLenght = visitLenght;
+	}
+	
 	public void setHoursFrom(String hoursFrom) {
 		this.hoursFrom = hoursFrom;
 	}
@@ -65,36 +80,31 @@ public class DoctorOfficeHours implements ObjectDB {
 		this.hoursTo = hoursTo;
 	}
 
-	public void setIdClinics(Clinics idClinics) {
-		this.clinic = idClinics;
-	}
-
 	public void setId(int idDoc) {
 		this.id = idDoc;
 	}
 
-	public void setDoctor(Doctor idDoctor) {
-		this.doc = idDoctor;
-	}
-
-	public String getHoursFrom() {
-		return hoursFrom;
-	}
-
-	public String getHoursTo() {
-		return hoursTo;
-	}
-
-	public Clinics getClinics() {
+	public Clinics getClinic() {
 		return clinic;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public Doctor getDoctor() {
+	
+	public Doctor getDoc() {
 		return doc;
 	}
 	
+	public String getHoursFrom() {
+		return hoursFrom;
+	}
+	
+	public String getHoursTo() {
+		return hoursTo;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public int getVisitLenght() {
+		return visitLenght;
+	}
 }

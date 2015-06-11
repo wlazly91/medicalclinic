@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
+        <li><a href="visitHours"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="register"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
         <li class="dropdown">

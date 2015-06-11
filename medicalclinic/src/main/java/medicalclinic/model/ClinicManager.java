@@ -14,7 +14,6 @@ import org.hibernate.SessionFactory;
 
 public class ClinicManager {
 
-	private String who;
 	AppConfig config = new AppConfig();
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
@@ -52,7 +51,7 @@ public class ClinicManager {
 		result = query.list();
 		if(result != null){
 			for (int i = 0; i < result.size(); i++) {
-				clinicList.add(result.get(i).getClinics());
+				clinicList.add(result.get(i).getClinic());
 			}
 			
 			return clinicList;
@@ -75,7 +74,7 @@ public class ClinicManager {
 		result = query.list();
 		if(result != null){
 			for (int i = 0; i < result.size(); i++) {
-				clinicList.add(result.get(i).getDoctor());
+				clinicList.add(result.get(i).getDoc());
 			}
 			
 			return clinicList;
@@ -85,11 +84,5 @@ public class ClinicManager {
 	}
 		
 		
-	public void setWho(String who) {
-		this.who = who;
-	}
-	
-	public String getWho() {
-		return who;
-	}
+
 }

@@ -1,10 +1,13 @@
 package test.medicalclinic.db;
 
+import java.util.List;
+
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
 import medicalclinic.db.DoctorOfficeHours;
 import medicalclinic.model.ClinicManager;
+import medicalclinic.model.DoctorManager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,8 +35,8 @@ public class DoctorOfficeHoursTest {
 		clin.setName("Dziecięca");
 		session.save(clin);
 		
-		doctorHours.setIdClinics(clin);
-		doctorHours.setDoctor(doc);
+		doctorHours.setClinic(clin);
+		doctorHours.setDoc(doc);
 		doctorHours.setHoursFrom("14:00");
 		doctorHours.setHoursTo("18:00");
 		
@@ -59,5 +62,14 @@ public class DoctorOfficeHoursTest {
 		cm.getDoctorInClinics("Dziecięca");
 		
 		System.out.println(cm.getDoctorInClinics("Dziecięca"));
+	}
+	
+	@Test
+	public void test3(){
+		DoctorManager dM = new DoctorManager();
+		
+		List<DoctorOfficeHours> a = dM.getHoursDoctor(1);
+		
+		System.out.println(a);
 	}
 }

@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
+        <li><a href="visitHours"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="register"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
         <li class="dropdown">
@@ -111,18 +111,23 @@
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
        
-        <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
+       <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
         	<c:forEach var="clinic" items="${clinic}">
-        	<table>
-        	<tr>
-				<td><form:checkbox path="who" value="${clinic.name}" onchange="javascript:formSubmit()"/>  ${clinic.name}</td>
+        	<table class="table table-hover">
+        	<tr onclick="javascript:formSubmit()" style="cursor: pointer;">
+				<td><form:input type="hidden" path="who" value="${clinic.name}"/> ${clinic.name}</td>
 	    	</tr>
 			</table> 
 			</c:forEach> 
 		</form:form>
 		
 		<c:if test="${doctorList != null}">
-		<table class="table table-striped">
+		<script type="text/javascript">
+		function formSubmit() {
+			document.getElementById("whatDoc").submit();
+		}</script>
+		<form:form id = "whatDoc" method="GET" action="/FamilyClinic/visitHours">
+		<table class="table table-hover">
             <thead>
                     <tr>
                         <th>Name</th>
@@ -132,14 +137,16 @@
                 </thead>
             <tbody>
                     <c:forEach var="doctorList" items="${doctorList}">
-                        <tr>
-                            <td>${doctorList.name}</td>
+                        <tr onclick="javascript:formSubmit()" style="cursor: pointer;">
+                        	<form:input type="hidden" path="id" value="${doctorList.id}" />
+                        	<td>${doctorList.name}</td>
                             <td>${doctorList.surname}</td>
                             <td>${doctorList.specjalityName}</td>                  
                         </tr>
                     </c:forEach>
                 </tbody>
-          </table> 
+          </table>
+          </form:form> 
           </c:if>
         </div>
    	</div>

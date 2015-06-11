@@ -18,7 +18,7 @@
 				document.getElementById("logoutForm").submit();
 			}
 			function formSubmit() {
-				document.getElementById("whoShow").submit();
+				document.getElementById("whoDoctor").submit();
 			}
 		</script>
 </head>
@@ -44,7 +44,7 @@
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
+        <li><a href="visitHours"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="register"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
         <li class="dropdown">
@@ -109,8 +109,30 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-		
-	
+		<form:form id = "whoDoctor" method="GET" action="/FamilyClinic/visitHours">
+			<table class="table table-hover">
+            <thead>
+                <tr>
+                	<th>Name</th>
+                	<th>Surname</th>
+                	<th>Specjality</th>
+                	<th>Hours From</th>
+                	<th>Hours To</th>
+            	</tr>
+            </thead>
+            <tbody>
+				<c:forEach var="docList" items="${docList}">
+					<tr onclick="javascript:formSubmit()" style="cursor: pointer;">   
+						<td>${docList.getDoc().getName()}<form:input type="hidden" path="id" value="${docList.getDoc().getId()}" /></td>
+						<td>${docList.getDoc().getSurname()}</td>
+						<td>${docList.getDoc().getSpecjalityName()}</td>
+						<td>${docList.getHoursFrom()}</td>
+						<td>${docList.getHoursTo()}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+          	</table>    
+		</form:form> 
 	</div>
 </div>
 </body>
