@@ -3,7 +3,7 @@
  */
 package medicalclinic.db;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,6 +51,9 @@ public class ScheduleVisits implements ObjectDB {
 	@Column(name = "HOURS_SV")
 	private String hoursSV;
 	
+	@Column(name="VISITLENGHT")
+	private int visitL;
+	
 	
 	public ScheduleVisits() {}
 	
@@ -61,88 +64,60 @@ public class ScheduleVisits implements ObjectDB {
 		this.idDoctor = doc;
 		this.idPatient = pat;
 	}
-	/**
-	 * @param dateSV the dateSV to set
-	 */
+	
+	public void setVisitL(int visitL) {
+		this.visitL = visitL;
+	}
+	
 	public void setDateSV(Date dateSV) {
 		this.dateSV = dateSV;
 	}
 	
-	/**
-	 * @param hoursSV the hoursSV to set
-	 */
 	public void setHoursSV(String hoursSV) {
 		this.hoursSV = hoursSV;
 	}
 	
-	/**
-	 * @param idClinics the idClinics to set
-	 */
 	public void setIdClinics(Clinics idClinics) {
 		this.idClinics = idClinics;
 	}
 	
-	/**
-	 * @param idDoctor the idDoctor to set
-	 */
 	public void setIdDoctor(Doctor idDoctor) {
 		this.idDoctor = idDoctor;
 	}
 	
-	/**
-	 * @param idPatient the idPatient to set
-	 */
 	public void setIdPatient(Patient idPatient) {
 		this.idPatient = idPatient;
 	}
 	
-	/**
-	 * @param idSV the idSV to set
-	 */
 	public void setIdSV(int idSV) {
 		this.idSV = idSV;
 	}
 	
-	/**
-	 * @return the dateSV
-	 */
 	public Date getDateSV() {
 		return dateSV;
 	}
 	
-	/**
-	 * @return the hoursSV
-	 */
 	public String getHoursSV() {
 		return hoursSV;
 	}
 	
-	/**
-	 * @return the idClinics
-	 */
 	public Clinics getIdClinics() {
 		return idClinics;
 	}
 	
-	/**
-	 * @return the idDoctor
-	 */
 	public Doctor getIdDoctor() {
 		return idDoctor;
 	}
 	
-	/**
-	 * @return the idPatient
-	 */
 	public Patient getIdPatient() {
 		return idPatient;
 	}
 	
-	/**
-	 * @return the idSV
-	 */
 	public int getIdSV() {
 		return idSV;
 	}
 	
+	public int getVisitL() {
+		return visitL;
+	}
 }

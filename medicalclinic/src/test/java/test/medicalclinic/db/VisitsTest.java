@@ -1,7 +1,7 @@
 package test.medicalclinic.db;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
@@ -20,21 +20,21 @@ public class VisitsTest {
 	SessionFactory sessionFactory = config.sessionFactory();
 	Session session;
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void test() throws HibernateException, SQLException {
 		ScheduleVisits schVisit = new ScheduleVisits();
 		Clinics clin = new Clinics();
+		GregorianCalendar data = new GregorianCalendar(2015,5,12);
 		Doctor doc = new Doctor();
 		Patient pat = new Patient();
 		clin.setId(2);
-		doc.setId(1);
+		doc.setId(301);
 		pat.setIdPatient(1);
 		schVisit.setIdClinics(clin);
 		schVisit.setIdDoctor(doc);
 		schVisit.setIdPatient(pat);
-		schVisit.setDateSV(new Date(2015, 6, 12));
-		schVisit.setHoursSV("14:15");
+		schVisit.setDateSV(data.getTime()); 
+		schVisit.setHoursSV("14:20");
 		
 		session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -43,6 +43,8 @@ public class VisitsTest {
 		
 		session.getTransaction().commit();
 		session.close();
+		
+		System.out.println();
 	}
 
 }
