@@ -41,21 +41,13 @@ public class ClinicManager {
 	@SuppressWarnings("unchecked")
 	public List<Clinics> getClinics()
 	{
-		List<DoctorOfficeHours> result = null;
 		List<Clinics> clinicList = new ArrayList<Clinics>();
 		session = sessionFactory.openSession();
 		
-		String hql = "from DoctorOfficeHours";
+		String hql = "select distinct clinic from DoctorOfficeHours";
 		Query query = session.createQuery(hql);
+		clinicList = query.list();
 		
-		result = query.list();
-		if(result != null){
-			for (int i = 0; i < result.size(); i++) {
-				clinicList.add(result.get(i).getClinic());
-			}
-			
-			return clinicList;
-		}
 		session.close();		
 		return clinicList;
 	}

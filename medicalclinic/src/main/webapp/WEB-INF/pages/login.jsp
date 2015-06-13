@@ -16,8 +16,6 @@
 
 <body>
 
-
-	
 <sec:authorize access="hasRole('ROLE_USER')">
 		<!-- For login user -->
 		<c:url value="/logout" var="logoutUrl" />
@@ -150,7 +148,6 @@
 				
 				<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-			   
 			   
         	<div class="modal-footer">
         		<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>

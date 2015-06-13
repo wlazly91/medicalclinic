@@ -106,15 +106,16 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-		<form:form id = "whoDoctor" method="GET" action="/FamilyClinic/visitHours">
+		
 		<script type="text/javascript">
-		function formSubmit() {
+		function formSubmit() {2
 			document.getElementById("whoDoctor").submit();
 		}
 		</script>
 			<table class="table table-hover">
             <thead>
                 <tr>
+                	<th></th>
                 	<th>Name</th>
                 	<th>Surname</th>
                 	<th>Specjality</th>
@@ -123,18 +124,22 @@
             	</tr>
             </thead>
             <tbody>
+           
 				<c:forEach var="docList" items="${docList}">
-					<tr onclick="javascript:formSubmit()" style="cursor: pointer;">   
-						<td>${docList.getDoc().getName()}<form:input type="hidden" path="id" value="${docList.getDoc().getId()}" /></td>
+					<form:form id = "whoDoctor" method="GET" action="/FamilyClinic/visitHours">
+					<tr >   
+						<td><form:checkbox path="id" value="${docList.getDoc().getId()}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
+						<td>${docList.getDoc().getName()}</td>
 						<td>${docList.getDoc().getSurname()}</td>
 						<td>${docList.getDoc().getSpecjalityName()}</td>
 						<td>${docList.getHoursFrom()}</td>
 						<td>${docList.getHoursTo()}</td>
 					</tr>
+					</form:form>
 				</c:forEach>
 			</tbody>
           	</table>    
-		</form:form> 
+		 
 	</div>
 </div>
 </body>

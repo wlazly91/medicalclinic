@@ -3,6 +3,8 @@
  */
 package medicalclinic.db;
 
+import java.sql.Time;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +38,10 @@ public class DoctorOfficeHours implements ObjectDB {
 	private Clinics clinic;
 	
 	@Column(name = "HOURS_FROM")
-	private String hoursFrom;
+	private Time hoursFrom;
 	
 	@Column(name = "HOURS_TO")
-	private String hoursTo;
+	private Time hoursTo;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_DOCTOR")
@@ -52,7 +54,7 @@ public class DoctorOfficeHours implements ObjectDB {
 	public DoctorOfficeHours() {}
 	
 	
-	public DoctorOfficeHours(int id, String from, String to, Doctor doc, Clinics clin) {
+	public DoctorOfficeHours(int id, Time from, Time to, Doctor doc, Clinics clin) {
 		this.hoursFrom = from;
 		this.hoursTo = to;
 		this.clinic = clin;
@@ -72,11 +74,11 @@ public class DoctorOfficeHours implements ObjectDB {
 		this.visitLenght = visitLenght;
 	}
 	
-	public void setHoursFrom(String hoursFrom) {
+	public void setHoursFrom(Time hoursFrom) {
 		this.hoursFrom = hoursFrom;
 	}
 
-	public void setHoursTo(String hoursTo) {
+	public void setHoursTo(Time hoursTo) {
 		this.hoursTo = hoursTo;
 	}
 
@@ -92,11 +94,11 @@ public class DoctorOfficeHours implements ObjectDB {
 		return doc;
 	}
 	
-	public String getHoursFrom() {
+	public Time getHoursFrom() {
 		return hoursFrom;
 	}
 	
-	public String getHoursTo() {
+	public Time getHoursTo() {
 		return hoursTo;
 	}
 	

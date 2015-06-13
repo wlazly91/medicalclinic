@@ -107,13 +107,12 @@
 </nav>
 <div class="container theme-showcase" role = "main" style="margin-top: 60px">    
 	<div class="jumbotron">
-       
-       <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
-       <script type="text/javascript">
+              <script type="text/javascript">
 			function formSubmit() {
 				document.getElementById("whoShow").submit();
 			}
 		</script>
+       <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
         	<c:forEach var="clinic" items="${clinic}">
         	<table class="table table-hover">
         	<tr onclick="javascript:formSubmit()" style="cursor: pointer;">
@@ -128,27 +127,30 @@
 		function formSubmit() {
 			document.getElementById("whatDoc").submit();
 		}</script>
-		<form:form id = "whatDoc" method="GET" action="/FamilyClinic/visitHours">
-		<table class="table table-hover">
+		
+		<table class="table table-hover" >
             <thead>
                     <tr>
+                   		<th></th>
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Specjality</th>
                     </tr>
                 </thead>
             <tbody>
+            <form:form id = "whatDoc" method="POST" action="/FamilyClinic/visitHours">
                     <c:forEach var="doctorList" items="${doctorList}">
-                        <tr onclick="javascript:formSubmit()" style="cursor: pointer;">
-                        	<form:input type="hidden" path="id" value="${doctorList.id}" />
+                        <tr>
+                        	<td><form:checkbox path="id" value="${doctorList.id}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
                         	<td>${doctorList.name}</td>
                             <td>${doctorList.surname}</td>
                             <td>${doctorList.specjalityName}</td>                  
                         </tr>
                     </c:forEach>
+             </form:form> 
                 </tbody>
           </table>
-          </form:form> 
+          
           </c:if>
         </div>
    	</div>

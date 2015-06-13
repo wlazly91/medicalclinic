@@ -3,6 +3,7 @@
  */
 package medicalclinic.db;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -49,15 +50,13 @@ public class ScheduleVisits implements ObjectDB {
 	private Date dateSV;
 	
 	@Column(name = "HOURS_SV")
-	private String hoursSV;
-	
-	@Column(name="VISITLENGHT")
-	private int visitL;
+	private Time hoursSV;
+
 	
 	
 	public ScheduleVisits() {}
 	
-	public ScheduleVisits(Date dateS, String hours, Doctor doc, Clinics clin, Patient pat) {
+	public ScheduleVisits(Date dateS, Time hours, Doctor doc, Clinics clin, Patient pat) {
 		this.dateSV = dateS;
 		this.hoursSV = hours;
 		this.idClinics = clin;
@@ -65,15 +64,11 @@ public class ScheduleVisits implements ObjectDB {
 		this.idPatient = pat;
 	}
 	
-	public void setVisitL(int visitL) {
-		this.visitL = visitL;
-	}
-	
 	public void setDateSV(Date dateSV) {
 		this.dateSV = dateSV;
 	}
 	
-	public void setHoursSV(String hoursSV) {
+	public void setHoursSV(Time hoursSV) {
 		this.hoursSV = hoursSV;
 	}
 	
@@ -97,7 +92,7 @@ public class ScheduleVisits implements ObjectDB {
 		return dateSV;
 	}
 	
-	public String getHoursSV() {
+	public Time getHoursSV() {
 		return hoursSV;
 	}
 	
@@ -115,9 +110,5 @@ public class ScheduleVisits implements ObjectDB {
 	
 	public int getIdSV() {
 		return idSV;
-	}
-	
-	public int getVisitL() {
-		return visitL;
 	}
 }

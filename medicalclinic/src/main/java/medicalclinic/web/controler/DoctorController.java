@@ -17,14 +17,22 @@ import org.springframework.web.servlet.ModelAndView;
 public class DoctorController {
 
 	@RequestMapping(value = "/visitHours", method = RequestMethod.GET)
-	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") Doctor doc, 
-			   ModelMap model) {
+	public ModelAndView selectClinic(@ModelAttribute("FamilyClinic") Doctor appClin, ModelMap model) {
 		DoctorManager dM = new DoctorManager();
 		ModelAndView modelresult = new ModelAndView("visitHours", "command", new Doctor());
-		List<DoctorOfficeHours> docList = dM.getHoursDoctor(1);
+		List<DoctorOfficeHours> docList = dM.getHoursDoctor(appClin.getId());
+		
 		modelresult.addObject("docList" , docList);
-		if(doc.getId() > 0)
-			modelresult.addObject("msg", doc.getId());
+		return modelresult;
+	}
+	
+	@RequestMapping(value = "/visitHours", method = RequestMethod.POST)
+	public ModelAndView showDoctorList(@ModelAttribute("FamilyClinic") Doctor appClin, ModelMap model) {
+		DoctorManager dM = new DoctorManager();
+		ModelAndView modelresult = new ModelAndView("visitHours", "command", new Doctor());
+		List<DoctorOfficeHours> docList = dM.getHoursDoctor(appClin.getId());
+		
+		modelresult.addObject("docList" , docList);
 		
 		return modelresult;
 	}

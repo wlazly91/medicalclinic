@@ -1,5 +1,6 @@
 package test.medicalclinic.db;
 
+import java.sql.Time;
 import java.util.List;
 
 import medicalclinic.config.AppConfig;
@@ -37,8 +38,8 @@ public class DoctorOfficeHoursTest {
 		
 		doctorHours.setClinic(clin);
 		doctorHours.setDoc(doc);
-		doctorHours.setHoursFrom("14:00");
-		doctorHours.setHoursTo("18:00");
+		doctorHours.setHoursFrom(new Time(14,0,0));
+		doctorHours.setHoursTo(new Time(18,0,0));
 		
 		
 		session.save(doctorHours);
