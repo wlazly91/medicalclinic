@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,10 +109,15 @@
 	<div class="jumbotron">
 		
 		<script type="text/javascript">
-		function formSubmit() {2
+		function formSubmit() {
 			document.getElementById("whoDoctor").submit();
 		}
+		function formSubmitOption() {
+			document.getElementById("whatDate").submit();
+		}
+		
 		</script>
+		
 			<table class="table table-hover">
             <thead>
                 <tr>
@@ -127,7 +133,7 @@
            
 				<c:forEach var="docList" items="${docList}">
 					<form:form id = "whoDoctor" method="POST" action="/FamilyClinic/visitHours">
-					<tr >   
+					<tr>   
 						<td><form:checkbox path="id" value="${docList.getDoc().getId()}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
 						<td>${docList.getDoc().getName()}</td>
 						<td>${docList.getDoc().getSurname()}</td>
@@ -139,17 +145,43 @@
 				</c:forEach>
 			</tbody>
           	</table> 
-          	
-
-				    <c:forEach items="${mapOfList}" var="map">
-				    	${map.key} 	
-				    	<c:forEach items="${map.value}" var="valueMap">	
-				    		${valueMap.key}  
-				    		<c:forEach items="${valueMap.value}" var="valueList">	
-				    			${valueList} 
-    						</c:forEach>
-    					</c:forEach>
+          	<table class="table table-hover">
+            <thead>
+                <tr>
+                	<th>Day</th>
+                	<th>Date</th>
+                	<th>Time</th>
+            	</tr>
+            </thead>
+            <tbody>
+            
+ 					<c:forEach items="${mapOfList}" var="map">
+ 					<tr>
+				    	<td>${map.key}</td>	 
+				    			<td> 
+				    			<form:form id = "whatDate" method="GET" action="/FamilyClinic/visitHours">
+				    			<select id="valueMapDate" name="valueMapDate">
+				    				<c:forEach items="${map.value}" var="valueMap">	
+				    					<option onclick="javascript:formSubmitOption()" value="${valueMap.key}"> ${valueMap.key} </option>
+				    				</c:forEach>
+								</select>
+								</form:form>
+    							</td>
+    							<td>
+    							<select name = "aaa">
+				    				<c:forEach items="${map.value}" var="valueMap">	
+				    					<c:forEach items="${valueMap.value}" var="valueList">
+				    							<option>${valueList}</option>
+				    					</c:forEach>
+				    				</c:forEach>
+								</select>
+    							</td>
+    				</tr>
     				</c:forEach>
+			</tbody>
+          	</table>
+          	
+          	<h1> Result: ${msg} </h1>
 	</div>
 </div>
 </body>

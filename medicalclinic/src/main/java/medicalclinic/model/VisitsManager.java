@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import medicalclinic.config.AppConfig;
@@ -63,14 +64,14 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	 * 			Data	
 	 * 			Wolne godziny
 	 * */
-	public HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> getFreeTerm(int idDoc) {
+	public LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> getFreeTerm(int idDoc) {
 		String[] resultDoc;
 		List<ScheduleVisits> resultScheduel;
 		List<DoctorOfficeHours> doctorDay;
-		HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> freeTimeinWeek = new HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
-		HashMap<java.sql.Date, ArrayList<Time>> freeTimeInDay = new HashMap<java.sql.Date, ArrayList<Time>>();
-		HashMap<java.sql.Date, ArrayList<Time>> freeTimeInDayTmp = new HashMap<java.sql.Date, ArrayList<Time>>();
-		HashMap<String , ArrayList<java.sql.Date>> freeTerm = new HashMap<String , ArrayList<java.sql.Date>>();
+		LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> freeTimeinWeek = new LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
+		LinkedHashMap<java.sql.Date, ArrayList<Time>> freeTimeInDay = new LinkedHashMap<java.sql.Date, ArrayList<Time>>();
+		LinkedHashMap<java.sql.Date, ArrayList<Time>> freeTimeInDayTmp = new LinkedHashMap<java.sql.Date, ArrayList<Time>>();
+		LinkedHashMap<String , ArrayList<java.sql.Date>> freeTerm = new LinkedHashMap<String , ArrayList<java.sql.Date>>();
 		VisitsManager vM = new VisitsManager();
 		List<Time> freeTime = null;
 		
@@ -89,7 +90,7 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 					freeTime = vM.freeTimeInDay(doctorDay.get(0).getHoursFrom(), doctorDay.get(0).getHoursTo(), resultScheduel);
 					freeTimeInDay.put(date, (ArrayList<Time>) freeTime);
 				}
-				freeTimeinWeek.put(key, new HashMap<java.sql.Date, ArrayList<Time>>(freeTimeInDay));
+				freeTimeinWeek.put(key, new LinkedHashMap<java.sql.Date, ArrayList<Time>>(freeTimeInDay));
 				freeTimeInDay.clear();
 			}
 		return freeTimeinWeek;
@@ -282,9 +283,9 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 //	}
 	
 	@SuppressWarnings("deprecation")
-	public HashMap<String , ArrayList<java.sql.Date>> dateOfAdmission(String[] docDay, Date dateTo) {
+	public LinkedHashMap<String , ArrayList<java.sql.Date>> dateOfAdmission(String[] docDay, Date dateTo) {
 		
-		HashMap<String , ArrayList<java.sql.Date>> dataPrzyjec = new HashMap<String , ArrayList<java.sql.Date>>();
+		LinkedHashMap<String , ArrayList<java.sql.Date>> dataPrzyjec = new LinkedHashMap<String , ArrayList<java.sql.Date>>();
 		
 		ArrayList<java.sql.Date> sunday = new ArrayList<java.sql.Date>(); 
 		ArrayList<java.sql.Date> monday = new ArrayList<java.sql.Date>(); 
