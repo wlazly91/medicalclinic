@@ -13,6 +13,7 @@ import java.util.List;
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
+import medicalclinic.db.DoctorOfficeHours;
 import medicalclinic.db.Patient;
 import medicalclinic.db.ScheduleVisits;
 import medicalclinic.model.DateInfo;
@@ -56,7 +57,7 @@ public class VisitsTest {
 		schVisit.setIdClinics(clin);
 		schVisit.setIdDoctor(doc);
 		schVisit.setIdPatient(pat);
-		schVisit.setDateSV(data.getTime()); 
+//		schVisit.setDateSV(data.getTime()); 
 		schVisit.setHoursSV(a);
 		
 		
@@ -72,104 +73,68 @@ public class VisitsTest {
 		
 		System.out.println(result.get(0).getHoursSV());
 	}
+//	
+//	@Test
+//	@SuppressWarnings("deprecation")
+//	public void test1() {
+//		VisitsManager vM = new VisitsManager();
+//		List<Time> freeTime = new ArrayList<Time>();
+//		freeTime = vM.getFreeTermDoctor(321);
+//		
+//		for (Time time : freeTime) {
+//			System.out.println(time.getHours()+":"+time.getMinutes());
+//		}
+//	}
 	
 //	@Test
-	@SuppressWarnings("deprecation")
-	public void test1() {
+	public void test2() {
+		List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();
+		String[] resultDoc;
+		HashMap<String, ArrayList<ScheduleVisits>> freeTerm = new HashMap<String, ArrayList<ScheduleVisits>>();
+	
+		int idDoc = 321;
+	
 		VisitsManager vM = new VisitsManager();
-		List<Time> freeTime = new ArrayList<Time>();
-		freeTime = vM.getFreeTermDoctor(321);
-		
-		for (Time time : freeTime) {
-			System.out.println(time.getHours()+":"+time.getMinutes());
+	
+		result = vM.termFromNextWeek(idDoc);
+		resultDoc = vM.admissionDaysDoctor(idDoc);
+	
+		for (ScheduleVisits scheduleVisits : result) {
+			System.out.println(scheduleVisits.getHoursSV());
+		}
+	
+		for (int i = 0; i < resultDoc.length; i++) {
+			System.out.println(resultDoc[i]);
+		}
+	
+		Date max = vM.maxDay(result);
+	
+	//	ArrayList<java.sql.Date> res = new ArrayList<java.sql.Date>();
+	
+		HashMap<String , ArrayList<java.sql.Date>> res = vM.dateOfAdmission(resultDoc,max);
+	
+		for (int i = 0; i < res.size(); i++) {
+		System.out.println(res.get(i).get(i).getDate());
 		}
 	}
 	
 	@Test
-	public void test2() {
-	List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();
-	String[] resultDoc;
-	HashMap<String, ArrayList<ScheduleVisits>> freeTerm = new HashMap<String, ArrayList<ScheduleVisits>>();
+	public void test3() {
 	
-	int idDoc = 321;
-	
-	VisitsManager vM = new VisitsManager();
-	
-	result = vM.termFromDate(idDoc);
-	resultDoc = vM.admissionDaysDoctor(idDoc);
-	
-	for (ScheduleVisits scheduleVisits : result) {
-		System.out.println(scheduleVisits.getHoursSV());
-	}
-	
-	for (int i = 0; i < resultDoc.length; i++) {
-		System.out.println(resultDoc[i]);
-	}
-	
-//	ArrayList<java.sql.Date> res = new ArrayList<java.sql.Date>();
-	
-	HashMap<String , ArrayList<java.sql.Date>> res = dateOfAdmission(resultDoc,result.get(0).getDateSV());
-	for (int i = 0; i < res.size(); i++) {
-		System.out.println(res.get(i));
-	}
-	}
-	@SuppressWarnings("deprecation")
-	public static HashMap<String , ArrayList<java.sql.Date>> dateOfAdmission(String[] docDay, Date dateTo) {
+		VisitsManager vM = new VisitsManager();
+		HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> a = new HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
+		a= vM.getFreeTerm(321);
+		System.out.println(a);
 		
-		HashMap<String , ArrayList<java.sql.Date>> dataPrzyjec = new HashMap<String , ArrayList<java.sql.Date>>();
 		
-		ArrayList<java.sql.Date> sunday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> monday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> tuesday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> wednesday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> thursday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> friday = new ArrayList<java.sql.Date>(); 
-		ArrayList<java.sql.Date> saturday = new ArrayList<java.sql.Date>();
-		
-		Calendar dateActual = Calendar.getInstance();
-		java.sql.Date date = new java.sql.Date(dateActual.getTime().getYear(), dateActual.getTime().getMonth(), dateActual.getTime().getDate());
-
-		DateTime b = new DateTime(dateTo.getTime());
-		DateTime a = new DateTime(date.getTime());
-		int iloscDni = Days.daysBetween(a,b).getDays();
-		String tmp = "";
-		for (int i = 0; i <= iloscDni; i++) {
-			date = new java.sql.Date(dateActual.getTime().getYear(), dateActual.getTime().getMonth(), dateActual.getTime().getDate() + i);
-			for (int j = 0; j < docDay.length; j++) {
-				tmp = DateInfo.getDayOfWeekInDate(date);
-				if (tmp.equals(docDay[j])){
-					switch(tmp) {
-						case "Sunday":
-							sunday.add(date);
-						case "Monday":
-							monday.add(date);
-						case "Tuesday":
-							tuesday.add(date);
-						case "Wednesday":
-							wednesday.add(date);
-						case "Thursday":
-							thursday.add(date);
-						case "Friday":
-							friday.add(date);
-						case "Saturday":
-							saturday.add(date);
-					}
+		for (String key : a.keySet()) {
+			for(java.sql.Date date : a.get(key).keySet()){
+				for (int i = 0; i < a.get(key).get(date).size(); i++) {
+					System.out.println("Dzień Tygodnia: " + key + " Data: " + date + " godzina: " + a.get(key).get(date).get(i));
 				}
 			}
 		}
-		
-		dataPrzyjec.put(HashMapKey.MONDAY, monday);
-		dataPrzyjec.put(HashMapKey.TUESDAY, tuesday);
-		dataPrzyjec.put(HashMapKey.WEDNESDAY, wednesday);
-		dataPrzyjec.put(HashMapKey.THURSDAY, thursday);
-		dataPrzyjec.put(HashMapKey.FRIDAY, friday);
-		dataPrzyjec.put(HashMapKey.SATURDAY, saturday);
-		dataPrzyjec.put(HashMapKey.SUNDAY, sunday);
-		
-		return dataPrzyjec; 
 	}
-	
-	
 
-	
 }
+

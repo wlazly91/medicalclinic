@@ -138,28 +138,18 @@
 					</form:form>
 				</c:forEach>
 			</tbody>
-			
-			
           	</table> 
           	
-          	<c:if test="${freeTime != null}">
-          	<table class="table table-hover">
-            <thead>
-                <tr>
-                	<th>Name</th>
-            	</tr>
-            </thead>
-            <tbody>
-				<c:forEach var="freeTime" items="${freeTime}">
-					<tr >   
-						<td>${freeTime.getHours()} : ${ freeTime.getMinutes()}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-          	</table>  
-          	</c:if>
-          	 
-		 
+
+				    <c:forEach items="${mapOfList}" var="map">
+				    	${map.key} 	
+				    	<c:forEach items="${map.value}" var="valueMap">	
+				    		${valueMap.key}  
+				    		<c:forEach items="${valueMap.value}" var="valueList">	
+				    			${valueList} 
+    						</c:forEach>
+    					</c:forEach>
+    				</c:forEach>
 	</div>
 </div>
 </body>

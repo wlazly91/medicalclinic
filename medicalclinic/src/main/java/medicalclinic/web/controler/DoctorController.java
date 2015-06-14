@@ -2,9 +2,9 @@ package medicalclinic.web.controler;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import javassist.expr.NewArray;
 import medicalclinic.db.Doctor;
 import medicalclinic.db.DoctorOfficeHours;
 import medicalclinic.model.DoctorManager;
@@ -36,14 +36,22 @@ public class DoctorController {
 		ModelAndView modelresult = new ModelAndView("visitHours", "command", new Doctor());
 		
 		VisitsManager vM = new VisitsManager();
-		List<Time> freeTime = new ArrayList<Time>();
-				
-		if(appClin.getId() > 0){
-			freeTime = vM.getFreeTermDoctor(appClin.getId());
-			
-		}
+		HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> mapOfList = new HashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
+		mapOfList = vM.getFreeTerm(321);
+//		HashMap<String, Integer> freeTime = new HashMap<String, Integer>();
+//		HashMap<String, ArrayList<Integer>> mapOfList = new HashMap<String, ArrayList<Integer>>();
+//		
+//		ArrayList<Integer> a = new ArrayList<Integer>();
+//		
+//		a.add(100);
+//		a.add(300);
+//		a.add(500);
+//
+//		mapOfList.put("Udało", a);
+		
+		modelresult.addObject("mapOfList" , mapOfList);
 						
-		modelresult.addObject("freeTime" , freeTime);
+		
 		
 		return modelresult;
 	}
