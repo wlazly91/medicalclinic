@@ -22,9 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
-import test.medicalclinic.db.VisitsTest;
-
-
+@SuppressWarnings("unchecked")
 public class VisitsManager extends WebSecurityConfigurerAdapter{
 	
 	AppConfig config = new AppConfig();
@@ -70,7 +68,6 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 		List<DoctorOfficeHours> doctorDay;
 		LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> freeTimeinWeek = new LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
 		LinkedHashMap<java.sql.Date, ArrayList<Time>> freeTimeInDay = new LinkedHashMap<java.sql.Date, ArrayList<Time>>();
-		LinkedHashMap<java.sql.Date, ArrayList<Time>> freeTimeInDayTmp = new LinkedHashMap<java.sql.Date, ArrayList<Time>>();
 		LinkedHashMap<String , ArrayList<java.sql.Date>> freeTerm = new LinkedHashMap<String , ArrayList<java.sql.Date>>();
 		VisitsManager vM = new VisitsManager();
 		List<Time> freeTime = null;
@@ -103,10 +100,10 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	 * @param schedule - lista wizyt na dany dzień
 	 * @return - Lista Wolnych godzin w danym dniu
 	 * */
+	@SuppressWarnings("deprecation")
 	public List<Time> freeTimeInDay(Time from, Time to, List<ScheduleVisits> schedule) {
 		
 		int hoursTo = to.getHours();
-		int minuteto = to.getMinutes();
 		
 		List<Time> freeTime = new ArrayList<Time>();
 		VisitsManager vM = new VisitsManager();
@@ -138,6 +135,9 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	}
 	
 	
+	/**
+	 * Zwraca godziny przyjęć lekarza w dni które przyjmuje
+	 * */
 	public List<DoctorOfficeHours> hoursVisitDay(int idDoc) {
 		List<DoctorOfficeHours> resultDocHours;
 		session = sessionFactory.openSession();
@@ -150,6 +150,9 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	}
 
 	
+	/**
+	 * Zwraca godziny przyjęć lekarza w podany dzień tygodnia
+	 * */
 	public List<DoctorOfficeHours> hoursVisitDay(int idDoc, String nameDay) {
 		List<DoctorOfficeHours> resultDocHours;
 		session = sessionFactory.openSession();
@@ -185,7 +188,6 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	 * @param idDoc - ID lekarza
 	 * @return List<DoctorOfficeHours> zaweirającą dni w których przymuje dany lekarz oraz godziny
 	 * */
-	@SuppressWarnings("unchecked")
 	public String[] admissionDaysDoctor(int idDoc) {
 		
 		List<DoctorOfficeHours> result = new ArrayList<DoctorOfficeHours>();
@@ -213,7 +215,7 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	 * @return List<ScheduleVisits> - zawierająca wszytskie 
 	 * wizyt danego lekarza od aktualnej daty do 7 dni w przód
 	 * */
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings("deprecation")
 	public List<ScheduleVisits> termFromNextWeek(int idDoc) {
 		
 		List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();
@@ -239,7 +241,6 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	 * @param Date - dzień z któremu chcemy pobrać godziny wizyt
 	 * @return - List wizyty
 	 * */
-	@SuppressWarnings("unchecked")
 	public List<ScheduleVisits> getHoursVisitDay(java.sql.Date data, int idDoc) {
 		
 		List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();		

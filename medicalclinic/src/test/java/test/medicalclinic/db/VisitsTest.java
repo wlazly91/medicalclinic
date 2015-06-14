@@ -1,31 +1,23 @@
 package test.medicalclinic.db;
 
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
 import medicalclinic.config.AppConfig;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
-import medicalclinic.db.DoctorOfficeHours;
 import medicalclinic.db.Patient;
 import medicalclinic.db.ScheduleVisits;
-import medicalclinic.model.DateInfo;
-import medicalclinic.model.HashMapKey;
 import medicalclinic.model.VisitsManager;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.junit.Test;
 
 public class VisitsTest {
@@ -42,10 +34,8 @@ public class VisitsTest {
 		
 		ScheduleVisits schVisit = new ScheduleVisits();
 		Clinics clin = new Clinics();
-		GregorianCalendar data = new GregorianCalendar(2015,5,12);
 		Doctor doc = new Doctor();
 		Patient pat = new Patient();
-		@SuppressWarnings("deprecation")
 		Time a = new Time(18, 30, 00);
 		a.getTime();
 		a.setHours(19);
@@ -87,10 +77,10 @@ public class VisitsTest {
 //	}
 	
 //	@Test
+	@SuppressWarnings("deprecation")
 	public void test2() {
 		List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();
 		String[] resultDoc;
-		HashMap<String, ArrayList<ScheduleVisits>> freeTerm = new HashMap<String, ArrayList<ScheduleVisits>>();
 	
 		int idDoc = 321;
 	

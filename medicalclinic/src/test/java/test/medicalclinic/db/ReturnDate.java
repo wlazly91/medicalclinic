@@ -1,7 +1,6 @@
 package test.medicalclinic.db;
 
 import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 import medicalclinic.config.AppConfig;
@@ -36,6 +35,7 @@ public class ReturnDate {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test1() {
 		session = sessionFactory.openSession();

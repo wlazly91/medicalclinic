@@ -17,6 +17,7 @@ import org.junit.Test;
 public class DoctorOfficeHoursTest {
 
 	//@Test
+	@SuppressWarnings("deprecation")
 	public void test() {
 		
 		AppConfig config = new AppConfig();
