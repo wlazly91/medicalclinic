@@ -126,7 +126,7 @@
             <tbody>
            
 				<c:forEach var="docList" items="${docList}">
-					<form:form id = "whoDoctor" method="GET" action="/FamilyClinic/visitHours">
+					<form:form id = "whoDoctor" method="POST" action="/FamilyClinic/visitHours">
 					<tr >   
 						<td><form:checkbox path="id" value="${docList.getDoc().getId()}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
 						<td>${docList.getDoc().getName()}</td>
@@ -138,7 +138,27 @@
 					</form:form>
 				</c:forEach>
 			</tbody>
-          	</table>    
+			
+			
+          	</table> 
+          	
+          	<c:if test="${freeTime != null}">
+          	<table class="table table-hover">
+            <thead>
+                <tr>
+                	<th>Name</th>
+            	</tr>
+            </thead>
+            <tbody>
+				<c:forEach var="freeTime" items="${freeTime}">
+					<tr >   
+						<td>${freeTime.getHours()} : ${ freeTime.getMinutes()}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+          	</table>  
+          	</c:if>
+          	 
 		 
 	</div>
 </div>

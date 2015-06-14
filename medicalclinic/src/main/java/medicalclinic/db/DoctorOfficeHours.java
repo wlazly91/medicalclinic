@@ -50,6 +50,9 @@ public class DoctorOfficeHours implements ObjectDB {
 	@Column(name="VISITLENGHT")
 	private int visitLenght;
 	
+	@Column(name="DAYOFWEEK")
+	private String dayOfWeek;
+	
 	
 	public DoctorOfficeHours() {}
 	
@@ -62,6 +65,10 @@ public class DoctorOfficeHours implements ObjectDB {
 		this.id = id;
 	}
 
+	public void setDayOfWeek(String dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+	
 	public void setClinic(Clinics clinic) {
 		this.clinic = clinic;
 	}
@@ -109,4 +116,9 @@ public class DoctorOfficeHours implements ObjectDB {
 	public int getVisitLenght() {
 		return visitLenght;
 	}
+	
+	public String getDayOfWeek() {
+		return dayOfWeek;
+	}
+	
 }
