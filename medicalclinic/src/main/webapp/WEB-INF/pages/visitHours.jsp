@@ -132,7 +132,7 @@
             <tbody>
            
 				<c:forEach var="docList" items="${docList}">
-					<form:form id = "whoDoctor" method="POST" action="/FamilyClinic/visitHours">
+					<form:form id = "whoDoctor" method="GET" action="/FamilyClinic/visitHours">
 					<tr>   
 						<td><form:checkbox path="id" value="${docList.getDoc().getId()}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
 						<td>${docList.getDoc().getName()}</td>
@@ -168,13 +168,13 @@
 								</form:form>
     							</td>
     							<td>
+    							
     							<select name = "aaa">
-				    				<c:forEach items="${map.value}" var="valueMap">	
-				    					<c:forEach items="${valueMap.value}" var="valueList">
-				    							<option>${valueList}</option>
-				    					</c:forEach>
+				    				<c:forEach items="${resultTime}" var="rasult">	
+				    							<option>${rasult}</option>
 				    				</c:forEach>
 								</select>
+								
     							</td>
     				</tr>
     				</c:forEach>

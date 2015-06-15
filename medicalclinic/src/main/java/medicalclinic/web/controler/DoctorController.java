@@ -24,17 +24,33 @@ import org.springframework.web.servlet.ModelAndView;
 public class DoctorController {
 
 	@RequestMapping(value = "/visitHours", method = RequestMethod.GET)
-	public ModelAndView selectClinic(@RequestParam(value = "valueMapDate") Date valueMap, @ModelAttribute("FamilyClinic") AppClinic appClin, ModelMap model) {
-		DoctorManager dM = new DoctorManager();
+	public ModelAndView selectClinic(@RequestParam(value = "valueMapDate") java.sql.Date valueMap, @ModelAttribute("FamilyClinic") AppClinic appClin, ModelMap model) {
 		
+		DoctorManager dM = new DoctorManager();
+		VisitsManager vM = new VisitsManager();
 		ModelAndView modelresult = new ModelAndView("visitHours", "command", new AppClinic());
-				
-		List<DoctorOfficeHours> docList = dM.getHoursDoctor(appClin.getId());
+		LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> mapOfList = new LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
+		mapOfList = vM.getFreeTerm(321);
+		List<DoctorOfficeHours> docList = dM.getHoursDoctor(321);
+		ArrayList<Time> resultTime = new ArrayList<Time>();
 		
 		modelresult.addObject("docList" , docList);
+		modelresult.addObject("mapOfList" , mapOfList);
 		
-		if(valueMap != null)
-			modelresult.addObject("msg", valueMap);
+		for (String key : mapOfList.keySet()) {
+			for (java.sql.Date date : mapOfList.get(key).keySet()) {
+				if(date.getTime() == valueMap.getTime()){
+					resultTime = mapOfList.get(key).get(valueMap);
+					modelresult.addObject("resultTime", resultTime);
+					modelresult.addObject("msg", valueMap);	
+				}
+			}
+							
+		}
+		
+		
+//		if(valueMap != null)
+//			modelresult.addObject("msg", valueMap);
 		
 		return modelresult;
 	}
@@ -46,7 +62,7 @@ public class DoctorController {
 		
 		VisitsManager vM = new VisitsManager();
 		LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>> mapOfList = new LinkedHashMap<String, HashMap<java.sql.Date, ArrayList<Time>>>();
-		mapOfList = vM.getFreeTerm(appClin.getId());
+		mapOfList = vM.getFreeTerm(321);
 		
 		if(valueMap != null)
 			modelresult.addObject("msg", valueMap);
