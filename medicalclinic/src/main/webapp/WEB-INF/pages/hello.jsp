@@ -12,7 +12,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   		<script>
-			function formSubmitLogout() {
+			function formSubmit() {
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
@@ -90,7 +90,7 @@
 
         <li>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-			<a href="javascript:formSubmitLogout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+			<a href="javascript:formSubmit()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
 		</c:if>
 		</li>	
 		
@@ -103,8 +103,11 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase" role = "main">    
-
+<div class="container theme-showcase" role = "main" style="margin-top: 60px">    
+	<div class="jumbotron">
+	<h2>${title} </h2>
+	<img src="D:\medicalclinic\medicalclinic\medicalclinic\src\main\webapp\WEB-INF\pages\images2edit.jpg" class="img-responsive" alt="Cinque Terre">
+	</div>
 </div>
 </body>
 </html>

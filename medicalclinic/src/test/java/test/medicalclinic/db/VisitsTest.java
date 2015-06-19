@@ -1,5 +1,7 @@
 package test.medicalclinic.db;
 
+import static org.junit.Assert.*;
+
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -47,7 +49,6 @@ public class VisitsTest {
 		schVisit.setIdClinics(clin);
 		schVisit.setIdDoctor(doc);
 		schVisit.setIdPatient(pat);
-//		schVisit.setDateSV(data.getTime()); 
 		schVisit.setHoursSV(a);
 		
 		
@@ -61,22 +62,10 @@ public class VisitsTest {
 		result = query.list();
 		session.close();
 		
-		System.out.println(result.get(0).getHoursSV());
+		assertNotNull(result.get(0).getHoursSV());
 	}
-//	
-//	@Test
-//	@SuppressWarnings("deprecation")
-//	public void test1() {
-//		VisitsManager vM = new VisitsManager();
-//		List<Time> freeTime = new ArrayList<Time>();
-//		freeTime = vM.getFreeTermDoctor(321);
-//		
-//		for (Time time : freeTime) {
-//			System.out.println(time.getHours()+":"+time.getMinutes());
-//		}
-//	}
 	
-//	@Test
+	@Test
 	@SuppressWarnings("deprecation")
 	public void test2() {
 		List<ScheduleVisits> result = new ArrayList<ScheduleVisits>();
@@ -94,17 +83,15 @@ public class VisitsTest {
 		}
 	
 		for (int i = 0; i < resultDoc.length; i++) {
-			System.out.println(resultDoc[i]);
+			assertNotNull(resultDoc[i]);
 		}
 	
 		Date max = vM.maxDay(result);
 	
-	//	ArrayList<java.sql.Date> res = new ArrayList<java.sql.Date>();
-	
 		HashMap<String , ArrayList<java.sql.Date>> res = vM.dateOfAdmission(resultDoc,max);
 	
 		for (int i = 0; i < res.size(); i++) {
-		System.out.println(res.get(i).get(i).getDate());
+			assertNotNull(res.get(i).get(i).getDate());
 		}
 	}
 	
@@ -120,7 +107,7 @@ public class VisitsTest {
 		for (String key : a.keySet()) {
 			for(java.sql.Date date : a.get(key).keySet()){
 				for (int i = 0; i < a.get(key).get(date).size(); i++) {
-					System.out.println("Dzień Tygodnia: " + key + " Data: " + date + " godzina: " + a.get(key).get(date).get(i));
+					assertNotNull("Dzień Tygodnia: " + key + " Data: " + date + " godzina: " + a.get(key).get(date).get(i));
 				}
 			}
 		}

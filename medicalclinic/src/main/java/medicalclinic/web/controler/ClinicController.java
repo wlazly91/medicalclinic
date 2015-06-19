@@ -5,6 +5,7 @@ import java.util.List;
 import medicalclinic.db.Clinics;
 import medicalclinic.db.Doctor;
 import medicalclinic.model.AppClinic;
+import medicalclinic.model.AppVisits;
 import medicalclinic.model.ClinicManager;
 
 import org.springframework.stereotype.Controller;
@@ -25,17 +26,20 @@ public class ClinicController {
 		ClinicManager cM = new ClinicManager();
 		List<Clinics> clinic = cM.getClinics();
 		modelresult.addObject("clinic" , clinic);
+		modelresult.addObject("who", appClin.getWho());
 		
 		if(appClin.getWho() != null) {
-			List<Doctor> doctorList = cM.getDoctorInClinics(appClin.getWho());
+			modelresult.addObject("who", appClin.getWho());
+			List<Doctor> doctorList = cM.getDoctorInClinics(appClin.getWho().valueOf(appClin.getWho()));
 			modelresult.addObject("doctorList", doctorList);
+			modelresult.addObject("Command", new AppVisits());
 		}
 		
 		return modelresult;
 	}
 	
 	@RequestMapping(value = "/clinic", method = RequestMethod.POST)
-	public ModelAndView student(@ModelAttribute("FamilyClinic") AppClinic appClin, 
+	public ModelAndView selectClinicPost(@ModelAttribute("FamilyClinic") AppClinic appClin, 
 			   ModelMap model) {
 
 		ModelAndView modelresult = new ModelAndView("clinic", "command", new AppClinic());

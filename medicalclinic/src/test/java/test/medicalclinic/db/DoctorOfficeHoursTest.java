@@ -1,5 +1,7 @@
 package test.medicalclinic.db;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.sql.Time;
 import java.util.List;
 
@@ -16,7 +18,7 @@ import org.junit.Test;
 
 public class DoctorOfficeHoursTest {
 
-	//@Test
+	@Test
 	@SuppressWarnings("deprecation")
 	public void test() {
 		
@@ -42,36 +44,29 @@ public class DoctorOfficeHoursTest {
 		doctorHours.setHoursFrom(new Time(14,0,0));
 		doctorHours.setHoursTo(new Time(18,0,0));
 		
-		
 		session.save(doctorHours);
 		session.getTransaction().commit();	
 		session.close();
 	}
 	
-	//@Test
+	@Test
 	public void test1() {
 		ClinicManager cm = new ClinicManager();
-		
 		cm.getDoctorOfficeHours("Dziecięca");
-		
-		System.out.println(cm.getDoctorOfficeHours("Dziecięca"));
+		assertNotNull(cm.getDoctorOfficeHours("Dziecięca"));
 	}
 
 	@Test
 	public void test2() {
  		ClinicManager cm = new ClinicManager();
-		
 		cm.getDoctorInClinics("Dziecięca");
-		
-		System.out.println(cm.getDoctorInClinics("Dziecięca"));
+		assertNotNull(cm.getDoctorInClinics("Dziecięca"));
 	}
 	
 	@Test
 	public void test3(){
 		DoctorManager dM = new DoctorManager();
-		
 		List<DoctorOfficeHours> a = dM.getHoursDoctor(1);
-		
-		System.out.println(a);
+		assertNotNull(a);
 	}
 }

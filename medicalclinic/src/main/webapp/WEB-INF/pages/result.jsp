@@ -1,10 +1,13 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
+  <title>Visiting Hours</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -12,7 +15,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   		<script>
-			function formSubmit() {
+			function formSubmitLogout() {
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
@@ -24,6 +27,7 @@
 			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 		</form>
 </sec:authorize>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
@@ -88,7 +92,7 @@
 
         <li>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-			<a href="javascript:formSubmit()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+			<a href="javascript:formSubmitLogout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
 		</c:if>
 		</li>	
 		
@@ -101,13 +105,13 @@
     </div>
   </div>
 </nav>
-
-<div class="container theme-showcase" role = "main">    
-<div class="jumbotron">
-        <h1>Result :  ${msg}</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+<div class="container theme-showcase" role = "main" style="margin-top: 60px">    
+	<div class="jumbotron">
+		<div class="alert alert-success">
+  			<strong>Success!</strong> Your visit:  ${date}  ${time} !
+		</div>
+		<img src="D:\medicalclinic\medicalclinic\medicalclinic\src\main\webapp\WEB-INF\pages\images2edit.jpg" class="img-responsive" alt="Cinque Terre">
+	</div>
 </div>
-</div>
-
 </body>
 </html>

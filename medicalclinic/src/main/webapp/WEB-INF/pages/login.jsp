@@ -114,7 +114,12 @@
     </div>
   </div>
 </nav>
-
+<div class="container theme-showcase" role = "main" style="margin-top: 60px">    
+	<div class="jumbotron">
+	<h2>${title} </h2>
+	<img src="D:\medicalclinic\medicalclinic\medicalclinic\src\main\webapp\WEB-INF\pages\images2edit.jpg" class="img-responsive" alt="Cinque Terre">
+	</div>
+</div>
 
 <div class="container">
 	<!-- Modal -->

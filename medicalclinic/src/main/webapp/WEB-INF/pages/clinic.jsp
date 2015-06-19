@@ -112,22 +112,24 @@
 				document.getElementById("whoShow").submit();
 			}
 		</script>
-       <form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
+		<h2>Choose clinics: </h2>
+       	<form:form id = "whoShow" method="GET" action="/FamilyClinic/clinic">
         	<c:forEach var="clinic" items="${clinic}">
         	<table class="table table-hover">
         	<tr onclick="javascript:formSubmit()" style="cursor: pointer;">
-				<td><form:input type="hidden" path="who" value="${clinic.name}"/> ${clinic.name}</td>
+				<td><form:checkbox path="who" value="${clinic.name}"/> ${clinic.name}</td>
 	    	</tr>
 			</table> 
 			</c:forEach> 
 		</form:form>
 		
 		<c:if test="${doctorList != null}">
+		<h2>Choose Specjalist: </h2>
 		<script type="text/javascript">
 		function formSubmit() {
 			document.getElementById("whatDoc").submit();
-		}</script>
-		
+		}
+		</script>
 		<table class="table table-hover" >
             <thead>
                     <tr>
@@ -138,7 +140,7 @@
                     </tr>
                 </thead>
             <tbody>
-            <form:form id = "whatDoc" method="POST" action="/FamilyClinic/visitHours">
+            <form:form id = "whatDoc" method="GET" action="/FamilyClinic/visitHours">
                     <c:forEach var="doctorList" items="${doctorList}">
                         <tr>
                         	<td><form:checkbox path="id" value="${doctorList.id}" onclick="javascript:formSubmit()" style="cursor: pointer;"/></td>
@@ -147,10 +149,10 @@
                             <td>${doctorList.specjalityName}</td>                  
                         </tr>
                     </c:forEach>
+                    <form:input type= "hidden" path="who" value="${who}"/>
              </form:form> 
                 </tbody>
           </table>
-          
           </c:if>
         </div>
    	</div>

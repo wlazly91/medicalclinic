@@ -47,7 +47,7 @@ public class ScheduleVisits implements ObjectDB {
 	private Patient idPatient;
 	
 	@Column(name = "DATE_SV")
-	private Date dateSV;
+	private java.sql.Date dateSV;
 	
 	@Column(name = "HOURS_SV")
 	private Time hoursSV;

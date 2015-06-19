@@ -95,8 +95,7 @@ public class Doctor implements ObjectDB
 	public void setSpecjalityName(String specjalityName) {
 		this.specjalityName = specjalityName;
 	}
-	
-	
+		
 	public Set<Visits> getVisits() {
 		return visits;
 	}

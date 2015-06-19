@@ -48,7 +48,6 @@ public class ReturnDate {
 		clin.setId(1);
 		doc.setId(1);
 		pat.setIdPatient(1);
-//		sch.setDateSV(new Date());
 		sch.setHoursSV(new Time(15, 0, 0));
 		sch.setIdClinics(clin);
 		sch.setIdDoctor(doc);

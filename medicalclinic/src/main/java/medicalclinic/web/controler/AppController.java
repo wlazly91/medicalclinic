@@ -18,7 +18,7 @@ public class AppController {
 	public ModelAndView defaultPage() {
 
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Login Form - Database Authentication");
+		model.addObject("title", "Welcome to the family clinic Family Clinic");
 		model.setViewName("hello");
 		return model;
 	  

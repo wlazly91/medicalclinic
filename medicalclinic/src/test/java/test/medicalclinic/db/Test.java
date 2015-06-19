@@ -8,7 +8,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		VisitsManager vm = new VisitsManager();
-		vm.saveMeVisits();
+		vm.saveMeVisits(null);
 	  }
 
 	}

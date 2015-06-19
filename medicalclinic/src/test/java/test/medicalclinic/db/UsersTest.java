@@ -42,7 +42,7 @@ public class UsersTest {
 		assertTrue(um.addDoctor(appUser));
 	}
 	
-//	@Test
+	@Test
 	public void testUsers2() {
 
 		Users usr = new Users();
@@ -54,7 +54,7 @@ public class UsersTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		System.out.println("Jest ju� ID" + usr.getIdUser());
+		assertNotNull("Jest już ID" + usr.getIdUser());
 		
 		session.save(usr);
 		
@@ -64,7 +64,7 @@ public class UsersTest {
 	}
 	
 	
-//	@Test
+	@Test
 	public void testUsers3() {
 
 		UserManager um = new UserManager();
@@ -100,7 +100,7 @@ public class UsersTest {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void testUsers4() {
 		
 		session = sessionFactory.openSession();
@@ -111,11 +111,11 @@ public class UsersTest {
 		@SuppressWarnings("unchecked")
 		List<B> result = query.list();		
 		
-		System.out.println(result.get(0).getName());
+		assertNotNull(result.get(0).getName());
 	}
 	
 	
-//	@Test
+	@Test
 	public void testUsers5() {
 		
 		AppConfig config = new AppConfig();
@@ -140,11 +140,11 @@ public class UsersTest {
 		@SuppressWarnings("unchecked")
 		List<B> result = query.list();		
 		session.close();
-		System.out.println(result.get(0).getAaa().getId());
+		assertNotNull(result.get(0).getAaa().getId());
 		
 	}
 	
-//	@Test
+	@Test
 	public void testUsers6() {
 		
 		session = sessionFactory.openSession();
@@ -155,10 +155,10 @@ public class UsersTest {
 		@SuppressWarnings("unchecked")
 		List<Users> result = query.list();		
 		
-		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
+		assertNotNull(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
 	}
 	
-//	@Test
+	@Test
 	public void testUsers7() {
 		session = sessionFactory.openSession();
 		
@@ -169,9 +169,9 @@ public class UsersTest {
 		List<Users> result = query.list();		
 		
 		for (Users users : result) {
-			System.out.println(users.getLogin());
+			assertNotNull(users.getLogin());
 		}
-//		System.out.println(result.get(0).getDoc().getName() + result.get(0).getDoc().getSurname());
+		
 		
 	}
 }

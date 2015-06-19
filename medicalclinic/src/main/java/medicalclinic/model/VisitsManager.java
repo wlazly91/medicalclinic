@@ -8,10 +8,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.print.Doc;
+
 import medicalclinic.config.AppConfig;
+import medicalclinic.db.Clinics;
+import medicalclinic.db.Doctor;
 import medicalclinic.db.DoctorOfficeHours;
+import medicalclinic.db.Patient;
 import medicalclinic.db.ScheduleVisits;
 import medicalclinic.db.Users;
+import medicalclinic.db.Visits;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -30,29 +36,59 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 	Session session;
 	
 	
+	public List<ScheduleVisits> getMyVisit() {
+		
+		User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		ArrayList<Users> resultUser = new ArrayList<Users>();
+		ArrayList<ScheduleVisits> resultVisit = new ArrayList<ScheduleVisits>();
+		session = sessionFactory.openSession();
+		String userId = "from Users where login = '"+ usr.getUsername() +"'";
+		
+		Query query = session.createQuery(userId);
+		
+		resultUser = (ArrayList<Users>) query.list();
+		String visitUser = "from Visits where patient = " +resultUser.get(0).getIdUser() + "";
+		Query query1 = session.createQuery(visitUser);
+		resultVisit = (ArrayList<ScheduleVisits>) query1.list();
+		session.close();
+		
+		
+		return resultVisit;
+	}
+	
 	/**
 	 * Metoda służy do zarejestrowania pacjenta na wizytę
 	 * */
-	@SuppressWarnings("unused")
-	public boolean saveMeVisits() {
+	public boolean saveMeVisits(AppVisits appVisit) {
 		
 		try {
 			User usr = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			UserManager um = new UserManager();
 			List<Users> userList = um.getUsers(usr.getUsername());
-
+			Patient pat = new Patient();
+			Doctor doc = new Doctor();
+			Clinics clin = new Clinics();
+			ScheduleVisits visit = new ScheduleVisits();
+			pat.setIdPatient(userList.get(0).getPat().getIdPatient());
+			doc.setId(appVisit.getId());
+			clin.setId(1);
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			
-			session.save(new String());
+			visit.setDateSV(appVisit.getData());
+			visit.setHoursSV(appVisit.getTime());
+			visit.setIdDoctor(doc);
+			visit.setIdPatient(pat);
+			visit.setIdClinics(clin);
+			
+			session.save(visit);
 			session.getTransaction().commit();
 			session.close();
-			
+			return true;
  
 		} catch (Exception e) {
 			return false;
 		}
-		return false;
 	}
 	
 	/**
@@ -222,7 +258,7 @@ public class VisitsManager extends WebSecurityConfigurerAdapter{
 		Calendar dateActual = Calendar.getInstance();
 		
 		java.sql.Date actualDay = new java.sql.Date(dateActual.getTime().getYear(), dateActual.getTime().getMonth(), dateActual.getTime().getDate());
-		java.sql.Date dateLastVisit = new java.sql.Date(dateActual.getTime().getYear(), dateActual.getTime().getMonth(), dateActual.getTime().getDate() + 11);
+		java.sql.Date dateLastVisit = new java.sql.Date(dateActual.getTime().getYear(), dateActual.getTime().getMonth(), dateActual.getTime().getDate() + 7);
 		
 		String hql = "from ScheduleVisits Doctor where idDoctor.id = "+ idDoc +" and dateSV >= '" + actualDay + "' and dateSV <= '"+ dateLastVisit +"' order by hoursSV asc";
 		

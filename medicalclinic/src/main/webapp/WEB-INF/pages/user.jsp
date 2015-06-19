@@ -106,38 +106,30 @@
 </nav>
 
 <div class="container theme-showcase" role = "main">      
-
+<div class="jumbotron">
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN, ROLE_NURSE')">
 	<h2>Add New User </h2>
 
 	<form:form method="POST" action="/FamilyClinic/addUser">
    	<table>
     	<tr>
-        	<td><form:label path="name">NameUser</form:label></td>
+        	<td><form:label path="name">Name</form:label></td>
         	<td><form:input path="name" /></td>
-    	</tr>
-    	<tr>
-        	<td><form:label path="surname">SurnameUser </form:label></td>
+        	<td><form:label path="surname">  Surname </form:label></td>
         	<td><form:input path="surname" /></td>
-    	</tr>
-   		<tr>
-        	<td><form:label path="specjality">Specjality </form:label></td>
+        	<td><form:label path="specjality">   Specjality(in the case of the doctor) </form:label></td>
         	<td><form:input path="specjality" /></td>
     	</tr>
         <tr>	
         	<td><form:label path="login">Login </form:label></td>
 	        <td><form:input path="login" /></td>
-    	</tr>
-        <tr>
-        	<td><form:label path="password">Password </form:label></td>
+        	<td><form:label path="password">   Password </form:label></td>
 	        <td><form:input type='password' path="password" /></td>
     	</tr>
 		<tr>
-        	<td><form:label path="phoneNumber">Phone Number </form:label></td>
+        	<td><form:label path="phoneNumber">   Phone Number </form:label></td>
 	        <td><form:input path="phoneNumber" /></td>
-    	</tr>
-		<tr>
-        	<td><form:label path="eMail">E-Mail </form:label></td>
+        	<td><form:label path="eMail">   E-Mail </form:label></td>
 	        <td><form:input path="eMail" /></td>
     	</tr>
 		<tr>
@@ -145,35 +137,24 @@
     	</tr>
 		<tr>
         	<td><form:checkbox path="who" value="Doctor"/> Doctor </td>
-    	</tr>
-		<tr>
         	<td><form:checkbox path="who" value="Patient"/> Patient </td>
-    	</tr>
-		<tr>
         	<td><form:checkbox path="who" value="Nurse"/> Nurse </td>
+        	<td><sec:authorize access = "hasRole('ROLE_ADMIN')">
+        		<form:checkbox path="who" value="Admin"/> Admin
+    		</sec:authorize>
+    	 	</td>
     	</tr>
-    	
-    	<sec:authorize access = "hasRole('ROLE_ADMIN')">
-    	<tr>
-        	<td><form:checkbox path="who" value="Admin"/> Admin </td>
-    	</tr>
-    	</sec:authorize>
-    	
     	<tr>
         	<td colspan="2">
-            	<input type="submit" value="Submit"/>
+            	<input type="submit" value="Add User"/>
         	</td>
     	</tr>
 	</table>  
 	</form:form>
 	</sec:authorize>
 <table>
-    <tr>
-        <td>Result :</td>
-        <td>${msg}</td>
-
-    </tr>
 </table> 
+</div>
 </div>
 
 </body>

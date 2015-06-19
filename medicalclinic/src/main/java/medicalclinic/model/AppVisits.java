@@ -1,16 +1,24 @@
 package medicalclinic.model;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class AppVisits {
 
+	private int id;
 	private String nameDoctor;
 	private String surnameDoctor;
 	
 	private String hours;
 	private Date data;
+	private Time time;
+	
 	
 	private String clinicName;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public void setClinicName(String clinicName) {
 		this.clinicName = clinicName;
@@ -32,11 +40,19 @@ public class AppVisits {
 		this.surnameDoctor = surnameDoctor;
 	}
 	
+	public void setTime(Time time) {
+		this.time = time;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
 	public String getClinicName() {
 		return clinicName;
 	}
 	
-	public Date getData() {
+	public java.sql.Date getData() {
 		return data;
 	}
 	
@@ -50,5 +66,9 @@ public class AppVisits {
 	
 	public String getSurnameDoctor() {
 		return surnameDoctor;
+	}
+	
+	public Time getTime() {
+		return time;
 	}
 }

@@ -115,9 +115,14 @@
 		function formSubmitOption() {
 			document.getElementById("whatDate").submit();
 		}
+		function formSubmitVisit() {
+			document.getElementById("saveVisit").submit();
+		}
+		
 		
 		</script>
-		
+		<!-- 
+		<c:if test="${mapOfList == mapOfList}">
 			<table class="table table-hover">
             <thead>
                 <tr>
@@ -145,6 +150,11 @@
 				</c:forEach>
 			</tbody>
           	</table> 
+          	</c:if>
+          	-->
+          	
+          	<h2>Jan Kowalski office hours for the next week: </h2>
+          	<form:form id = "saveVisit" method="POST" action="/FamilyClinic/result">
           	<table class="table table-hover">
             <thead>
                 <tr>
@@ -157,31 +167,27 @@
             
  					<c:forEach items="${mapOfList}" var="map">
  					<tr>
-				    	<td>${map.key}</td>	 
+				    <td>${map.key}</td>	 
 				    			<td> 
-				    			<form:form id = "whatDate" method="GET" action="/FamilyClinic/visitHours">
-				    			<select id="valueMapDate" name="valueMapDate">
-				    				<c:forEach items="${map.value}" var="valueMap">	
-				    					<option onclick="javascript:formSubmitOption()" value="${valueMap.key}"> ${valueMap.key} </option>
-				    				</c:forEach>
-								</select>
-								</form:form>
-    							</td>
-    							<td>
-    							
-    							<select name = "aaa">
-				    				<c:forEach items="${resultTime}" var="rasult">	
-				    							<option>${rasult}</option>
-				    				</c:forEach>
-								</select>
-								
-    							</td>
+				    			<c:forEach items="${map.value}" var="valueMap">
+				    				<form:checkbox path="data" value = "${valueMap.key}"/> ${valueMap.key}
+				    					<td>
+    										<c:forEach items="${valueMap.value}" var="rasult">
+    											<form:checkbox path="time" value = "${rasult}"/> ${rasult}<br>
+    										</c:forEach>
+    									</td>
+    							</c:forEach>
+				    			</td>
+				    			
+    							<!--<c:if test="${resultTime != null}"></c:if> -->
     				</tr>
     				</c:forEach>
 			</tbody>
           	</table>
-          	
-          	<h1> Result: ${msg} </h1>
+          	<form:input type="hidden" path="id" value="${idDoc}"/>
+          	</form:form>
+          	<button type="submit" onclick="javascript:formSubmitVisit()" class="btn btn-default">Save Me</button>
+
 	</div>
 </div>
 </body>

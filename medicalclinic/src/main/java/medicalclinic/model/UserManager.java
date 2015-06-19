@@ -242,7 +242,7 @@ public class UserManager {
 		List<Users> result = null;
 		session = sessionFactory.openSession();
 		
-		String hql = "from Users where login = " + login;
+		String hql = "from Users where login = '" + login + "'";
 
 		Query query = session.createQuery(hql);
 
