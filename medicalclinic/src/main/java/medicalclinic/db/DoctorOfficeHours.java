@@ -29,11 +29,11 @@ public class DoctorOfficeHours implements ObjectDB {
 	@Column(name = "ID_DOC")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDDOCTOROFFICE") 
 	@SequenceGenerator(name="IDDOCTOROFFICE", sequenceName = "IDDOCTOROFFICE", allocationSize=1)
-	private int idDoc;
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CLINICS")
-	private Clinics idClinics;
+	private Clinics clinic;
 	
 	@Column(name = "HOURS_FROM")
 	private String hoursFrom;
@@ -43,83 +43,58 @@ public class DoctorOfficeHours implements ObjectDB {
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_DOCTOR")
-	private Doctor idDoctor;
+	private Doctor doc;
 	
 	
 	public DoctorOfficeHours() {}
 	
 	
-	public DoctorOfficeHours(String from, String to) {
+	public DoctorOfficeHours(int id, String from, String to, Doctor doc, Clinics clin) {
 		this.hoursFrom = from;
 		this.hoursTo = to;
+		this.clinic = clin;
+		this.doc = doc;
+		this.id = id;
 	}
-	/**
-	 * @param hoursFrom the hoursFrom to set
-	 */
+
 	public void setHoursFrom(String hoursFrom) {
 		this.hoursFrom = hoursFrom;
 	}
-	/**
-	 * @param hoursTo the hoursTo to set
-	 */
+
 	public void setHoursTo(String hoursTo) {
 		this.hoursTo = hoursTo;
 	}
-	
-	/**
-	 * @param idClinics the idClinics to set
-	 */
+
 	public void setIdClinics(Clinics idClinics) {
-		this.idClinics = idClinics;
+		this.clinic = idClinics;
 	}
-	
-	/**
-	 * @param idDoc the idDoc to set
-	 */
-	public void setIdDoc(int idDoc) {
-		this.idDoc = idDoc;
+
+	public void setId(int idDoc) {
+		this.id = idDoc;
 	}
-	
-	/**
-	 * @param idDoctor the idDoctor to set
-	 */
-	public void setIdDoctor(Doctor idDoctor) {
-		this.idDoctor = idDoctor;
+
+	public void setDoctor(Doctor idDoctor) {
+		this.doc = idDoctor;
 	}
-	
-	/**
-	 * @return the hoursFrom
-	 */
+
 	public String getHoursFrom() {
 		return hoursFrom;
 	}
-	
-	/**
-	 * @return the hoursTo
-	 */
+
 	public String getHoursTo() {
 		return hoursTo;
 	}
-	
-	/**
-	 * @return the idClinics
-	 */
-	public Clinics getIdClinics() {
-		return idClinics;
+
+	public Clinics getClinics() {
+		return clinic;
 	}
-	
-	/**
-	 * @return the idDoc
-	 */
-	public int getIdDoc() {
-		return idDoc;
+
+	public int getId() {
+		return id;
 	}
-	
-	/**
-	 * @return the idDoctor
-	 */
-	public Doctor getIdDoctor() {
-		return idDoctor;
+
+	public Doctor getDoctor() {
+		return doc;
 	}
 	
 }

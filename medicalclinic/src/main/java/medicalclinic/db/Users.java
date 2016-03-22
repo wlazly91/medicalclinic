@@ -3,12 +3,16 @@
  */
 package medicalclinic.db;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,22 +34,6 @@ public class Users implements ObjectDB {
 	@SequenceGenerator(name="IDUSER", sequenceName = "IDUSER", allocationSize=1)
 	private int idUser;
 	
-	@JoinColumn(name = "ID_DOCTOR", nullable = true)
-	@Column(name = "ID_DOCTOR")
-	private Integer idDoc;
-	
-	@JoinColumn(name = "ID_PATIENT", nullable = true)
-	@Column(name = "ID_PATIENT")
-	private Integer idPat;
-
-	@JoinColumn(name = "ID_NURSE", nullable = true)
-	@Column(name = "ID_NURSE")
-	private Integer idNurse;
-	
-//	@JoinColumn(name = "ID_OTHER", nullable = true)
-//	@Column(name = "ID_OTHER")
-//	private Integer idOther;
-	
 	@Column(name = "E_MAIL", nullable = true)
 	private String eMail;
 	
@@ -61,23 +49,32 @@ public class Users implements ObjectDB {
 	@Column(name = "ACTIVE")
 	private int activ;
 	
-//	@Column(name = "STREETS", nullable = true)
-//	private String streets;
+	@ManyToOne
+    @JoinColumn(name="ID_DOCTOR", nullable = true)
+    private Doctor doc;
 	
-//	@ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(name="PERMISSIONS_USER", 
-//                joinColumns={@JoinColumn(name="ID_USER")}, 
-//                inverseJoinColumns={@JoinColumn(name="ID_PER")})
-//    private Set<Permissions> permission = new HashSet<Permissions>();
+	@ManyToOne
+    @JoinColumn(name="ID_NURSE", nullable = true)
+    private Nurse nur;
 	
-	public Users() {}
+	@ManyToOne
+    @JoinColumn(name="ID_PATIENT", nullable = true)
+    private Patient pat;
+	
+	@OneToMany(mappedBy="usr")
+	private Set<PermissionsUser> usersPerm;
+	
+	public Users() {}	
 	
 
-	public Users(String eMailN, String numberP, String passwordN, String loginN) {
+	public Users(String eMailN, String numberP, String passwordN, String loginN, Doctor doc, int active, int id) {
+		this.idUser = id;
 		this.eMail = eMailN;
 		this.phoneNum = numberP;
 		this.password = passwordN;
 		this.login = loginN;
+		this.doc = doc;
+		this.activ = active;
 	}
 	
 	
@@ -87,18 +84,15 @@ public class Users implements ObjectDB {
 		this.login = loginN;
 	}
 	
-//	public void setPermission(Set<Permissions> permission) {
-//		this.permission = permission;
-//	}
-//	
-//	public Set<Permissions> getPermission() {
-//		return permission;
-//	}
 	
-//	public void setStreets(String streets) {
-//		this.streets = streets;
-//	}
+	public void setUsersPerm(Set<PermissionsUser> usersPerm) {
+		this.usersPerm = usersPerm;
+	}
 	
+	public void setDoc(Doctor doc) {
+		this.doc = doc;
+	}
+
 	public void setActiv(int activ) {
 		this.activ = activ;
 	}
@@ -107,20 +101,12 @@ public class Users implements ObjectDB {
 		this.eMail = eMail;
 	}
 	
-	public void setIdDoc(Integer idDoc) {
-		this.idDoc = idDoc;
+	public void setNur(Nurse nur) {
+		this.nur = nur;
 	}
 	
-	public void setIdNurse(Integer idNurse) {
-		this.idNurse = idNurse;
-	}
-	
-//	public void setIdOther(Integer idOther) {
-//		this.idOther = idOther;
-//	}
-	
-	public void setIdPat(Integer idPat) {
-		this.idPat = idPat;
+	public void setPat(Patient pat) {
+		this.pat = pat;
 	}
 	
 	public void setIdUser(int idUser) {
@@ -139,9 +125,17 @@ public class Users implements ObjectDB {
 		this.phoneNum = phoneNum;
 	}
 	
-//	public String getStreets() {
-//		return streets;
-//	}
+	public Doctor getDoc() {
+		return doc;
+	}
+	
+	public Set<PermissionsUser> getUsersPerm() {
+		return usersPerm;
+	}
+	
+	public Patient getPat() {
+		return pat;
+	}
 	
 	public int getActiv() {
 		return activ;
@@ -151,20 +145,9 @@ public class Users implements ObjectDB {
 		return eMail;
 	}
 	
-	public Integer getIdDoc() {
-		return idDoc;
-	}
 	
-	public Integer getIdNurse() {
-		return idNurse;
-	}
-	
-//	public Integer getIdOther() {
-//		return idOther;
-//	}
-	
-	public Integer getIdPat() {
-		return idPat;
+	public Nurse getNur() {
+		return nur;
 	}
 	
 	public int getIdUser() {
@@ -182,6 +165,4 @@ public class Users implements ObjectDB {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-	
-	
 }

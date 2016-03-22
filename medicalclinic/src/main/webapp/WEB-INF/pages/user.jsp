@@ -2,6 +2,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +40,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
+        <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
@@ -63,6 +65,7 @@
                   <li><a href="#">Modify Visits</a></li>		
                   <li class="divider"></li>
                   <li class="dropdown-header">Users</li>
+                  <li><a href="userList">Users</a></li>
                   <li><a href="#">Add User</a></li>
                   <li><a href="#">Delete User</a></li>
                   <li><a href="#">Modify User</a></li>
@@ -102,19 +105,19 @@
   </div>
 </nav>
 
-<div class="container theme-showcase">    
+<div class="container theme-showcase" role = "main">      
 
 	<sec:authorize access = "hasAnyRole('ROLE_ADMIN, ROLE_NURSE')">
 	<h2>Add New User </h2>
 
-	<form:form method="POST" action="/SpringSecurity/addUsers">
+	<form:form method="POST" action="/FamilyClinic/addUser">
    	<table>
     	<tr>
-        	<td><form:label path="name">Name </form:label></td>
+        	<td><form:label path="name">NameUser</form:label></td>
         	<td><form:input path="name" /></td>
     	</tr>
     	<tr>
-        	<td><form:label path="surname">Surname </form:label></td>
+        	<td><form:label path="surname">SurnameUser </form:label></td>
         	<td><form:input path="surname" /></td>
     	</tr>
    		<tr>
@@ -122,12 +125,12 @@
         	<td><form:input path="specjality" /></td>
     	</tr>
         <tr>	
-        	<td><form:label path="eMail">Login </form:label></td>
-	        <td><form:input path="eMail" /></td>
+        	<td><form:label path="login">Login </form:label></td>
+	        <td><form:input path="login" /></td>
     	</tr>
         <tr>
         	<td><form:label path="password">Password </form:label></td>
-	        <td><form:input path="password" /></td>
+	        <td><form:input type='password' path="password" /></td>
     	</tr>
 		<tr>
         	<td><form:label path="phoneNumber">Phone Number </form:label></td>
@@ -164,6 +167,13 @@
 	</table>  
 	</form:form>
 	</sec:authorize>
+<table>
+    <tr>
+        <td>Result :</td>
+        <td>${msg}</td>
+
+    </tr>
+</table> 
 </div>
 
 </body>

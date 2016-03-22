@@ -1,10 +1,13 @@
 package medicalclinic.db;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 /**
@@ -34,29 +37,47 @@ public class Doctor implements ObjectDB
 	@Column(name = "SPECJALITY_NAME")
 	private String specjalityName;
 	
+	@OneToMany(mappedBy="doc")
+	private Set<Users> users;
+	
+	@OneToMany(mappedBy="doctor")
+	private Set<Visits> visits;
+	
+	@OneToMany(mappedBy="doc")
+	private Set<DoctorOfficeHours> doctorHours;
+	
 	public Doctor() {}
 	
-	public Doctor(String nameN, String nameS){
+	public Doctor(String nameN, String nameS, String specjalityName, Set<Users> a, Set<Visits> vis, Set<DoctorOfficeHours> docHours) {
 		this.name = nameN;
 		this.surname = nameS;
+		this.specjalityName = specjalityName;
+		this.users = a;
+		this.visits = vis;
+		this.doctorHours = docHours;
 	}
-	/**
-	 * @param id the id to set
-	 */
+	
+	
+	public void setVisits(Set<Visits> visits) {
+		this.visits = visits;
+	}
+	
+	public void setUsers(Set<Users> users) {
+		this.users = users;
+	}
+	
+	public Set<Users> getUsers() {
+		return users;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	/**
-	 * @param name the name to set
-	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	/**
-	 * @param surname the surname to set
-	 */
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
@@ -65,23 +86,19 @@ public class Doctor implements ObjectDB
 		this.specjalityName = specjalityName;
 	}
 	
-	/**
-	 * @return the id
-	 */
+	
+	public Set<Visits> getVisits() {
+		return visits;
+	}
+
 	public int getId() {
 		return id;
 	}
-	
-	/**
-	 * @return the name
-	 */
+
 	public String getName() {
 		return name;
 	}
-	
-	/**
-	 * @return the surname
-	 */
+
 	public String getSurname() {
 		return surname;
 	}

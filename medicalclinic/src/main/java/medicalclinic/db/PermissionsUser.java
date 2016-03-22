@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,36 +21,46 @@ public class PermissionsUser implements ObjectDB {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IDUSERPER") 
 	@SequenceGenerator(name="IDUSERPER", sequenceName = "IDUSERPER", allocationSize=1)
 	private Integer idPerUser;
+
+	@ManyToOne
+    @JoinColumn(name = "ID_PER")
+    private Permissions perm;
 	
-	@Column(name = "ID_USER")
-	private Integer idUser;
+	@ManyToOne
+    @JoinColumn(name="ID_USER")
+    private Users usr;
 	
-	@Column(name = "ID_PER")
-	private Integer idPer;
+	public PermissionsUser() {}
 	
-	public void setIdPer(Integer idPer) {
-		this.idPer = idPer;
+	public PermissionsUser(Integer id, Users usr, Permissions perm) {
+		this.idPerUser = id;
+		this.perm = perm;
+		this.usr = usr;
+	}
+	
+	public void setPerm(Permissions perm) {
+		this.perm = perm;
 	}
 	
 	public void setIdPerUser(Integer idPerUser) {
 		this.idPerUser = idPerUser;
 	}
 	
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
+	public void setUsr(Users usr) {
+		this.usr = usr;
 	}
 	
-	public Integer getIdPer() {
-		return idPer;
+	public Users getUsr() {
+		return usr;
+	}
+		
+	public Permissions getPerm() {
+		return perm;
 	}
 	
 	public Integer getIdPerUser() {
 		return idPerUser;
 	}
-	
-	public Integer getIdUser() {
-		return idUser;
-	}
-	
+		
 }
 

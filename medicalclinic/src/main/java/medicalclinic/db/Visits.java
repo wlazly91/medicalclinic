@@ -34,87 +34,54 @@ public class Visits implements ObjectDB {
 	private int idVisits;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_DISEASES")
-	private Diseases idDis;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_PATIENT")
-	private Patient idPatient;
+    @JoinColumn(name="ID_PATIENT")
+    private Patient patient;
 	
 	@Column(name = "DATE_VISITS")
 	private Date dateVisit;
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_DOCTOR")
-	private Doctor idDoc;
+	private Doctor doctor;
 	
 	
-	/**
-	 * @param dateVisit the dateVisit to set
-	 */
+	public Visits() {}
+	
+	public Visits(int id, Patient pat, Doctor doc, Date data) {
+		this.dateVisit = data;
+		this.doctor = doc;
+		this.idVisits = id;
+		this.patient = pat;
+	}
+
 	public void setDateVisit(Date dateVisit) {
 		this.dateVisit = dateVisit;
 	}
-	
-	/**
-	 * @param idDis the idDis to set
-	 */
-	public void setIdDis(Diseases idDis) {
-		this.idDis = idDis;
-	}
-	
-	/**
-	 * @param idDoc the idDoc to set
-	 */
+
 	public void setIdDoc(Doctor idDoc) {
-		this.idDoc = idDoc;
+		this.doctor = idDoc;
 	}
 	
-	/**
-	 * @param idPatient the idPatient to set
-	 */
-	public void setIdPatient(Patient idPatient) {
-		this.idPatient = idPatient;
+	public void setPat(Patient pat) {
+		this.patient = pat;
 	}
-	
-	/**
-	 * @param idVisits the idVisits to set
-	 */
+
 	public void setIdVisits(int idVisits) {
 		this.idVisits = idVisits;
 	}
 	
-	/**
-	 * @return the dateVisit
-	 */
+	public Patient getPat() {
+		return patient;
+	}
+
 	public Date getDateVisit() {
 		return dateVisit;
 	}
-	
-	/**
-	 * @return the idDis
-	 */
-	public Diseases getIdDis() {
-		return idDis;
-	}
-	
-	/**
-	 * @return the idDoc
-	 */
+
 	public Doctor getIdDoc() {
-		return idDoc;
+		return doctor;
 	}
-	
-	/**
-	 * @return the idPatient
-	 */
-	public Patient getIdPatient() {
-		return idPatient;
-	}
-	
-	/**
-	 * @return the idVisits
-	 */
+
 	public int getIdVisits() {
 		return idVisits;
 	}

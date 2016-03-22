@@ -39,7 +39,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
+        <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
         <sec:authorize access="hasRole('ROLE_USER')">
@@ -64,6 +64,7 @@
                   <li><a href="#">Modify Visits</a></li>		
                   <li class="divider"></li>
                   <li class="dropdown-header">Users</li>
+                  <li><a href="userList">Users</a></li>
                   <li><a href="#">Add User</a></li>
                   <li><a href="#">Delete User</a></li>
                   <li><a href="#">Modify User</a></li>
@@ -102,8 +103,8 @@
     </div>
   </div>
 </nav>
-<div class="container theme-showcase">    
-	
+<div class="container theme-showcase" role = "main">    
+
 </div>
 </body>
 </html>

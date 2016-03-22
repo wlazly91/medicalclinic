@@ -1,8 +1,9 @@
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" %>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Bootstrap Example</title>
@@ -12,29 +13,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-</head>
-
-<body>
-
-
-	
-<sec:authorize access="hasRole('ROLE_USER')">
-		<!-- For login user -->
-		<c:url value="/logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<script>
+  		<script>
 			function formSubmit() {
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
-		<c:if test="${pageContext.request.userPrincipal.name}">
-			<li>
-				<a	href="login"> Logout </a>
-			</li>	
-		</c:if>
+</head>
+<body>
+
+<sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_NURSE')">		
+		<c:url value="/logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+		</form>
 </sec:authorize>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -50,11 +41,10 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li><a href="clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
+        <li><a href="/clinic"><span class="glyphicon glyphicon-tint"></span> Specialist Clinic</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-eye-open"></span> Specialists</a></li> 
         <li><a href="#"><span class="glyphicon glyphicon-check"></span> Registration</a></li>
-        
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <sec:authorize access="hasRole('ROLE_USER')">
         <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-th"></span> Patient Panel</a>
 			<ul class="dropdown-menu" role="menu">
@@ -66,7 +56,6 @@
            </ul>
         </li>
         </sec:authorize>
-        
         <sec:authorize access="hasRole('ROLE_ADMIN')">
         <li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-cog"> </span>  Admin Options </a>
@@ -116,45 +105,25 @@
     </div>
   </div>
 </nav>
+<div class="container theme-showcase" role = "main">    
+	<div class="jumbotron">
+		<form:form method="POST" action="/FamilyClinic/clinic">
+   	<table>
+        <tr>	
+        	<td><form:label path="login">Login </form:label></td>
+	        <td><form:input path="login" /></td>
+    	</tr>
+    	<tr>
+        	<td colspan="2">
+            	<input type="submit" value="Submit"/>
+        	</td>
+    	</tr>
+	</table>  
+	</form:form>
 
-<div class="container theme-showcase" role = "main">      
-	<div id="login-box">
-
-		<h3>Login with Username and Password</h3>
-
-		<c:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c:if>
-
-		<form name='loginForm'
-			action="<c:url value='/login' />" method='POST'>
-
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='login'></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					
-						<td colspan='2'>
-						<button type="submit" class="btn btn-danger" value="submit" name="submit">Sign In </button>
-						</td>
-						
-				</tr>
-			</table>
-
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-
-		</form>
-	</div>
+        <h1>Result :  ${msg}</h1>
+        </div>
+   	</div>
 </div>
 </body>
 </html>

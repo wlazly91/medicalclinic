@@ -1,10 +1,13 @@
 package medicalclinic.db;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,45 +33,38 @@ public class Clinics implements ObjectDB
 	@Column(name = "NAME")
 	private String name;
 	
+	@OneToMany(mappedBy="clinic")
+	private Set<DoctorOfficeHours> doctorHours;
+
 	
-	/**
-	 * Domyœlny
-	 */
 	public Clinics() {}
-	
-	/**
-	 * Konstruktor sparametryzowany
-	 */
-	public Clinics(String name) {
+
+	public Clinics(int idC, String name, Set<DoctorOfficeHours> dictorHours) {
 		this.name = name;
 	}
 	
 	
-	/**
-	 * @param id the id to set
-	 */
+	public void setDictorHours(Set<DoctorOfficeHours> dictorHours) {
+		this.doctorHours = dictorHours;
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 	
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
+	}
+	
+	public Set<DoctorOfficeHours> getDoctorHours() {
+		return doctorHours;
 	}
 }

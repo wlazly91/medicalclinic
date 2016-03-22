@@ -3,11 +3,14 @@
  */
 package medicalclinic.db;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,6 +41,8 @@ public class Nurse implements ObjectDB {
 	@Column(name = "POSITION")
 	private String position;
 	
+	@OneToMany(mappedBy="nur")
+	private Set<Users> users;
 	
 	public Nurse() {}
 	
@@ -46,61 +51,45 @@ public class Nurse implements ObjectDB {
 		this.surname = surnameN;
 		this.position = positionN;
 	}
-	/**
-	 * @param idNurse the idNurse to set
-	 */
+
 	public void setIdNurse(int idNurse) {
 		this.idNurse = idNurse;
 	}
 	
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	/**
-	 * @param position the position to set
-	 */
 	public void setPosition(String position) {
 		this.position = position;
 	}
 	
-	/**
-	 * @param surname the surname to set
-	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
 	
-	/**
-	 * @return the idNurse
-	 */
+	public void setUsers(Set<Users> users) {
+		this.users = users;
+	}
+	
 	public int getIdNurse() {
 		return idNurse;
 	}
-	
-	/**
-	 * @return the name
-	 */
+
 	public String getName() {
 		return name;
 	}
 	
-	/**
-	 * @return the position
-	 */
 	public String getPosition() {
 		return position;
 	}
-	
-	/**
-	 * @return the surname
-	 */
+
 	public String getSurname() {
 		return surname;
 	}
 	
+	public Set<Users> getUsers() {
+		return users;
+	}
 	
 }
